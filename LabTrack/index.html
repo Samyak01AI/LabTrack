@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LabTrack — Faculty Progress Register</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><div class="brand-mark">L</div><div><strong>LabTrack</strong><span>Faculty progress register</span></div></div>
+      <div class="faculty-box"><small>Faculty account</small><div class="faculty-name">Prof. Neha Kulkarni</div><div class="faculty-sub">Computer Department</div></div>
+      <nav>
+        <button class="nav-item active" data-page="overview">Overview</button>
+        <button class="nav-item" data-page="students">Students</button>
+        <button class="nav-item" data-page="records">Progress records</button>
+        <button class="nav-item" data-page="tasks">Additional tasks</button>
+        <button class="nav-item" data-page="criteria">My criteria</button>
+        <button class="nav-item" data-page="reports">Annual reports</button>
+      </nav>
+      <div class="sidebar-note"><b>Semester 5 · 2026</b><span>Records are kept faculty-wise and can be reviewed throughout the semester.</span></div>
+      <button class="reset-demo" id="resetDemo">Reset demo data</button>
+    </aside>
+
+    <main class="main">
+      <header class="topbar"><button class="mobile-menu" id="mobileMenu">☰</button><div><div class="crumb">Computer Department / Semester 5</div><h1 id="pageTitle">Overview</h1></div><div class="top-actions"><span class="date-chip">01 Oct 2026</span><button class="outline-btn" id="addQuickRecord">+ Add record</button></div></header>
+      <div id="app"></div>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop"><div class="modal" id="modal"></div></div>
+  <script src="js/app.js"></script>
+</body>
+</html>
