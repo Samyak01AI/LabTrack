@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">LabTrack</title>
+  <rect width="64" height="64" rx="14" fill="#03224d"/>
+  <path d="M14 20c7-3 13-2 18 2 5-4 11-5 18-2v23c-7-3-13-2-18 2-5-4-11-5-18-2z" fill="none" stroke="#f8f9ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+  <path d="M32 22v23" fill="none" stroke="#f8f9ff" stroke-linecap="round" stroke-width="2.5"/>
+  <path d="M20 28h6m-6 6h6m12-6h6m-6 6h6" fill="none" stroke="#39bfc0" stroke-linecap="round" stroke-width="2.5"/>
+  <circle cx="32" cy="48" r="3" fill="#006972"/>
+</svg>

@@ -1,0 +1,704 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-secondary-fixed":"#001f23","outline":"#747780","secondary-fixed":"#98f0fb","surface-container-highest":"#d3e4fe","on-surface-variant":"#44474f","on-primary-fixed":"#001a41","surface-container-high":"#dce9ff","tertiary-fixed-dim":"#bec6e0","tertiary-fixed":"#dae2fd","secondary-fixed-dim":"#7cd4df","on-secondary":"#ffffff","primary-container":"#1f3864","error-container":"#ffdad6","primary-fixed":"#d8e2ff","primary-fixed-dim":"#afc6fb","tertiary-container":"#30384d","tertiary":"#1b2336","surface-container-low":"#eff4ff","surface-container-lowest":"#ffffff","surface":"#f8f9ff","surface-container":"#e5eeff","inverse-on-surface":"#eaf1ff","on-primary":"#ffffff","secondary":"#006972","primary":"#03224d","surface-dim":"#cbdbf5","on-secondary-fixed-variant":"#004f56","on-tertiary":"#ffffff","on-primary-fixed-variant":"#2e4673","on-surface":"#0b1c30","on-tertiary-fixed-variant":"#3f465c","on-tertiary-container":"#9aa2ba","outline-variant":"#c4c6d0","background":"#f8f9ff","on-background":"#0b1c30","surface-variant":"#d3e4fe","surface-tint":"#475e8c","surface-bright":"#f8f9ff","on-secondary-container":"#006d77","secondary-container":"#96eef9","on-tertiary-fixed":"#131b2e","on-primary-container":"#8ba2d5","error":"#ba1a1a","inverse-primary":"#afc6fb","on-error-container":"#93000a","inverse-surface":"#213145","on-error":"#ffffff"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"space-lg":"1.5rem","space-xl":"2rem","space-sm":"0.5rem","margin":"2rem","gutter-tablet":"1rem","margin-tablet":"1.25rem","space-xs":"0.25rem","gutter":"1.5rem","space-md":"1rem"},fontFamily:{"label-sm":["Inter"],"code-meta":["JetBrains Mono"],"body-sm":["Inter"],"headline-xl":["Inter"],"label-md":["Inter"],"headline-md":["Inter"],"headline-xl-mobile":["Inter"],"headline-lg":["Inter"],"headline-sm":["Inter"],"body-lg":["Inter"],"code-body":["JetBrains Mono"],"body-md":["Inter"]},fontSize:{"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.04em","fontWeight":"600"}],"code-meta":["11px",{"lineHeight":"16px","fontWeight":"500"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"headline-xl":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"700"}],"label-md":["13px",{"lineHeight":"18px","letterSpacing":"0.01em","fontWeight":"500"}],"headline-md":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-xl-mobile":["26px",{"lineHeight":"34px","letterSpacing":"-0.015em","fontWeight":"700"}],"headline-lg":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-sm":["16px",{"lineHeight":"24px","letterSpacing":"0","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"code-body":["13px",{"lineHeight":"20px","fontWeight":"400"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}]}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-64 bg-[#0d172b] text-on-primary z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-r border-[#1e293b]"><div class="flex flex-col"><div class="h-16 px-space-md flex items-center justify-between border-b border-[#1e293b] bg-[#091120]"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-secondary flex items-center justify-center text-on-secondary font-headline-sm text-headline-sm shadow-sm"><span class="material-symbols-outlined text-[20px]">terminal</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-white tracking-tight leading-none">LabTrack</span><span class="font-code-meta text-code-meta text-slate-400 mt-0.5">v4.2 • Core Engine</span></div></div><span class="font-code-meta text-code-meta px-1.5 py-0.5 rounded bg-secondary/20 text-secondary-fixed border border-secondary/30">LIVE</span></div><div class="px-space-md pt-space-md pb-space-sm"><span class="font-label-sm text-label-sm text-slate-400 uppercase tracking-wider font-semibold">Curriculum Operations</span></div><nav class="px-space-sm flex flex-col gap-1" data-active-classes="bg-[#162544] text-white font-label-md relative after:content-[''] after:absolute after:left-0 after:top-1 after:bottom-1 after:w-1 after:bg-secondary after:rounded-r"><a class="flex items-center gap-2.5 px-space-sm py-2 rounded-lg font-label-md text-label-md text-slate-300 hover:bg-[#162544]/60 hover:text-white transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[18px] text-slate-400">dashboard</span><span class="">Dashboard</span></a><a class="flex items-center gap-2.5 px-space-sm py-2 rounded-lg font-label-md text-label-md text-slate-300 hover:bg-[#162544]/60 hover:text-white transition-colors" data-path="assignments" href="#"><span class="material-symbols-outlined text-[18px] text-slate-400">assignment</span><span class="">Assignments</span></a><a class="flex items-center gap-2.5 px-space-sm py-2 rounded-lg font-label-md text-label-md text-slate-300 hover:bg-[#162544]/60 hover:text-white transition-colors" data-path="submissions" href="#"><span class="material-symbols-outlined text-[18px] text-slate-400">folder_shared</span><span class="">Submissions</span></a><a aria-current="page" class="flex items-center gap-2.5 px-space-sm py-2 rounded-lg transition-colors bg-[#162544] text-white font-label-md relative after:content-[''] after:absolute after:left-0 after:top-1 after:bottom-1 after:w-1 after:bg-secondary after:rounded-r shadow-sm" data-path="similarity-flags" href="#"><span class="material-symbols-outlined text-[18px] text-secondary-fixed">difference</span><span class="">Similarity Flags</span></a><a class="flex items-center gap-2.5 px-space-sm py-2 rounded-lg font-label-md text-label-md text-slate-300 hover:bg-[#162544]/60 hover:text-white transition-colors" data-path="results" href="#"><span class="material-symbols-outlined text-[18px] text-slate-400">grade</span><span class="">Results</span></a><a class="flex items-center gap-2.5 px-space-sm py-2 rounded-lg font-label-md text-label-md text-slate-300 hover:bg-[#162544]/60 hover:text-white transition-colors" data-path="reports" href="#"><span class="material-symbols-outlined text-[18px] text-slate-400">analytics</span><span class="">Reports</span></a></nav></div><div class="p-space-md m-space-sm rounded-lg bg-[#091120] border border-[#1e293b]"><div class="flex items-center gap-2 mb-1"><span class="w-2 h-2 rounded-full bg-secondary-fixed animate-pulse"></span><span class="font-label-sm text-label-sm text-secondary-fixed font-semibold tracking-wide uppercase">Active Lab Cluster</span></div><p class="font-code-meta text-code-meta text-white tracking-tight truncate">cluster-primary.cs.mit.edu</p><p class="font-code-meta text-code-meta text-slate-400 mt-1">28 Active Sandboxes</p></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-secondary text-[22px]">account_balance</span><span class="font-headline-sm text-headline-sm text-on-surface">Dept. of Computer Science &amp; Engineering</span></div><div class="h-5 w-[1px] bg-outline-variant/40"></div><div class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-surface-container font-label-md text-label-md text-on-surface font-medium"><span class="material-symbols-outlined text-secondary text-[16px]">school</span><span class="">CS301: Data Structures - Section B</span></div><span class="font-label-sm text-label-sm px-2.5 py-1 rounded bg-surface-container-high text-on-surface-variant font-medium">Term Fall 24</span></div><div class="flex items-center gap-space-md"><button class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-secondary"></span></button><div class="h-8 w-[1px] bg-outline-variant/40"></div><div class="flex items-center gap-space-sm"><div class="text-right"><div class="font-label-md text-label-md font-semibold text-on-surface leading-tight">Prof. David K. Karger</div><div class="flex items-center justify-end gap-1 mt-0.5"><span class="font-label-sm text-label-sm text-on-secondary px-1.5 py-0.5 rounded bg-secondary tracking-wide uppercase">FACULTY / COURSE HEAD</span></div></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Top Academic Context Bar -->
+<div class="w-full bg-surface-container-lowest px-space-lg py-space-md shadow-sm">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<!-- Breadcrumb & Pair Identity -->
+<div class="flex flex-col gap-1 min-w-0">
+<nav class="flex items-center gap-1.5 font-label-sm text-label-sm text-on-surface-variant flex-wrap">
+<span class="hover:text-primary transition-colors cursor-pointer">Courses</span>
+<span class="material-symbols-outlined text-[13px] text-outline">chevron_right</span>
+<span class="hover:text-primary transition-colors cursor-pointer">CS301 Data Structures &amp; Algorithms</span>
+<span class="material-symbols-outlined text-[13px] text-outline">chevron_right</span>
+<span class="hover:text-primary transition-colors cursor-pointer">Similarity Flags</span>
+<span class="material-symbols-outlined text-[13px] text-outline">chevron_right</span>
+<span class="font-code-meta text-code-meta font-semibold text-secondary px-1.5 py-0.5 rounded bg-surface-container">Pair Analysis [CS24B018 ⇄ CS24B042]</span>
+</nav>
+<div class="flex items-center gap-space-sm mt-0.5 flex-wrap">
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-error-container text-on-error-container">
+<span class="material-symbols-outlined text-[16px]">fingerprint</span>
+<span class="font-label-md text-label-md font-bold">87% Syntactic &amp; AST Overlap</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Automated structural analysis signal. Intended for instructor review and viva inquiry, not an automated verdict of misconduct.</span>
+</div>
+</div>
+<!-- Action Cluster & Pair Switchers -->
+<div class="flex items-center gap-2 flex-wrap lg:justify-end">
+<div class="flex items-center bg-surface-container-low rounded-lg p-0.5 shadow-sm">
+<button class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-lowest hover:text-on-surface transition-colors font-label-sm text-label-sm" title="Previous Flagged Pair" type="button">
+<span class="material-symbols-outlined text-[14px]">west</span>
+<span class="hidden xl:inline">CS24B089 &amp; CS24B103</span>
+</button>
+<div class="h-4 w-[1px] bg-outline-variant"></div>
+<button class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-lowest hover:text-on-surface transition-colors font-label-sm text-label-sm" title="Next Flagged Pair" type="button">
+<span class="hidden xl:inline">CS24B015 &amp; GitHub</span>
+<span class="material-symbols-outlined text-[14px]">east</span>
+</button>
+</div>
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" id="toggle-note-btn" type="button">
+<span class="material-symbols-outlined text-[16px]">edit_note</span>
+<span class="">Add Note</span>
+</button>
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility_off</span>
+<span class="">Ignore Signal</span>
+</button>
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-secondary hover:bg-primary-container text-on-secondary font-label-md text-label-md shadow-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span class="">Mark as Reviewed</span>
+</button>
+</div>
+</div>
+<!-- Parameter Tuning Matrix & Method Signature -->
+<div class="mt-space-md pt-3 bg-surface-container-low rounded-xl px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
+<!-- Threshold Slider -->
+<div class="flex items-center gap-4 w-full md:w-auto">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-secondary">tune</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface whitespace-nowrap">AST Sensitivity Threshold:</span>
+<span class="font-code-meta text-code-meta font-bold text-secondary bg-surface-container-lowest px-2 py-0.5 rounded shadow-sm" id="threshold-val">75%</span>
+</div>
+<div class="flex flex-col w-48 sm:w-64">
+<input class="w-full accent-[#006972] bg-surface-container-highest h-1.5 rounded-lg appearance-none cursor-pointer" id="sensitivity-slider" max="95" min="50" step="5" type="range" value="75">
+<div class="flex justify-between text-[9px] font-code-meta text-outline mt-1 px-0.5">
+<span class="">50%</span>
+<span class="">65%</span>
+<span class="font-bold text-secondary">75%</span>
+<span class="">85%</span>
+<span class="">95%</span>
+</div>
+</div>
+</div>
+<!-- Quick Inspection Metrics -->
+<div class="flex items-center gap-4 flex-wrap text-on-surface-variant font-code-meta text-code-meta w-full md:w-auto justify-end">
+<div class="flex items-center gap-1.5 bg-surface-container-lowest px-2.5 py-1 rounded shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">account_tree</span>
+<span class="">Matched Nodes: <strong class="text-on-surface">42 / 48</strong></span>
+</div>
+<div class="flex items-center gap-1.5 bg-surface-container-lowest px-2.5 py-1 rounded shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">view_carousel</span>
+<span class="">Clusters: <strong class="text-on-surface">3 Blocks</strong></span>
+</div>
+<div class="flex items-center gap-1.5 bg-surface-container-lowest px-2.5 py-1 rounded shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-primary">psychology</span>
+<span class="">Engine: <span class="text-on-surface">Tree Edit Distance &amp; Winnowing</span></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Dual Split-Pane Code Comparison Workbench -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-sm p-space-md w-full">
+<!-- LEFT PANEL: Student 1 (Rohan Mukherjee) -->
+<div class="flex flex-col bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden min-w-0">
+<!-- Student 1 Metadata Header -->
+<div class="bg-primary text-on-primary p-3 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-code-meta text-code-meta bg-primary-container px-2 py-0.5 rounded text-secondary-fixed font-bold tracking-wider">STUDENT 1</span>
+<span class="font-headline-sm text-headline-sm font-semibold text-on-primary tracking-tight">CS24B018 • Rohan Mukherjee</span>
+</div>
+<span class="font-code-meta text-code-meta bg-surface-container-highest/20 text-on-primary px-2 py-0.5 rounded">Branch: v2 (Final)</span>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-2 font-code-meta text-code-meta text-on-primary-container pt-1 bg-primary-container/30 p-2 rounded-lg">
+<div>
+<span class="block text-[10px] text-outline-variant uppercase">Submitted</span>
+<span class="text-on-primary">Oct 24, 14:26 UTC</span>
+</div>
+<div>
+<span class="block text-[10px] text-outline-variant uppercase">Commit</span>
+<span class="text-secondary-fixed">1a99cd2</span>
+</div>
+<div>
+<span class="block text-[10px] text-outline-variant uppercase">Language</span>
+<span class="text-on-primary">C++20 (GCC 13.2)</span>
+</div>
+<div class="col-span-2 sm:col-span-3 flex items-center gap-1.5 text-secondary-fixed pt-0.5">
+<span class="material-symbols-outlined text-[14px]">smart_toy</span>
+<span class="truncate">Declared AI: <strong>ChatGPT-4o</strong> (Prompt log filed in /docs/ai-log.md)</span>
+</div>
+</div>
+</div>
+<!-- File Tab Header -->
+<div class="bg-surface-container px-3 py-1.5 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[15px] text-secondary">description</span>
+<span class="font-code-meta text-code-meta font-bold text-on-surface">src/LRUCache.cpp</span>
+<span class="text-[10px] font-code-meta text-on-surface-variant bg-surface-container-high px-1 rounded">45 lines</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<button class="hover:text-primary transition-colors" title="Copy Raw Code" type="button">
+<span class="material-symbols-outlined text-[15px]">content_copy</span>
+</button>
+<button class="hover:text-primary transition-colors" title="View Full File in Tree" type="button">
+<span class="material-symbols-outlined text-[15px]">open_in_new</span>
+</button>
+</div>
+</div>
+<!-- Code Inspector Viewer 1 -->
+<div class="font-code-body text-code-body bg-tertiary text-inverse-on-surface overflow-x-auto p-2 leading-relaxed selection:bg-secondary/40 select-text">
+<div class="min-w-[540px]">
+<!-- Lines 1-19 Unmatched Pre-amble -->
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">1</span>
+<span class="text-secondary-fixed-dim">#include</span> <span class="text-primary-fixed">&lt;unordered_map&gt;</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">2</span>
+<span class="text-secondary-fixed-dim">#include</span> <span class="text-primary-fixed">&lt;memory&gt;</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">3</span>
+<span></span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">4</span>
+<span class="text-primary-fixed">struct</span> <span class="text-on-primary">Node</span> {
+          </div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">5</span>
+<span class="pl-4"><span class="text-primary-fixed">int</span> key, val;</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">6</span>
+<span class="pl-4">Node* prev; Node* next;</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">7</span>
+<span class="pl-4">Node(<span class="text-primary-fixed">int</span> k, <span class="text-primary-fixed">int</span> v) : key(k), val(v), prev(<span class="text-secondary-fixed">nullptr</span>), next(<span class="text-secondary-fixed">nullptr</span>) {}</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">8</span>
+            };
+          </div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">9</span>
+<span></span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">10</span>
+<span class="text-primary-fixed">class</span> <span class="text-on-primary font-bold">LRUCache</span> {
+          </div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">11</span>
+<span class="text-primary-fixed">private</span>:
+          </div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">12</span>
+<span class="pl-4"><span class="text-primary-fixed">int</span> cap;</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">13</span>
+<span class="pl-4">std::unordered_map&lt;<span class="text-primary-fixed">int</span>, Node*&gt; cacheMap;</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">14</span>
+<span class="pl-4">Node* head;</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">15</span>
+<span class="pl-4">Node* tail;</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">16</span>
+<span></span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">17</span>
+<span class="pl-4 text-outline-variant">// Internal sentinel-based list linkages</span>
+</div>
+<!-- Matched Cluster Tag Banner -->
+<div class="bg-surface-container-highest/20 text-on-primary-fixed px-3 py-1 my-1 rounded flex items-center justify-between text-[11px] font-code-meta shadow-sm">
+<span class="flex items-center gap-1 text-secondary-fixed">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+<strong>Cluster #1:</strong> Identical sentinel pointer reassignment logic (12 lines)
+            </span>
+<span class="text-[10px] text-tertiary-fixed-dim">AST node match score: 0.94</span>
+</div>
+<!-- Matched Segment: Lines 18-32 Rohan -->
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">18</span>
+<span class="pl-4"><span class="text-primary-fixed">void</span> <span class="text-secondary-fixed font-semibold">removeNode</span>(Node* node) {</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">19</span>
+<span class="pl-8">Node* prevNode = node-&gt;prev;</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">20</span>
+<span class="pl-8">Node* nextNode = node-&gt;next;</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">21</span>
+<span class="pl-8">prevNode-&gt;next = nextNode;</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">22</span>
+<span class="pl-8">nextNode-&gt;prev = prevNode;</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">23</span>
+<span class="pl-4">}</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">24</span>
+<span class="pl-4"><span class="text-primary-fixed">void</span> <span class="text-secondary-fixed font-semibold">addNode</span>(Node* node) {</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">25</span>
+<span class="pl-8">node-&gt;next = head-&gt;next;</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">26</span>
+<span class="pl-8">node-&gt;prev = head;</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">27</span>
+<span class="pl-8">head-&gt;next-&gt;prev = node;</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">28</span>
+<span class="pl-8">head-&gt;next = node;</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">29</span>
+<span class="pl-4">}</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">30</span>
+<span class="pl-4"><span class="text-primary-fixed">void</span> <span class="text-secondary-fixed font-semibold">moveToHead</span>(Node* node) {</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">31</span>
+<span class="pl-8">removeNode(node);</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">32</span>
+<span class="pl-8">addNode(node);</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">33</span>
+<span class="pl-4">}</span>
+</div>
+<!-- Lines 34-45 Remaining Logic -->
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">34</span>
+<span></span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">35</span>
+<span class="text-primary-fixed">public</span>:
+          </div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">36</span>
+<span class="pl-4">LRUCache(<span class="text-primary-fixed">int</span> capacity) : cap(capacity) {</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">37</span>
+<span class="pl-8">head = <span class="text-primary-fixed">new</span> Node(0, 0);</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">38</span>
+<span class="pl-8">tail = <span class="text-primary-fixed">new</span> Node(0, 0);</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">39</span>
+<span class="pl-8">head-&gt;next = tail;</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">40</span>
+<span class="pl-8">tail-&gt;prev = head;</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">41</span>
+<span class="pl-4">}</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">42</span>
+<span class="pl-4"><span class="text-primary-fixed">int</span> <span class="text-secondary-fixed">get</span>(<span class="text-primary-fixed">int</span> key) {</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">43</span>
+<span class="pl-8"><span class="text-primary-fixed">auto</span> it = cacheMap.find(key);</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">44</span>
+<span class="pl-8"><span class="text-primary-fixed">if</span> (it == cacheMap.end()) <span class="text-primary-fixed">return</span> -1;</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">45</span>
+<span class="pl-8">moveToHead(it-&gt;second); <span class="text-primary-fixed">return</span> it-&gt;second-&gt;val;</span>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT PANEL: Student 2 (Alex V. Chen) -->
+<div class="flex flex-col bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden min-w-0">
+<!-- Student 2 Metadata Header -->
+<div class="bg-primary text-on-primary p-3 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-code-meta text-code-meta bg-primary-container px-2 py-0.5 rounded text-secondary-fixed font-bold tracking-wider">STUDENT 2</span>
+<span class="font-headline-sm text-headline-sm font-semibold text-on-primary tracking-tight">CS24B042 • Alex V. Chen</span>
+</div>
+<span class="font-code-meta text-code-meta bg-surface-container-highest/20 text-on-primary px-2 py-0.5 rounded">Branch: v3 (Final)</span>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-2 font-code-meta text-code-meta text-on-primary-container pt-1 bg-primary-container/30 p-2 rounded-lg">
+<div>
+<span class="block text-[10px] text-outline-variant uppercase">Submitted</span>
+<span class="text-on-primary">Oct 24, 14:48 UTC</span>
+</div>
+<div>
+<span class="block text-[10px] text-outline-variant uppercase">Commit</span>
+<span class="text-secondary-fixed">7b42f1c</span>
+</div>
+<div>
+<span class="block text-[10px] text-outline-variant uppercase">Language</span>
+<span class="text-on-primary">C++20 (GCC 13.2)</span>
+</div>
+<div class="col-span-2 sm:col-span-3 flex items-center gap-1.5 text-secondary-fixed pt-0.5">
+<span class="material-symbols-outlined text-[14px]">smart_toy</span>
+<span class="truncate">Declared AI: <strong>ChatGPT-4o &amp; Copilot</strong> (Lines 23-27 declared)</span>
+</div>
+</div>
+</div>
+<!-- File Tab Header -->
+<div class="bg-surface-container px-3 py-1.5 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[15px] text-secondary">description</span>
+<span class="font-code-meta text-code-meta font-bold text-on-surface">src/LRUCache.cpp</span>
+<span class="text-[10px] font-code-meta text-on-surface-variant bg-surface-container-high px-1 rounded">45 lines</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<button class="hover:text-primary transition-colors" title="Copy Raw Code" type="button">
+<span class="material-symbols-outlined text-[15px]">content_copy</span>
+</button>
+<button class="hover:text-primary transition-colors" title="View Full File in Tree" type="button">
+<span class="material-symbols-outlined text-[15px]">open_in_new</span>
+</button>
+</div>
+</div>
+<!-- Code Inspector Viewer 2 -->
+<div class="font-code-body text-code-body bg-tertiary text-inverse-on-surface overflow-x-auto p-2 leading-relaxed selection:bg-secondary/40 select-text">
+<div class="min-w-[540px]">
+<!-- Lines 1-19 Unmatched Pre-amble -->
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">1</span>
+<span class="text-secondary-fixed-dim">#include</span> <span class="text-primary-fixed">&lt;unordered_map&gt;</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">2</span>
+<span class="text-secondary-fixed-dim">#include</span> <span class="text-primary-fixed">&lt;iostream&gt;</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">3</span>
+<span></span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">4</span>
+<span class="text-primary-fixed">class</span> <span class="text-on-primary">Node</span> {
+          </div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">5</span>
+<span class="text-primary-fixed">public</span>:
+          </div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">6</span>
+<span class="pl-4"><span class="text-primary-fixed">int</span> k, v;</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">7</span>
+<span class="pl-4">Node* prev; Node* next;</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">8</span>
+<span class="pl-4">Node(<span class="text-primary-fixed">int</span> _k, <span class="text-primary-fixed">int</span> _v) : k(_k), v(_v), prev(<span class="text-secondary-fixed">nullptr</span>), next(<span class="text-secondary-fixed">nullptr</span>) {}</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">9</span>
+            };
+          </div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">10</span>
+<span></span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">11</span>
+<span class="text-primary-fixed">class</span> <span class="text-on-primary font-bold">LRUCache</span> {
+          </div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">12</span>
+<span class="text-primary-fixed">private</span>:
+          </div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">13</span>
+<span class="pl-4"><span class="text-primary-fixed">int</span> capacity;</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">14</span>
+<span class="pl-4">std::unordered_map&lt;<span class="text-primary-fixed">int</span>, Node*&gt; mp;</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">15</span>
+<span class="pl-4">Node* head;</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">16</span>
+<span class="pl-4">Node* tail;</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">17</span>
+<span></span>
+</div>
+<!-- Matched Cluster Tag Banner -->
+<div class="bg-surface-container-highest/20 text-on-primary-fixed px-3 py-1 my-1 rounded flex items-center justify-between text-[11px] font-code-meta shadow-sm">
+<span class="flex items-center gap-1 text-secondary-fixed">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+<strong>Cluster #1:</strong> Syntactic AST Match (Variable renamed from node-&gt;prev to p)
+            </span>
+<span class="text-[10px] text-tertiary-fixed-dim">Normalized Isomorphism: 0.96</span>
+</div>
+<!-- Matched Segment: Lines 18-32 Alex -->
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">18</span>
+<span class="pl-4"><span class="text-primary-fixed">void</span> <span class="text-secondary-fixed font-semibold">detach</span>(Node* curr) {</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">19</span>
+<span class="pl-8">Node* p = curr-&gt;prev;</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">20</span>
+<span class="pl-8">Node* n = curr-&gt;next;</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">21</span>
+<span class="pl-8">p-&gt;next = n;</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">22</span>
+<span class="pl-8">n-&gt;prev = p;</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">23</span>
+<span class="pl-4">}</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">24</span>
+<span class="pl-4"><span class="text-primary-fixed">void</span> <span class="text-secondary-fixed font-semibold">attach</span>(Node* curr) {</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">25</span>
+<span class="pl-8">curr-&gt;next = head-&gt;next;</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">26</span>
+<span class="pl-8">curr-&gt;prev = head;</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">27</span>
+<span class="pl-8">head-&gt;next-&gt;prev = curr;</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">28</span>
+<span class="pl-8">head-&gt;next = curr;</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">29</span>
+<span class="pl-4">}</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">30</span>
+<span class="pl-4"><span class="text-primary-fixed">void</span> <span class="text-secondary-fixed font-semibold">promote</span>(Node* curr) {</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">31</span>
+<span class="pl-8">detach(curr);</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">32</span>
+<span class="pl-8">attach(curr);</span>
+</div>
+<div class="bg-primary-container/40 flex text-inverse-on-surface">
+<span class="w-10 text-right pr-3 select-none text-secondary-fixed text-[11px] font-bold">33</span>
+<span class="pl-4">}</span>
+</div>
+<!-- Lines 34-45 Remaining Logic -->
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">34</span>
+<span></span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">35</span>
+<span class="text-primary-fixed">public</span>:
+          </div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">36</span>
+<span class="pl-4">LRUCache(<span class="text-primary-fixed">int</span> cap) : capacity(cap) {</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">37</span>
+<span class="pl-8">head = <span class="text-primary-fixed">new</span> Node(-1, -1);</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">38</span>
+<span class="pl-8">tail = <span class="text-primary-fixed">new</span> Node(-1, -1);</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">39</span>
+<span class="pl-8">head-&gt;next = tail;</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">40</span>
+<span class="pl-8">tail-&gt;prev = head;</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">41</span>
+<span class="pl-4">}</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">42</span>
+<span class="pl-4"><span class="text-primary-fixed">int</span> <span class="text-secondary-fixed">get</span>(<span class="text-primary-fixed">int</span> key) {</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">43</span>
+<span class="pl-8"><span class="text-primary-fixed">if</span> (mp.find(key) == mp.end()) <span class="text-primary-fixed">return</span> -1;</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">44</span>
+<span class="pl-8">promote(mp[key]); <span class="text-primary-fixed">return</span> mp[key]-&gt;v;</span>
+</div>
+<div class="flex text-on-tertiary-container hover:bg-tertiary-container/30">
+<span class="w-10 text-right pr-3 select-none text-outline-variant text-[11px]">45</span>
+<span class="pl-4">}</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Drawer / Academic Analysis Summary -->
+<div class="px-space-md pb-space-lg w-full flex flex-col gap-space-md">
+<!-- Contextual Guidance Notice -->
+<div class="rounded-xl bg-surface-container-high p-4 flex items-start gap-3 shadow-sm">
+<span class="material-symbols-outlined text-[20px] text-secondary mt-0.5">info</span>
+<div class="flex flex-col gap-0.5 text-on-surface">
+<span class="font-headline-sm text-headline-sm font-semibold">Oral Examination Recommendation</span>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Both students declared LLM assistance for sentinel pointer edge-case scaffolding in their AI-Use Declaration. Check viva defense oral transcripts to confirm independent conceptual understanding of memory management, pointer de-referencing safety, and destructor reclamation logic.
+        </p>
+</div>
+</div>
+<!-- Comparison Metrics & Evaluator Observation Deck -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+<!-- Metrics Card (5 cols) -->
+<div class="lg:col-span-5 bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-2 mb-3 bg-surface-container-low px-3 py-2 rounded-lg">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">Structural Equivalence</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-highest text-secondary font-bold">SYNTACTIC DEEP-SCAN</span>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<div class="bg-surface-container-low p-2.5 rounded-lg flex flex-col">
+<span class="font-code-meta text-[10px] text-on-surface-variant uppercase tracking-wider">Token Sim.</span>
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface mt-1">89%</span>
+<span class="text-[10px] font-label-sm text-secondary mt-0.5">Winnowing (k=5)</span>
+</div>
+<div class="bg-surface-container-low p-2.5 rounded-lg flex flex-col">
+<span class="font-code-meta text-[10px] text-on-surface-variant uppercase tracking-wider">AST Isomorphism</span>
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface mt-1">87%</span>
+<span class="text-[10px] font-label-sm text-secondary mt-0.5">Tree Distance</span>
+</div>
+<div class="bg-surface-container-low p-2.5 rounded-lg flex flex-col">
+<span class="font-code-meta text-[10px] text-on-surface-variant uppercase tracking-wider">Var Renaming</span>
+<span class="font-headline-lg text-headline-lg font-bold text-primary mt-1">High</span>
+<span class="text-[10px] font-label-sm text-on-surface-variant mt-0.5">Alpha-converted</span>
+</div>
+</div>
+<div class="mt-space-md p-3 rounded-lg bg-surface-container-low flex flex-col gap-1.5 font-body-sm text-body-sm text-on-surface-variant">
+<div class="flex items-center justify-between">
+<span class="font-medium text-on-surface">Control Flow Graph Divergence</span>
+<span class="font-code-meta text-code-meta font-bold text-on-surface">0.08 (Virtually Identical)</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 92%;"></div>
+</div>
+<span class="text-[11px] text-outline mt-0.5">Normalized AST tree matches identically across node removal and head splicing routines.</span>
+</div>
+</div>
+<div class="pt-3 text-[11px] font-code-meta text-outline flex items-center justify-between">
+<span class="">Engine Hash: <code class="text-on-surface font-semibold">ted-winnow-cxx20#9938</code></span>
+<span class="">Indexed Repositories: 1,480</span>
+</div>
+</div>
+<!-- Instructor Observation & Notes Card (7 cols) -->
+<div class="lg:col-span-7 bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-secondary">rate_review</span>
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">Instructor Evaluation Notes &amp; Viva Prompts</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded">Confidential to Faculty</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Record neutral inquiries or verified outcomes from the code viva. These logs become part of the official departmental moderation trail.
+          </p>
+<div class="mt-1">
+<textarea class="w-full p-3 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest transition-all" id="eval-notes-field" placeholder="Enter neutral evaluative observations for oral examination / record (e.g. Inquired about head/tail dummy node memory deallocation during class destructor call; Alex explained O(1) eviction cycle adequately)..." rows="4">Inquire during lab viva: Both students use identical 4-pointer exchange sequence in addNode/attach. Inquire specifically about destructor memory reclamation for head/tail sentinel allocations to test independent ownership model.</textarea>
+</div>
+</div>
+<div class="flex items-center justify-between pt-3">
+<div class="flex items-center gap-2 text-outline font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px]">history</span>
+<span class="">Last modified by Prof. Karger • 12m ago</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" type="button">
+              Clear
+            </button>
+<button class="flex items-center gap-1 px-4 py-1.5 rounded-lg bg-secondary hover:bg-primary-container text-on-secondary font-label-md text-label-md transition-colors shadow-sm" id="save-note-btn" type="button">
+<span class="material-symbols-outlined text-[16px]">save</span>
+<span class="">Save Note</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive script for client-side sliders and note interactions -->
+<script>
+    (function initSimilarityView() {
+      const slider = document.getElementById('sensitivity-slider');
+      const thresholdDisplay = document.getElementById('threshold-val');
+      const toggleNoteBtn = document.getElementById('toggle-note-btn');
+      const notesField = document.getElementById('eval-notes-field');
+      const saveNoteBtn = document.getElementById('save-note-btn');
+
+      if (slider && thresholdDisplay) {
+        slider.addEventListener('input', (e) => {
+          thresholdDisplay.textContent = e.target.value + '%';
+        });
+      }
+
+      if (toggleNoteBtn && notesField) {
+        toggleNoteBtn.addEventListener('click', () => {
+          notesField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          notesField.focus();
+        });
+      }
+
+      if (saveNoteBtn) {
+        saveNoteBtn.addEventListener('click', () => {
+          const originalText = saveNoteBtn.innerHTML;
+          saveNoteBtn.innerHTML = '<span class="material-symbols-outlined text-[16px]">check</span><span>Saved</span>';
+          saveNoteBtn.classList.add('bg-primary-container');
+          setTimeout(() => {
+            saveNoteBtn.innerHTML = originalText;
+            saveNoteBtn.classList.remove('bg-primary-container');
+          }, 1800);
+        });
+      }
+    })();
+  </script>
+</div></main></div>
+
+</body></html>

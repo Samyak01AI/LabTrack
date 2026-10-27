@@ -1,0 +1,10 @@
+{
+  "routes": [
+    { "path": "/", "title": "LabTrack home redirect" },
+    { "path": "/login", "title": "Sign in to LabTrack" },
+    { "path": "/register", "title": "Create a student account" },
+    { "path": "/student/dashboard", "title": "Student dashboard" },
+    { "path": "/student/assignments/:id", "title": "Assignment specification" },
+    { "path": "/teacher/assignments", "title": "Teacher assignment management" }
+  ]
+}

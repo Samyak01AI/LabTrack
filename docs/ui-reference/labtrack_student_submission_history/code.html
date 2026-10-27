@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "inverse-on-surface": "#eaf1ff", "secondary-container": "#96eef9", "on-primary-container": "#8ba2d5", "on-background": "#0b1c30", "tertiary-container": "#30384d", "tertiary": "#1b2336", "inverse-surface": "#213145", "on-tertiary-fixed": "#131b2e", "primary-container": "#1f3864", "on-tertiary-container": "#9aa2ba", "surface-variant": "#d3e4fe", "surface-container-lowest": "#ffffff", "error": "#ba1a1a", "on-primary": "#ffffff", "inverse-primary": "#afc6fb", "on-surface-variant": "#44474f", "background": "#f8f9ff", "tertiary-fixed": "#dae2fd", "secondary": "#006972", "primary-fixed-dim": "#afc6fb", "on-surface": "#0b1c30", "surface-container-low": "#eff4ff", "on-tertiary": "#ffffff", "surface": "#f8f9ff", "on-secondary-container": "#006d77", "outline-variant": "#c4c6d0", "on-secondary-fixed-variant": "#004f56", "on-secondary-fixed": "#001f23", "surface-dim": "#cbdbf5", "error-container": "#ffdad6", "secondary-fixed-dim": "#7cd4df", "surface-tint": "#475e8c", "on-error-container": "#93000a", "on-secondary": "#ffffff", "outline": "#747780", "primary-fixed": "#d8e2ff", "on-error": "#ffffff", "surface-container-high": "#dce9ff", "on-tertiary-fixed-variant": "#3f465c", "tertiary-fixed-dim": "#bec6e0", "surface-bright": "#f8f9ff", "secondary-fixed": "#98f0fb", "on-primary-fixed": "#001a41", "on-primary-fixed-variant": "#2e4673", "surface-container-highest": "#d3e4fe", "surface-container": "#e5eeff", "primary": "#03224d" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "2rem", "space-xl": "2rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "margin-tablet": "1.25rem", "gutter-tablet": "1rem", "gutter": "1.5rem", "space-md": "1rem", "space-xs": "0.25rem" }, "fontFamily": { "headline-sm": ["Inter"], "body-lg": ["Inter"], "body-sm": ["Inter"], "headline-xl": ["Inter"], "label-sm": ["Inter"], "headline-md": ["Inter"], "code-meta": ["JetBrains Mono"], "body-md": ["Inter"], "headline-lg": ["Inter"], "code-body": ["JetBrains Mono"], "headline-xl-mobile": ["Inter"], "label-md": ["Inter"] }, "fontSize": { "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "0", "fontWeight": "600" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "headline-xl": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "code-meta": ["11px", { "lineHeight": "16px", "fontWeight": "500" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "code-body": ["13px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-xl-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "label-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "500" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-primary text-on-primary z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center justify-between bg-primary"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-secondary flex items-center justify-center"><span class="material-symbols-outlined text-on-secondary text-[20px]">terminal</span></div><div class="flex items-baseline gap-space-xs"><span class="font-headline-sm text-headline-sm font-bold text-on-primary tracking-tight">LabTrack</span><span class="px-1.5 py-0.5 rounded text-[10px] font-code-meta text-code-meta bg-primary-container text-primary-fixed">V4.2</span></div></div></div><div class="px-space-md py-space-sm"><span class="px-space-sm font-label-sm text-label-sm text-on-primary-container uppercase tracking-wider">DSA Workbench</span></div><nav class="flex flex-col gap-1 px-space-md" data-active-classes="bg-primary-container text-on-primary font-headline-sm"><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-on-primary-container hover:bg-primary-container hover:text-on-primary transition-colors font-body-md text-body-md" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span>Dashboard</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-on-primary-container hover:bg-primary-container hover:text-on-primary transition-colors font-body-md text-body-md" data-path="assignments" href="#"><span class="material-symbols-outlined text-[20px]">code_blocks</span><span>Assignments</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-on-primary-container hover:bg-primary-container hover:text-on-primary transition-colors font-body-md text-body-md" data-path="submission-history" href="#"><span class="material-symbols-outlined text-[20px]">history_edu</span><span>Submission History</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-on-primary-container hover:bg-primary-container hover:text-on-primary transition-colors font-body-md text-body-md" data-path="profile" href="#"><span class="material-symbols-outlined text-[20px]">account_box</span><span>Profile</span></a></nav></div><div class="p-space-md m-space-md rounded-xl bg-tertiary-container text-on-tertiary-container flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-sm text-label-sm uppercase tracking-wide text-on-tertiary-fixed">Lab Node: Active</span><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span></div><div class="font-code-meta text-code-meta text-tertiary-fixed flex items-center gap-1.5"><span class="material-symbols-outlined text-[14px]">dns</span><span>node-04b.lab.cs.edu</span></div><div class="font-body-sm text-body-sm text-on-tertiary-container pt-1">Cohort: <span class="font-label-md text-label-md text-on-tertiary font-semibold">CS-2026 / Sec B</span></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-secondary text-[20px]">school</span><span class="font-label-md text-label-md text-on-surface-variant font-medium">Dept. of Computer Science &amp; Engineering</span></div><div class="hidden md:flex items-center gap-space-xs px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span><span class="font-label-sm text-label-sm font-semibold">TERM FALL 24 • LAB 08</span></div></div><div class="flex items-center gap-space-md"><button class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error"></span></button><div class="flex items-center gap-space-md pl-space-sm"><div class="text-right hidden sm:block"><div class="font-label-md text-label-md text-on-surface font-semibold">Alex V. Chen</div><div class="font-code-meta text-code-meta text-on-surface-variant">CS24B042 • <span class="px-1.5 py-0.5 rounded text-[10px] font-label-sm text-label-sm bg-surface-container text-secondary font-bold">STUDENT</span></div></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative pt-16 w-full px-space-lg min-h-screen bg-surface"><div class="flex flex-col w-full">
+<!-- Top Academic Context Header & Action Toolbar -->
+<div class="pt-6 pb-8 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+<div class="flex flex-col gap-1.5 max-w-3xl">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-0.5 rounded-full font-label-sm text-label-sm font-semibold tracking-wider uppercase bg-surface-container-high text-secondary">
+          Academic Ledger • CS-301 Fall '24
+        </span>
+<span class="font-code-meta text-code-meta text-on-surface-variant flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+          Ledger ID: #TRK-24B-CS042
+        </span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight font-bold">
+        Submission History
+      </h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        Audit trail of algorithmic source submissions, automated test telemetry, declared AI-assist attributions, and faculty oral viva defense evaluations.
+      </p>
+</div>
+<!-- Quick Utilities: View Mode State Switcher & Export -->
+<div class="flex items-center gap-3 self-start lg:self-auto flex-wrap">
+<!-- State Preview Toggle -->
+<div class="bg-surface-container-low p-1 rounded-xl flex items-center shadow-sm">
+<button class="px-3.5 py-1.5 rounded-lg font-label-md text-label-md font-semibold transition-all duration-200 bg-surface-container-lowest text-on-surface shadow-sm flex items-center gap-1.5" id="viewActiveBtn" onclick="toggleLedgerState('active')">
+<span class="material-symbols-outlined text-[16px] text-secondary">database</span>
+<span>Active Submissions (4)</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-lg font-label-md text-label-md font-medium text-on-surface-variant hover:text-on-surface transition-all duration-200 flex items-center gap-1.5" id="viewEmptyBtn" onclick="toggleLedgerState('empty')">
+<span class="material-symbols-outlined text-[16px]">folder_off</span>
+<span>Empty State Preview</span>
+</button>
+</div>
+<!-- Export Official Transcript Button -->
+<button class="h-10 px-4 rounded-lg bg-surface-container text-primary hover:bg-surface-container-high font-label-md text-label-md font-semibold transition-colors flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Export Audit CSV</span>
+</button>
+<button class="h-10 px-4 rounded-lg bg-secondary text-on-secondary hover:bg-on-secondary-container font-label-md text-label-md font-semibold transition-colors shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Transcript PDF</span>
+</button>
+</div>
+</div>
+<!-- Key Metrics Bento Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+<!-- Card 1: Total Submissions -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="absolute -right-6 -bottom-6 w-24 h-24 rounded-full bg-surface-container opacity-50 group-hover:scale-110 transition-transform pointer-events-none"></div>
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-sm text-label-sm font-semibold tracking-wider text-on-surface-variant uppercase">Total Lifecycle Submissions</span>
+<span class="p-2 rounded-lg bg-surface-container text-primary">
+<span class="material-symbols-outlined text-[20px]">code</span>
+</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-xl text-headline-xl font-bold text-on-surface">18</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">across 6 Labs</span>
+</div>
+<div class="mt-3 pt-3 flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-secondary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">commit</span> Avg. 3.0 commits/lab
+        </span>
+<span class="text-on-surface-variant">Max allowed: 5</span>
+</div>
+</div>
+<!-- Card 2: Evaluation Status -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-sm text-label-sm font-semibold tracking-wider text-on-surface-variant uppercase">Evaluation Pipeline</span>
+<span class="p-2 rounded-lg bg-surface-container-high text-secondary">
+<span class="material-symbols-outlined text-[20px]">grading</span>
+</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-xl text-headline-xl font-bold text-on-surface">14</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Evaluated / 18</span>
+</div>
+<!-- Mini stacked progress bar -->
+<div class="mt-3 flex flex-col gap-1.5">
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden flex">
+<div class="h-full bg-secondary" style="width: 77.7%" title="14 Evaluated"></div>
+<div class="h-full bg-tertiary-fixed-dim" style="width: 16.6%" title="3 Pending Viva"></div>
+<div class="h-full bg-error-container" style="width: 5.7%" title="1 In Review"></div>
+</div>
+<div class="flex justify-between font-code-meta text-code-meta text-on-surface-variant">
+<span class="text-secondary font-semibold">14 Done</span>
+<span>3 Viva Queue</span>
+<span class="text-error">1 Queue</span>
+</div>
+</div>
+</div>
+<!-- Card 3: Understanding & Viva Mastery -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-sm text-label-sm font-semibold tracking-wider text-on-surface-variant uppercase">Viva Comprehension</span>
+<span class="p-2 rounded-lg bg-surface-container text-primary">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-xl text-headline-xl font-bold text-on-surface">88.4%</span>
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm font-semibold bg-surface-container-high text-secondary">High Tier</span>
+</div>
+<div class="mt-3 pt-3 flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span class="flex items-center gap-1 font-semibold text-secondary">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +4.2% vs. Cohort Median
+        </span>
+<span class="font-code-meta text-code-meta">σ = 3.1</span>
+</div>
+</div>
+<!-- Card 4: AI Disclosure & Integrity Index -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-sm text-label-sm font-semibold tracking-wider text-on-surface-variant uppercase">Academic Integrity Audit</span>
+<span class="p-2 rounded-lg bg-surface-container-high text-secondary">
+<span class="material-symbols-outlined text-[20px]">policy</span>
+</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-xl text-headline-xl font-bold text-on-surface">100%</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Disclosed &amp; Vetted</span>
+</div>
+<div class="mt-3 pt-3 flex items-center gap-1.5 font-label-sm text-label-sm text-on-secondary-container">
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+<span class="font-semibold">0 Unattributed Traces</span>
+<span class="text-on-surface-variant font-normal">• 4 Viva Signed</span>
+</div>
+</div>
+</div>
+<!-- Filter, Query & Control Console -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm mb-6 flex flex-col gap-4">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
+<!-- Search Input -->
+<div class="md:col-span-5 relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full h-10 pl-10 pr-4 rounded-lg bg-surface-container-low font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-secondary transition-all" id="searchInput" placeholder="Search by commit (e.g. #7f4b2), lab ID, or viva feedback..." type="text"/>
+</div>
+<!-- Assignment Filter Dropdown -->
+<div class="md:col-span-3">
+<div class="relative">
+<select class="w-full h-10 pl-3 pr-8 rounded-lg bg-surface-container-low font-body-md text-body-md text-on-surface appearance-none focus:outline-none focus:ring-2 focus:ring-secondary transition-all cursor-pointer" id="assignmentFilter">
+<option value="ALL">All Assignments (6 Labs)</option>
+<option selected="" value="LAB06">Lab 06: LRU Cache with O(1) Ops</option>
+<option value="LAB05">Lab 05: Dijkstra Shortest Path Engine</option>
+<option value="LAB04">Lab 04: Red-Black Tree Invariant Checker</option>
+<option value="LAB03">Lab 03: Lock-Free Circular Deque</option>
+<option value="LAB02">Lab 02: Quicksort Dual-Pivot &amp; Introsort</option>
+<option value="LAB01">Lab 01: Dynamic Bitset Vector</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[20px]">expand_more</span>
+</div>
+</div>
+<!-- Status Filter Dropdown -->
+<div class="md:col-span-2">
+<div class="relative">
+<select class="w-full h-10 pl-3 pr-8 rounded-lg bg-surface-container-low font-body-md text-body-md text-on-surface appearance-none focus:outline-none focus:ring-2 focus:ring-secondary transition-all cursor-pointer" id="statusFilter">
+<option value="ALL">All Statuses</option>
+<option value="EVALUATED">Evaluated</option>
+<option value="VIVA">Viva Scheduled</option>
+<option value="REVIEW">Under Review</option>
+<option value="RESUBMIT">Action Needed</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[20px]">expand_more</span>
+</div>
+</div>
+<!-- Quick Semester / Batch Pill -->
+<div class="md:col-span-2 flex justify-end">
+<div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-surface-container font-label-md text-label-md text-primary font-medium w-full md:w-auto justify-center">
+<span class="material-symbols-outlined text-[16px] text-secondary">calendar_month</span>
+<span>Fall 2024 (Current)</span>
+</div>
+</div>
+</div>
+<!-- Active Query Breadcrumbs / Applied Filter Pills -->
+<div class="flex items-center gap-2 pt-1 border-t-0 flex-wrap">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Active Filters:</span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high font-label-sm text-label-sm text-primary font-medium">
+<span>Lab 06</span>
+<button class="hover:text-error transition-colors"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface-variant">
+<span>Status: All</span>
+</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded font-code-meta text-code-meta text-on-surface-variant">
+<span>Showing 4 versions</span>
+</span>
+<button class="ml-auto font-label-sm text-label-sm text-secondary hover:underline font-semibold" onclick="resetFilters()">
+        Reset all filters
+      </button>
+</div>
+</div>
+<!-- VIEW STATE CONTAINER: ACTIVE SUBMISSIONS TABLE -->
+<div class="flex flex-col gap-4 mb-12" id="activeStateContainer">
+<!-- Academic Ledger Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<!-- Table Header -->
+<div class="px-6 py-4 bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">inventory_2</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Algorithmic Submissions Audit Record</span>
+</div>
+<span class="font-code-meta text-code-meta text-on-surface-variant">Auto-synced with Git Remote: git@cs.univ.edu:cs24b042/labtrack.git</span>
+</div>
+<!-- The Table Structure -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container/60 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
+<th class="py-3 px-6">Assignment &amp; Topic</th>
+<th class="py-3 px-4">Submission &amp; Commit</th>
+<th class="py-3 px-4">Version</th>
+<th class="py-3 px-4">Unit &amp; Bench Tests</th>
+<th class="py-3 px-4">Viva Comprehension</th>
+<th class="py-3 px-4">Final Mark</th>
+<th class="py-3 px-4">Status</th>
+<th class="py-3 px-6 text-right">Details</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 font-body-md text-body-md text-on-surface">
+<!-- ROW 1: LAB 06 - FINAL V2 (EXPANDED BY DEFAULT) -->
+<tr class="bg-surface-container-low/40 hover:bg-surface-container transition-colors cursor-pointer group" id="row-1-main" onclick="toggleRow('row-1')">
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded font-code-meta text-code-meta bg-primary-container text-primary-fixed font-bold">LAB-06</span>
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">Implement LRU Cache with O(1) Ops</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Hashmap + Doubly Linked Sentinel List • C++20</span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-medium text-on-surface">Oct 24, 2024 • 14:42</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="px-1.5 py-0.5 rounded font-code-meta text-code-meta bg-surface-container text-secondary font-semibold">git #7f4b2a9</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">(2d ago)</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-1">
+<span class="px-2.5 py-0.5 rounded-full font-label-sm text-label-sm font-semibold bg-surface-container-high text-primary">v2 (Final)</span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-md text-label-md font-bold text-on-secondary-container">15/15 Passed (100%)</span>
+</div>
+<span class="font-code-meta text-code-meta text-on-surface-variant">14.2ms • 3.4MB RSS</span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex flex-col">
+<div class="flex items-center gap-1">
+<span class="font-headline-sm text-headline-sm font-bold text-secondary">94</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">/ 100</span>
+</div>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-label-sm text-label-sm bg-surface-container font-semibold text-secondary w-max">
+                    High Mastery • Viva Signed
+                  </span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-baseline gap-1">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">96</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">/ 100</span>
+</div>
+<span class="font-code-meta text-code-meta text-on-surface-variant">Weighted (40% Viva)</span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="px-2.5 py-1 rounded-full font-label-sm text-label-sm font-semibold bg-surface-container-high text-secondary flex items-center gap-1 w-max">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+                  Evaluated
+                </span>
+</td>
+<td class="py-4 px-6 text-right whitespace-nowrap">
+<button class="p-1.5 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[20px] transition-transform duration-200 rotate-180" id="chevron-row-1">expand_circle_up</span>
+</button>
+</td>
+</tr>
+<!-- ROW 1: EXPANDED SUB-PANEL (INLINE RICH AUDIT CARD) -->
+<tr class="bg-surface-container-lowest" id="row-1-details">
+<td class="p-0" colspan="8">
+<div class="p-6 bg-surface-container-low/60 flex flex-col gap-6 shadow-inner">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- SECTION A: TEACHER & TA FEEDBACK & RUBRIC BREAKDOWN (7 Cols) -->
+<div class="lg:col-span-7 bg-surface-container-lowest rounded-xl p-5 shadow-sm flex flex-col justify-between">
+<div>
+<!-- Header with Evaluators -->
+<div class="flex items-start justify-between pb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold font-headline-sm">
+                              DK
+                            </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface flex items-center gap-1.5">
+                                Dr. David K. Karger &amp; Sarah Lin
+                                <span class="px-1.5 py-0.5 rounded text-[10px] font-label-sm text-label-sm bg-surface-container text-primary font-semibold">Lead Faculty &amp; Head TA</span>
+</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Reviewed on Oct 25, 2024 at 16:15 • Lab Section B Oral Panel</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant block font-semibold">Total Evaluation</span>
+<span class="font-headline-md text-headline-md font-bold text-secondary">96 / 100 Pts</span>
+</div>
+</div>
+<!-- Qualitative Feedback Statement -->
+<div class="p-4 rounded-lg bg-surface-container-low font-body-md text-body-md text-on-surface my-4">
+<p class="mb-2 italic">
+                            "Excellent rigor shown on the double-sentinel node design to eliminate edge cases in the eviction routine. During the oral viva defense, Alex articulated the O(1) amortized lock mechanism crisply under simulated concurrent capacity evictions."
+                          </p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                            Minor deduction on memory footprint during stress test batch 4 due to eager standard allocator reuse rather than a fixed memory arena slab. Code style adheres to Google C++ Guide.
+                          </p>
+</div>
+<!-- Rubric Breakdown Matrix -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm font-semibold tracking-wider text-on-surface-variant uppercase">Evaluated Rubric Dimensions</span>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+<div class="p-3 rounded-lg bg-surface-container-low flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Automated Test Suites</span>
+<div class="flex items-baseline justify-between mt-1">
+<span class="font-headline-sm text-headline-sm font-bold text-secondary">60 / 60</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">100% Pass</span>
+</div>
+</div>
+<div class="p-3 rounded-lg bg-surface-container-low flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface-variant">O(1) Bounds Proof</span>
+<div class="flex items-baseline justify-between mt-1">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">18 / 20</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">-2 Arena Alloc</span>
+</div>
+</div>
+<div class="p-3 rounded-lg bg-surface-container-low flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Viva Defense &amp; Mastery</span>
+<div class="flex items-baseline justify-between mt-1">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">18 / 20</span>
+<span class="font-label-sm text-label-sm text-primary font-semibold">High Defense</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between font-code-meta text-code-meta text-on-surface-variant">
+<span>Digital Signature: RSA-SHA256: 4e99f...81c2</span>
+<span>Evaluation Version: Rubric V2.3</span>
+</div>
+</div>
+<!-- SECTION B: AI-USE DECLARATION & INTEGRITY VETTING (5 Cols) -->
+<div class="lg:col-span-5 bg-surface-container-lowest rounded-xl p-5 shadow-sm flex flex-col justify-between">
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between pb-3">
+<div class="flex items-center gap-2">
+<span class="p-1.5 rounded-md bg-secondary-container text-on-secondary-container">
+<span class="material-symbols-outlined text-[18px]">neurology</span>
+</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">AI-Assistance Declaration</span>
+</div>
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm font-semibold bg-surface-container-high text-secondary">
+                            Vetted &amp; Compliant
+                          </span>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<span class="text-on-surface-variant">Student Attribution Status:</span>
+<span class="font-semibold text-primary">Assistance Disclosed</span>
+</div>
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="px-2 py-0.5 rounded font-code-meta text-code-meta bg-surface-container text-on-surface font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> ChatGPT-4o (Prompt Engineering)
+                            </span>
+<span class="px-2 py-0.5 rounded font-code-meta text-code-meta bg-surface-container text-on-surface font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span> GitHub Copilot
+                            </span>
+</div>
+</div>
+<!-- Specific Line Attribution Range -->
+<div class="p-3 rounded-lg bg-surface-container-low flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-code-meta text-code-meta font-bold text-primary">LRUCache.cpp (Lines 23–27)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Detachment Pointer Guard</span>
+</div>
+<p class="font-code-meta text-code-meta text-on-surface-variant bg-surface-container-lowest p-2 rounded">
+                            // AI-Attributed: Adapted synthetic sentinel swap with null-assertion safety macros from ChatGPT-4o session #a09e-11
+                          </p>
+</div>
+<!-- Faculty Integrity Note -->
+<div class="p-3 rounded-lg bg-surface-container-high text-on-surface flex items-start gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[20px] shrink-0 mt-0.5">verified_user</span>
+<div class="font-body-sm text-body-sm">
+<span class="font-bold">Viva Verification Audit:</span> Student demonstrated independent algorithmic derivation of the LRU unlink operation on the physical whiteboard during the viva. <strong>Zero penalty applied.</strong>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between font-code-meta text-code-meta text-on-surface-variant">
+<span>Turnitin / AST Match: 4.8% (Cohort avg: 12%)</span>
+<span class="text-secondary font-semibold">Integrity Verified</span>
+</div>
+</div>
+</div>
+<!-- SECTION C: ARTIFACTS & QUICK ACTIONS BAR -->
+<div class="p-4 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3 flex-wrap">
+<span class="font-label-sm text-label-sm font-semibold tracking-wider text-on-surface-variant uppercase">Artifacts:</span>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container font-label-md text-label-md text-on-surface transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">difference</span>
+<span>Diff Patch (.patch)</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container font-label-md text-label-md text-on-surface transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">monitor_heart</span>
+<span>Test Telemetry &amp; Valgrind Output</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container font-label-md text-label-md text-on-surface transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">audio_file</span>
+<span>Viva Oral Recording &amp; Rubric Notes (4:12)</span>
+</button>
+</div>
+<div class="flex items-center gap-2 self-end md:self-auto">
+<button class="h-9 px-4 rounded-lg bg-secondary text-on-secondary hover:bg-on-secondary-container font-label-md text-label-md font-semibold transition-colors flex items-center gap-2 shadow-sm">
+<span>Open in Code Reviewer</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</td>
+</tr>
+<!-- ROW 2: LAB 06 - V1 (PRIOR DRAFT, SUBMITTED BEFORE DEADLINE) -->
+<tr class="hover:bg-surface-container transition-colors cursor-pointer group" id="row-2-main" onclick="toggleRow('row-2')">
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded font-code-meta text-code-meta bg-surface-container text-on-surface-variant font-bold">LAB-06</span>
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">Implement LRU Cache with O(1) Ops</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Initial Draft Implementation • C++20</span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-medium text-on-surface">Oct 23, 2024 • 21:04</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="px-1.5 py-0.5 rounded font-code-meta text-code-meta bg-surface-container text-on-surface-variant font-semibold">git #4d89a1c</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">(3d ago)</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="px-2.5 py-0.5 rounded-full font-label-sm text-label-sm font-semibold bg-surface-container text-on-surface-variant">v1 (Superseded)</span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="font-label-md text-label-md font-semibold text-error">12/15 Passed (80%)</span>
+</div>
+<span class="font-code-meta text-code-meta text-on-surface-variant">TLE on Batch 4 Concurrency</span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="font-body-sm text-body-sm text-on-surface-variant">N/A (Replaced by v2)</span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="font-body-sm text-body-sm text-on-surface-variant">—</span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="px-2.5 py-1 rounded-full font-label-sm text-label-sm font-medium bg-surface-container text-on-surface-variant flex items-center gap-1 w-max">
+<span class="material-symbols-outlined text-[14px]">archive</span>
+                  Superseded
+                </span>
+</td>
+<td class="py-4 px-6 text-right whitespace-nowrap">
+<button class="p-1.5 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[20px] transition-transform duration-200" id="chevron-row-2">expand_circle_down</span>
+</button>
+</td>
+</tr>
+<!-- ROW 2: COLLAPSED DETAILS (CONTAINER EXPANDABLE) -->
+<tr class="hidden bg-surface-container-lowest" id="row-2-details">
+<td class="p-6 bg-surface-container-low/40" colspan="8">
+<div class="p-4 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-on-surface">Automated Build Log for Commit #4d89a1c</span>
+<span class="font-code-meta text-code-meta text-error">SIGALRM - Execution Time Limit Exceeded (&gt; 2000ms)</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Test case #13 tested rapid eviction with 100,000 keys. v1 used an unindexed linear scan for key retrieval during capacity evictions which resulted in O(N) degradation instead of O(1). Resolved in commit #7f4b2a9 (v2).
+                  </p>
+<div class="flex items-center gap-3 pt-2">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container font-label-sm text-label-sm font-semibold text-primary hover:bg-surface-container-high transition-colors">
+                      Compare Diff v1 vs v2
+                    </button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container font-label-sm text-label-sm font-semibold text-on-surface hover:bg-surface-container-high transition-colors">
+                      View Raw Terminal Output
+                    </button>
+</div>
+</div>
+</td>
+</tr>
+<!-- ROW 3: LAB 05 - EVALUATED V1 (EXPANDED TO SHOWCASE DIJKSTRA) -->
+<tr class="bg-surface-container-low/40 hover:bg-surface-container transition-colors cursor-pointer group" id="row-3-main" onclick="toggleRow('row-3')">
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded font-code-meta text-code-meta bg-primary-container text-primary-fixed font-bold">LAB-05</span>
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">Dijkstra Shortest Path Engine</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Min-Fibonacci Heap Graph Routing • C++20</span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-medium text-on-surface">Oct 14, 2024 • 19:10</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="px-1.5 py-0.5 rounded font-code-meta text-code-meta bg-surface-container text-secondary font-semibold">git #319ce9f</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">(12d ago)</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="px-2.5 py-0.5 rounded-full font-label-sm text-label-sm font-semibold bg-surface-container-high text-primary">v1 (Final)</span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-md text-label-md font-bold text-on-secondary-container">20/20 Passed (100%)</span>
+</div>
+<span class="font-code-meta text-code-meta text-on-surface-variant">28.8ms • 5.1MB RSS</span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex flex-col">
+<div class="flex items-center gap-1">
+<span class="font-headline-sm text-headline-sm font-bold text-secondary">91</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">/ 100</span>
+</div>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-label-sm text-label-sm bg-surface-container font-semibold text-secondary w-max">
+                    High Comprehension
+                  </span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-baseline gap-1">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">94</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">/ 100</span>
+</div>
+<span class="font-code-meta text-code-meta text-on-surface-variant">Weight: 15% Semester</span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="px-2.5 py-1 rounded-full font-label-sm text-label-sm font-semibold bg-surface-container-high text-secondary flex items-center gap-1 w-max">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+                  Evaluated
+                </span>
+</td>
+<td class="py-4 px-6 text-right whitespace-nowrap">
+<button class="p-1.5 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[20px] transition-transform duration-200 rotate-180" id="chevron-row-3">expand_circle_up</span>
+</button>
+</td>
+</tr>
+<!-- ROW 3: EXPANDED SUB-PANEL (LAB 05) -->
+<tr class="bg-surface-container-lowest" id="row-3-details">
+<td class="p-0" colspan="8">
+<div class="p-6 bg-surface-container-low/60 flex flex-col gap-6 shadow-inner">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Feedback Section -->
+<div class="lg:col-span-7 bg-surface-container-lowest rounded-xl p-5 shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between pb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-bold font-headline-sm">
+                              MS
+                            </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">
+                                Prof. Maya S. Sundaresan
+                              </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Reviewed Oct 16, 2024 • Algorithm Verification Lab</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-headline-md text-headline-md font-bold text-secondary">94 / 100 Pts</span>
+</div>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-low font-body-md text-body-md text-on-surface my-4">
+<p class="italic">
+                            "Clean edge relaxation logic. During the defense, you correctly proved why negative weight cycles invalidate Dijkstra and derived the Bellman-Ford fallback complexity without hesitation."
+                          </p>
+</div>
+<!-- Rubric Breakdown -->
+<div class="grid grid-cols-3 gap-3">
+<div class="p-3 rounded-lg bg-surface-container-low">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Graph Test Suite</span>
+<div class="font-headline-sm text-headline-sm font-bold text-secondary mt-1">50 / 50</div>
+</div>
+<div class="p-3 rounded-lg bg-surface-container-low">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Fib-Heap Constant Factor</span>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface mt-1">26 / 30</div>
+</div>
+<div class="p-3 rounded-lg bg-surface-container-low">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Oral Viva</span>
+<div class="font-headline-sm text-headline-sm font-bold text-primary mt-1">18 / 20</div>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between font-code-meta text-code-meta text-on-surface-variant">
+<span>Digital Signature: RSA-SHA256: 9b12a...00ef</span>
+<span>Evaluation Version: Rubric V2.0</span>
+</div>
+</div>
+<!-- AI Declaration Section -->
+<div class="lg:col-span-5 bg-surface-container-lowest rounded-xl p-5 shadow-sm flex flex-col justify-between">
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between pb-3">
+<div class="flex items-center gap-2">
+<span class="p-1.5 rounded-md bg-secondary-container text-on-secondary-container">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">Pure Algorithmic Baseline</span>
+</div>
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm font-semibold bg-surface-container-high text-secondary">
+                            100% Solo Code
+                          </span>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-low flex flex-col gap-2">
+<span class="font-label-md text-label-md font-semibold text-primary">Student Integrity Declaration:</span>
+<p class="font-body-sm text-body-sm text-on-surface">
+                            "No generative AI models were employed for core priority queue data structures or adjacency list memory buffers. Code written solely from CLRS chapter 24 text reference."
+                          </p>
+</div>
+<div class="p-3 rounded-lg bg-surface-container-high flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">task_alt</span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">AST &amp; Structural Diff Verified against Cohort Correlator</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between font-code-meta text-code-meta text-on-surface-variant">
+<span>Attribution Score: 0% External</span>
+<span class="text-secondary font-semibold">Faculty Certified</span>
+</div>
+</div>
+</div>
+<!-- Quick Artifact Actions -->
+<div class="p-4 rounded-xl bg-surface-container-lowest shadow-sm flex items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container font-label-md text-label-md text-on-surface transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">terminal</span>
+<span>Execution Benchmarks (20,000 Nodes)</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container font-label-md text-label-md text-on-surface transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">assignment_turned_in</span>
+<span>View Evaluation Sheet</span>
+</button>
+</div>
+<button class="h-9 px-4 rounded-lg bg-secondary text-on-secondary hover:bg-on-secondary-container font-label-md text-label-md font-semibold transition-colors flex items-center gap-1.5 shadow-sm">
+<span>View Submission Source</span>
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</button>
+</div>
+</div>
+</td>
+</tr>
+<!-- ROW 4: LAB 04 - VIVA SCHEDULED (PENDING DEFENSE) -->
+<tr class="hover:bg-surface-container transition-colors cursor-pointer group" id="row-4-main" onclick="toggleRow('row-4')">
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded font-code-meta text-code-meta bg-primary-container text-primary-fixed font-bold">LAB-04</span>
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">Red-Black Tree Balancing &amp; Rotations</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Self-Balancing Binary Search Tree with Parent Pointers</span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-medium text-on-surface">Oct 05, 2024 • 11:22</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="px-1.5 py-0.5 rounded font-code-meta text-code-meta bg-surface-container text-secondary font-semibold">git #88f12a0</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">(21d ago)</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="px-2.5 py-0.5 rounded-full font-label-sm text-label-sm font-semibold bg-surface-container-high text-primary">v1 (Final)</span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-md text-label-md font-bold text-on-secondary-container">18/18 Passed (100%)</span>
+</div>
+<span class="font-code-meta text-code-meta text-on-surface-variant">11.4ms • 2.8MB RSS</span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-primary">Pending Viva</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-label-sm text-label-sm bg-surface-container text-primary font-medium w-max">
+                    Slot: Fri 28th Oct 15:30
+                  </span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface-variant">Pending</span>
+<span class="font-code-meta text-code-meta text-on-surface-variant block">Auto Tests: 50/50</span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="px-2.5 py-1 rounded-full font-label-sm text-label-sm font-semibold bg-surface-container-high text-primary flex items-center gap-1 w-max">
+<span class="material-symbols-outlined text-[14px]">event</span>
+                  Viva Scheduled
+                </span>
+</td>
+<td class="py-4 px-6 text-right whitespace-nowrap">
+<button class="p-1.5 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[20px] transition-transform duration-200" id="chevron-row-4">expand_circle_down</span>
+</button>
+</td>
+</tr>
+<!-- ROW 4: DETAILS (SCHEDULED VIVA INFO) -->
+<tr class="hidden bg-surface-container-lowest" id="row-4-details">
+<td class="p-6 bg-surface-container-low/40" colspan="8">
+<div class="p-4 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<span class="p-2 rounded-lg bg-surface-container text-primary">
+<span class="material-symbols-outlined text-[24px]">school</span>
+</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">Oral Viva Defense Scheduled</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+                        Location: Room CS-304 (Algorithms Lab) or Zoom Node #4 • Panelist: Dr. K. Ramanathan
+                      </span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 rounded-lg bg-surface-container text-primary hover:bg-surface-container-high font-label-md text-label-md font-semibold transition-colors">
+                      Download Rubric Prep Sheet
+                    </button>
+<button class="px-4 py-2 rounded-lg bg-secondary text-on-secondary hover:bg-on-secondary-container font-label-md text-label-md font-semibold transition-colors shadow-sm">
+                      Join Waiting Room
+                    </button>
+</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination & Record Count Footer -->
+<div class="px-6 py-4 bg-surface-container-low flex flex-col sm:flex-row items-center justify-between gap-3">
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+          Showing <span class="font-semibold text-on-surface">1–4</span> of <span class="font-semibold text-on-surface">18</span> historical submission snapshots
+        </span>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-secondary text-on-secondary font-label-sm text-label-sm font-semibold flex items-center justify-center">
+            1
+          </button>
+<button class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-on-surface hover:bg-surface-container-high font-label-sm text-label-sm font-medium transition-colors">
+            2
+          </button>
+<button class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-on-surface hover:bg-surface-container-high font-label-sm text-label-sm font-medium transition-colors">
+            3
+          </button>
+<button class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- VIEW STATE CONTAINER: EMPTY STATE VARIANT (CONTROLLED BY STATE TOGGLE) -->
+<div class="hidden flex-col items-center justify-center py-16 px-6 bg-surface-container-lowest rounded-xl shadow-sm mb-12 text-center" id="emptyStateContainer">
+<!-- Academic Ledger Empty Illustration Badge -->
+<div class="w-20 h-20 rounded-2xl bg-surface-container flex items-center justify-center text-primary mb-5 shadow-sm">
+<span class="material-symbols-outlined text-[40px]">history_edu</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold mb-2">
+      No Submissions Found
+    </h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-lg mb-6">
+      There are no graded or pending submissions matching your current query filters. When you push and submit algorithmic code from the DSA Workbench, test telemetry, AI declarations, and faculty viva defense marks will compile here.
+    </p>
+<!-- Actions -->
+<div class="flex items-center gap-3">
+<button class="h-10 px-5 rounded-lg bg-surface-container hover:bg-surface-container-high font-label-md text-label-md font-semibold text-on-surface transition-colors flex items-center gap-2" onclick="resetFilters()">
+<span class="material-symbols-outlined text-[18px]">filter_alt_off</span>
+<span>Clear Filters</span>
+</button>
+<button class="h-10 px-5 rounded-lg bg-secondary text-on-secondary hover:bg-on-secondary-container font-label-md text-label-md font-semibold transition-colors flex items-center gap-2 shadow-sm" onclick="toggleLedgerState('active')">
+<span class="material-symbols-outlined text-[18px]">code_blocks</span>
+<span>Go to Active Assignments</span>
+</button>
+</div>
+<!-- Helpful academic guidance tip -->
+<div class="mt-8 pt-6 max-w-md flex items-center gap-2 font-body-sm text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary text-[18px]">info</span>
+<span>Remember to sign your git commits with your GPG departmental key before final push.</span>
+</div>
+</div>
+<!-- Departmental Policy & Viva Evaluation Guidelines Banner -->
+<div class="bg-surface-container-low rounded-xl p-5 mb-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+<div class="flex items-start gap-3">
+<span class="p-2 rounded-lg bg-surface-container text-secondary shrink-0">
+<span class="material-symbols-outlined text-[22px]">gavel</span>
+</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">Departmental Policy on Generative AI &amp; Oral Defense</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+          Per Fall '24 Faculty Resolution 4B: Code generation tools are permitted for boilerplate and test generators provided all lines are explicitly declared in the submission manifest. Final mark validity requires passing an in-person viva defense demonstrating conceptual ownership.
+        </p>
+</div>
+</div>
+<button class="shrink-0 font-label-md text-label-md text-secondary font-semibold hover:underline flex items-center gap-1">
+<span>Read Course Rubric</span>
+<span class="material-symbols-outlined text-[16px]">arrow_outward</span>
+</button>
+</div>
+</div>
+<!-- Inline JavaScript for Row Expansion & State Switching Micro-interactions -->
+<script>
+  function toggleRow(rowId) {
+    const detailsRow = document.getElementById(rowId + '-details');
+    const chevronIcon = document.getElementById('chevron-' + rowId);
+    
+    if (detailsRow) {
+      const isHidden = detailsRow.classList.contains('hidden');
+      if (isHidden) {
+        detailsRow.classList.remove('hidden');
+        if (chevronIcon) {
+          chevronIcon.classList.add('rotate-180');
+        }
+      } else {
+        detailsRow.classList.add('hidden');
+        if (chevronIcon) {
+          chevronIcon.classList.remove('rotate-180');
+        }
+      }
+    }
+  }
+
+  function toggleLedgerState(state) {
+    const activeCont = document.getElementById('activeStateContainer');
+    const emptyCont = document.getElementById('emptyStateContainer');
+    const activeBtn = document.getElementById('viewActiveBtn');
+    const emptyBtn = document.getElementById('viewEmptyBtn');
+
+    if (state === 'active') {
+      activeCont.classList.remove('hidden');
+      emptyCont.classList.add('hidden');
+      
+      activeBtn.classList.remove('text-on-surface-variant');
+      activeBtn.classList.add('bg-surface-container-lowest', 'text-on-surface', 'shadow-sm');
+      
+      emptyBtn.classList.remove('bg-surface-container-lowest', 'text-on-surface', 'shadow-sm');
+      emptyBtn.classList.add('text-on-surface-variant');
+    } else {
+      activeCont.classList.add('hidden');
+      emptyCont.classList.remove('hidden');
+      
+      emptyBtn.classList.remove('text-on-surface-variant');
+      emptyBtn.classList.add('bg-surface-container-lowest', 'text-on-surface', 'shadow-sm');
+      
+      activeBtn.classList.remove('bg-surface-container-lowest', 'text-on-surface', 'shadow-sm');
+      activeBtn.classList.add('text-on-surface-variant');
+    }
+  }
+
+  function resetFilters() {
+    const search = document.getElementById('searchInput');
+    const assignFilter = document.getElementById('assignmentFilter');
+    const statusFilter = document.getElementById('statusFilter');
+
+    if (search) search.value = '';
+    if (assignFilter) assignFilter.value = 'ALL';
+    if (statusFilter) statusFilter.value = 'ALL';
+
+    toggleLedgerState('active');
+  }
+</script></main></div></body></html>

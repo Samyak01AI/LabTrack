@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#03224d" />
+    <title>LabTrack — Faculty Register</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1" integrity="sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ" crossorigin="anonymous" defer></script>
+    <script type="module" src="./app.js"></script>
+  </head>
+  <body>
+    <aside class="sidebar" aria-label="Faculty navigation">
+      <div>
+        <a class="brand" href="#dashboard" aria-label="LabTrack dashboard">
+          <span class="brand-mark material-symbols-outlined" aria-hidden="true">terminal</span>
+          <span class="brand-copy"><strong>LabTrack</strong><small>Faculty Register</small></span>
+          <span class="live-pill">LOCAL</span>
+        </a>
+        <p class="nav-caption">CURRICULUM OPERATIONS</p>
+        <nav class="main-nav">
+          <a class="nav-item active" href="#dashboard" aria-current="page"><span class="material-symbols-outlined" aria-hidden="true">space_dashboard</span>Dashboard</a>
+          <a class="nav-item" href="#student-register"><span class="material-symbols-outlined" aria-hidden="true">group</span>Student Register</a>
+          <span class="nav-item nav-disabled" aria-disabled="true" title="Available in a later iteration"><span class="material-symbols-outlined" aria-hidden="true">assignment</span>Assignments</span>
+          <span class="nav-item nav-disabled" aria-disabled="true" title="Available in a later iteration"><span class="material-symbols-outlined" aria-hidden="true">code_blocks</span>Submissions</span>
+          <span class="nav-item nav-disabled" aria-disabled="true" title="Available in a later iteration"><span class="material-symbols-outlined" aria-hidden="true">policy</span>Similarity Flags</span>
+          <span class="nav-item nav-disabled" aria-disabled="true" title="Available in a later iteration"><span class="material-symbols-outlined" aria-hidden="true">fact_check</span>Results</span>
+          <span class="nav-item nav-disabled" aria-disabled="true" title="Available in a later iteration"><span class="material-symbols-outlined" aria-hidden="true">insights</span>Reports</span>
+        </nav>
+      </div>
+      <div class="sidebar-status">
+        <div class="status-heading"><span class="status-dot"></span><span>LOCAL DEMO</span></div>
+        <p>Saved in this browser</p>
+        <small id="storage-state">Checking local storage…</small>
+      </div>
+    </aside>
+
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="department"><span class="material-symbols-outlined" aria-hidden="true">account_balance</span><strong>Dept. of Computer Science &amp; Engineering</strong><span class="term-tag">CS301 · FALL 2026</span></div>
+        <div class="faculty-profile"><span class="material-symbols-outlined notification-icon" aria-hidden="true">notifications</span><span class="profile-divider"></span><div class="profile-copy"><strong>Faculty Demo</strong><small>FACULTY</small></div><span class="avatar material-symbols-outlined" aria-hidden="true">person</span></div>
+      </header>
+
+      <main id="dashboard" class="main-content">
+        <div class="context-bar">
+          <div class="page-heading">
+            <div class="eyebrow"><span>COURSES</span><span aria-hidden="true">›</span><span>CS301 DATA STRUCTURES &amp; ALGORITHMS</span><span aria-hidden="true">›</span><span class="teal-text">FACULTY REGISTER</span></div>
+            <h1>Course Administration — CS301</h1>
+            <p>Student register and completion overview. This prototype stores demo edits in your browser only.</p>
+          </div>
+          <div class="heading-actions"><span class="demo-badge"><span class="status-dot"></span>DEMO DATA</span><button id="open-add-student" class="button button-primary" type="button"><span class="material-symbols-outlined" aria-hidden="true">person_add</span>Add Student</button></div>
+        </div>
+
+        <section class="content-stack" aria-label="Course register overview">
+          <section class="metrics-grid" aria-label="Register metrics">
+            <article class="metric-card"><div class="metric-top"><div><span class="metric-label">REGISTERED STUDENTS</span><div class="metric-number" id="metric-total">0</div></div><span class="metric-icon"><span class="material-symbols-outlined" aria-hidden="true">groups</span></span></div><div class="metric-foot"><span class="metric-foot-dot"></span><span>Current local register</span></div></article>
+            <article class="metric-card"><div class="metric-top"><div><span class="metric-label">COMPLETE</span><div class="metric-number teal-text" id="metric-complete">0</div></div><span class="metric-icon"><span class="material-symbols-outlined" aria-hidden="true">task_alt</span></span></div><div class="metric-foot"><span class="metric-foot-dot teal-dot"></span><span>Only “Complete” records count</span></div></article>
+            <article class="metric-card"><div class="metric-top"><div><span class="metric-label">INCOMPLETE</span><div class="metric-number amber-text" id="metric-incomplete">0</div></div><span class="metric-icon amber-icon"><span class="material-symbols-outlined" aria-hidden="true">pending_actions</span></span></div><div class="metric-foot"><span class="metric-foot-dot amber-dot"></span><span>Requires follow-up</span></div></article>
+            <article class="metric-card"><div class="metric-top"><div><span class="metric-label">COMPLETION RATE</span><div class="metric-number" id="metric-rate">0%</div></div><span class="metric-icon"><span class="material-symbols-outlined" aria-hidden="true">donut_large</span></span></div><div class="metric-foot"><span>Calculated from current register</span></div></article>
+          </section>
+
+          <div class="dashboard-grid">
+            <section id="student-register" class="panel register-panel" aria-labelledby="register-heading">
+              <div class="panel-heading register-heading-row"><div><div class="section-title"><span class="material-symbols-outlined" aria-hidden="true">groups</span><h2 id="register-heading">Student Register</h2></div><p class="panel-subtitle">Search and filter the local course roster.</p></div><span class="record-count" id="record-count">0 students</span></div>
+              <div class="filters" role="search" aria-label="Filter student register">
+                <label class="search-field"><span class="material-symbols-outlined" aria-hidden="true">search</span><span class="sr-only">Search students</span><input id="search-input" type="search" placeholder="Filter by name or student ID…" autocomplete="off" /></label>
+                <label class="filter-control"><span class="sr-only">Filter by completion status</span><select id="status-filter"><option value="all">All statuses</option><option value="Complete">Complete</option><option value="Incomplete">Incomplete</option><option value="In Progress">In Progress</option></select></label>
+                <label class="filter-control"><span class="sr-only">Filter by section</span><select id="section-filter"><option value="all">All sections</option></select></label>
+              </div>
+              <div class="date-filters">
+                <span class="date-filter-caption">REGISTERED</span>
+                <label>From <input id="date-from" type="date" aria-label="Registered from date" /></label>
+                <label>To <input id="date-to" type="date" aria-label="Registered to date" /></label>
+                <button id="clear-filters" class="button button-quiet" type="button">Clear filters</button>
+              </div>
+              <p id="filter-error" class="form-message error-message filter-error" role="alert" hidden></p>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th scope="col">STUDENT</th><th scope="col">STUDENT ID</th><th scope="col">SECTION</th><th scope="col">REGISTERED</th><th scope="col">STATUS</th></tr></thead>
+                  <tbody id="student-rows"></tbody>
+                </table>
+                <div id="empty-state" class="empty-state" hidden><span class="material-symbols-outlined" aria-hidden="true">person_search</span><strong>No students match these filters</strong><p>Try changing the search or date range, or add a student.</p></div>
+              </div>
+              <div class="table-footer"><span id="shown-count">Showing 0 students</span><span class="mono-text">Local browser data</span></div>
+            </section>
+
+            <aside class="side-panels" aria-label="Course details and evaluation policy">
+              <section class="panel chart-panel" aria-labelledby="status-chart-heading"><div class="panel-heading"><div class="section-title"><span class="material-symbols-outlined" aria-hidden="true">bar_chart</span><h2 id="status-chart-heading">Register Status</h2></div><p class="panel-subtitle">Calculated from the records above</p></div><div class="chart-wrap"><canvas id="status-chart" aria-label="Student status distribution chart" role="img"></canvas><div id="chart-fallback" class="chart-fallback" aria-hidden="true" hidden></div></div><div id="chart-summary" class="chart-summary"></div></section>
+              <section class="panel policy-panel" aria-labelledby="policy-heading"><div class="section-title"><span class="material-symbols-outlined" aria-hidden="true">verified_user</span><h2 id="policy-heading">Review Principles</h2></div><p>LabTrack evaluates correctness <strong>and</strong> demonstrated understanding.</p><div class="policy-note"><span class="material-symbols-outlined" aria-hidden="true">info</span><span>Similarity results are flags for human review, not verdicts. LabTrack does not claim to detect AI-written code.</span></div></section>
+              <section class="local-note"><span class="material-symbols-outlined" aria-hidden="true">database</span><div><strong>Prototype storage</strong><p>Changes are saved to localStorage on this device. No login, backend, or code execution is included.</p></div></section>
+            </aside>
+          </div>
+        </section>
+        <footer class="page-footer"><span>LabTrack · Faculty Register Prototype</span><span>UI reference: Academic Precision</span></footer>
+      </main>
+    </div>
+
+    <dialog id="student-dialog" class="student-dialog" aria-labelledby="dialog-title">
+      <form id="student-form" novalidate>
+        <div class="dialog-heading"><div><span class="dialog-kicker">CS301 · FACULTY REGISTER</span><h2 id="dialog-title">Add Student</h2></div><button id="close-dialog" class="icon-button" type="button" aria-label="Close dialog"><span class="material-symbols-outlined" aria-hidden="true">close</span></button></div>
+        <p class="dialog-description">Fields marked required must be filled in. Student IDs must be unique.</p>
+        <label class="form-field">Student name <span class="required-mark">*</span><input id="student-name" name="name" type="text" maxlength="100" autocomplete="name" required /></label>
+        <label class="form-field">Student ID <span class="required-mark">*</span><input id="student-id" name="studentId" type="text" maxlength="20" autocomplete="off" placeholder="e.g. CS26B018" required /></label>
+        <label class="form-field">Section <span class="required-mark">*</span><select id="student-section" name="section" required><option value="">Select a section</option><option value="Section A">Section A</option><option value="Section B">Section B</option><option value="Section C">Section C</option></select></label>
+        <label class="form-field">Registered date <span class="required-mark">*</span><input id="student-date" name="registeredAt" type="date" required /></label>
+        <label class="form-field">Status <span class="required-mark">*</span><select id="student-status" name="status" required><option value="In Progress">In Progress</option><option value="Incomplete">Incomplete</option><option value="Complete">Complete</option></select></label>
+        <p id="form-error" class="form-message error-message" role="alert" hidden></p>
+        <div class="dialog-actions"><button id="cancel-dialog" class="button button-secondary" type="button">Cancel</button><button class="button button-primary" type="submit"><span class="material-symbols-outlined" aria-hidden="true">person_add</span>Save Student</button></div>
+      </form>
+    </dialog>
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  </body>
+</html>

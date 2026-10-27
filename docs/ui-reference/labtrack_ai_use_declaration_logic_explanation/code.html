@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "inverse-on-surface": "#eaf1ff", "secondary-container": "#96eef9", "on-primary-container": "#8ba2d5", "on-background": "#0b1c30", "tertiary-container": "#30384d", "tertiary": "#1b2336", "inverse-surface": "#213145", "on-tertiary-fixed": "#131b2e", "primary-container": "#1f3864", "on-tertiary-container": "#9aa2ba", "surface-variant": "#d3e4fe", "surface-container-lowest": "#ffffff", "error": "#ba1a1a", "on-primary": "#ffffff", "inverse-primary": "#afc6fb", "on-surface-variant": "#44474f", "background": "#f8f9ff", "tertiary-fixed": "#dae2fd", "secondary": "#006972", "primary-fixed-dim": "#afc6fb", "on-surface": "#0b1c30", "surface-container-low": "#eff4ff", "on-tertiary": "#ffffff", "surface": "#f8f9ff", "on-secondary-container": "#006d77", "outline-variant": "#c4c6d0", "on-secondary-fixed-variant": "#004f56", "on-secondary-fixed": "#001f23", "surface-dim": "#cbdbf5", "error-container": "#ffdad6", "secondary-fixed-dim": "#7cd4df", "surface-tint": "#475e8c", "on-error-container": "#93000a", "on-secondary": "#ffffff", "outline": "#747780", "primary-fixed": "#d8e2ff", "on-error": "#ffffff", "surface-container-high": "#dce9ff", "on-tertiary-fixed-variant": "#3f465c", "tertiary-fixed-dim": "#bec6e0", "surface-bright": "#f8f9ff", "secondary-fixed": "#98f0fb", "on-primary-fixed": "#001a41", "on-primary-fixed-variant": "#2e4673", "surface-container-highest": "#d3e4fe", "surface-container": "#e5eeff", "primary": "#03224d" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "2rem", "space-xl": "2rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "margin-tablet": "1.25rem", "gutter-tablet": "1rem", "gutter": "1.5rem", "space-md": "1rem", "space-xs": "0.25rem" }, "fontFamily": { "headline-sm": ["Inter"], "body-lg": ["Inter"], "body-sm": ["Inter"], "headline-xl": ["Inter"], "label-sm": ["Inter"], "headline-md": ["Inter"], "code-meta": ["JetBrains Mono"], "body-md": ["Inter"], "headline-lg": ["Inter"], "code-body": ["JetBrains Mono"], "headline-xl-mobile": ["Inter"], "label-md": ["Inter"] }, "fontSize": { "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "0", "fontWeight": "600" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "headline-xl": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "code-meta": ["11px", { "lineHeight": "16px", "fontWeight": "500" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "code-body": ["13px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-xl-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "label-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "500" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-primary text-on-primary z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center justify-between bg-primary"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-secondary flex items-center justify-center"><span class="material-symbols-outlined text-on-secondary text-[20px]">terminal</span></div><div class="flex items-baseline gap-space-xs"><span class="font-headline-sm text-headline-sm font-bold text-on-primary tracking-tight">LabTrack</span><span class="px-1.5 py-0.5 rounded text-[10px] font-code-meta text-code-meta bg-primary-container text-primary-fixed">V4.2</span></div></div></div><div class="px-space-md py-space-sm"><span class="px-space-sm font-label-sm text-label-sm text-on-primary-container uppercase tracking-wider">DSA Workbench</span></div><nav class="flex flex-col gap-1 px-space-md" data-active-classes="bg-primary-container text-on-primary font-headline-sm"><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-on-primary-container hover:bg-primary-container hover:text-on-primary transition-colors font-body-md text-body-md" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span>Dashboard</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-on-primary-container hover:bg-primary-container hover:text-on-primary transition-colors font-body-md text-body-md" data-path="assignments" href="#"><span class="material-symbols-outlined text-[20px]">code_blocks</span><span>Assignments</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-on-primary-container hover:bg-primary-container hover:text-on-primary transition-colors font-body-md text-body-md" data-path="submission-history" href="#"><span class="material-symbols-outlined text-[20px]">history_edu</span><span>Submission History</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-on-primary-container hover:bg-primary-container hover:text-on-primary transition-colors font-body-md text-body-md" data-path="profile" href="#"><span class="material-symbols-outlined text-[20px]">account_box</span><span>Profile</span></a></nav></div><div class="p-space-md m-space-md rounded-xl bg-tertiary-container text-on-tertiary-container flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-sm text-label-sm uppercase tracking-wide text-on-tertiary-fixed">Lab Node: Active</span><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span></div><div class="font-code-meta text-code-meta text-tertiary-fixed flex items-center gap-1.5"><span class="material-symbols-outlined text-[14px]">dns</span><span>node-04b.lab.cs.edu</span></div><div class="font-body-sm text-body-sm text-on-tertiary-container pt-1">Cohort: <span class="font-label-md text-label-md text-on-tertiary font-semibold">CS-2026 / Sec B</span></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-secondary text-[20px]">school</span><span class="font-label-md text-label-md text-on-surface-variant font-medium">Dept. of Computer Science &amp; Engineering</span></div><div class="hidden md:flex items-center gap-space-xs px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span><span class="font-label-sm text-label-sm font-semibold">TERM FALL 24 • LAB 08</span></div></div><div class="flex items-center gap-space-md"><button class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error"></span></button><div class="flex items-center gap-space-md pl-space-sm"><div class="text-right hidden sm:block"><div class="font-label-md text-label-md text-on-surface font-semibold">Alex V. Chen</div><div class="font-code-meta text-code-meta text-on-surface-variant">CS24B042 • <span class="px-1.5 py-0.5 rounded text-[10px] font-label-sm text-label-sm bg-surface-container text-secondary font-bold">STUDENT</span></div></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative pt-16 w-full px-space-lg min-h-screen bg-surface"><div class="flex flex-col w-full pb-28">
+<!-- TOP BREADCRUMBS & CONTEXT BAR -->
+<header class="flex flex-col gap-space-sm pt-space-lg mb-space-lg">
+<!-- Breadcrumbs -->
+<nav aria-label="Breadcrumbs" class="flex items-center gap-space-xs text-on-surface-variant font-label-md text-label-md">
+<a class="hover:text-secondary flex items-center gap-1 transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">folder_open</span>
+<span>Assignments</span>
+</a>
+<span class="text-outline-variant">/</span>
+<a class="hover:text-secondary truncate max-w-xs transition-colors" href="#">
+        Lab 06: Implement LRU Cache with O(1) Operations
+      </a>
+<span class="text-outline-variant">/</span>
+<span class="text-on-surface font-semibold">Submission Flow</span>
+</nav>
+<!-- Header Content & Metadata Matrix -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-space-sm">
+<span class="px-2 py-0.5 rounded bg-primary-container text-inverse-on-surface font-code-meta text-code-meta uppercase tracking-wider">Lab 06</span>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight font-bold">
+            Implement LRU Cache with O(1) Operations
+          </h1>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">
+          Step 2 &amp; 3 Unified Declaration — Academic integrity &amp; conceptual rigor verification
+        </p>
+</div>
+<!-- Live Metadata Chips -->
+<div class="flex flex-wrap items-center gap-space-xs">
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface">
+<span class="material-symbols-outlined text-secondary text-[16px]">terminal</span>
+<span class="font-code-meta text-code-meta font-medium">C++20 (GCC 13.2)</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface">
+<span class="material-symbols-outlined text-secondary text-[16px]">grade</span>
+<span class="font-label-md text-label-md font-semibold">Max: 100 Pts</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-low text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">cloud_sync</span>
+<span class="font-code-meta text-code-meta">Autosaved 14:38:10</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-secondary-container text-on-secondary-container">
+<span class="material-symbols-outlined text-[16px] animate-pulse">timer</span>
+<span class="font-code-meta text-code-meta font-bold">Lab: 01:54:20</span>
+</div>
+</div>
+</div>
+</header>
+<!-- 4-STEP HORIZONTAL WORKFLOW STEPPER -->
+<section class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm mb-space-lg">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-space-md relative">
+<!-- Step 1: Completed -->
+<div class="flex items-center gap-space-md p-space-sm rounded-lg bg-surface-container-low">
+<div class="w-9 h-9 rounded-full bg-secondary text-on-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1 text-secondary font-label-sm text-label-sm uppercase">
+<span>Step 01</span>
+<span class="material-symbols-outlined text-[14px]">done_all</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface truncate">Code Implementation</div>
+<div class="font-code-meta text-code-meta text-on-surface-variant">28/28 lines verified</div>
+</div>
+</div>
+<!-- Step 2: Active / In Progress -->
+<div class="flex items-center gap-space-md p-space-sm rounded-lg bg-surface-container-high ring-2 ring-secondary">
+<div class="w-9 h-9 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-label-md text-label-md font-bold shrink-0">
+          02
+        </div>
+<div class="min-w-0">
+<div class="text-secondary font-label-sm text-label-sm uppercase font-semibold flex items-center gap-1">
+<span>In Progress</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-ping"></span>
+</div>
+<div class="font-headline-sm text-headline-sm text-primary truncate">AI-Use Declaration</div>
+<div class="font-code-meta text-code-meta text-secondary font-medium">Tools &amp; Code Ranges</div>
+</div>
+</div>
+<!-- Step 3: Linked Active Unified Form -->
+<div class="flex items-center gap-space-md p-space-sm rounded-lg bg-surface-container-high ring-2 ring-secondary">
+<div class="w-9 h-9 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-label-md text-label-md font-bold shrink-0">
+          03
+        </div>
+<div class="min-w-0">
+<div class="text-secondary font-label-sm text-label-sm uppercase font-semibold">In Progress</div>
+<div class="font-headline-sm text-headline-sm text-primary truncate">Logic &amp; Defense</div>
+<div class="font-code-meta text-code-meta text-on-surface-variant">3 Invariants required</div>
+</div>
+</div>
+<!-- Step 4: Upcoming / Locked -->
+<div class="flex items-center gap-space-md p-space-sm rounded-lg bg-surface-container-low opacity-60">
+<div class="w-9 h-9 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-label-md text-label-md shrink-0">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+</div>
+<div class="min-w-0">
+<div class="text-on-surface-variant font-label-sm text-label-sm uppercase">Step 04</div>
+<div class="font-headline-sm text-headline-sm text-on-surface-variant truncate">Review &amp; Submit</div>
+<div class="font-code-meta text-code-meta text-on-surface-variant">Locked until valid</div>
+</div>
+</div>
+</div>
+</section>
+<!-- TRANSPARENCY & CONSTRUCTIVE DISCLOSURE BANNER -->
+<section class="bg-primary text-on-primary p-space-lg rounded-xl shadow-md mb-space-lg relative overflow-hidden">
+<div class="absolute -right-8 -bottom-8 w-44 h-44 rounded-full bg-secondary/10 blur-2xl pointer-events-none"></div>
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md relative z-10">
+<div class="flex items-start gap-space-md max-w-4xl">
+<div class="w-10 h-10 rounded-lg bg-secondary text-on-secondary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[22px]">policy</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-primary">Constructive AI Disclosure Protocol</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary/20 text-secondary-fixed font-code-meta text-code-meta uppercase">Policy 2024-Sec.C</span>
+</div>
+<p class="font-body-md text-body-md text-surface-container-highest leading-relaxed">
+            Declaring AI use is required for departmental transparency; course faculty evaluate your conceptual comprehension of the final implementation. LabTrack operates on a <strong class="text-on-primary font-semibold">constructive disclosure model</strong> — honest declarations inform targeted viva questions with <strong class="text-secondary-fixed font-semibold">zero punitive grading penalty</strong>.
+          </p>
+</div>
+</div>
+<div class="shrink-0 flex items-center gap-2 px-3 py-2 rounded-lg bg-primary-container text-on-primary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-secondary text-[18px]">verified_user</span>
+<span>FERPA Compliant Record</span>
+</div>
+</div>
+</section>
+<!-- UNIFIED FORM CONTAINER -->
+<form class="flex flex-col gap-space-xl" onsubmit="event.preventDefault();">
+<!-- ==================== STEP 2: AI-ASSISTANCE DECLARATION ==================== -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<!-- Section Header -->
+<div class="px-space-lg py-space-md bg-surface-container flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-primary text-on-primary flex items-center justify-center font-headline-sm text-headline-sm font-bold">
+            2
+          </div>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary font-bold">Step 2: AI-Assistance Declaration</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Disclose generative tools, prompt workflows, and annotate assisted code regions</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm font-medium">Required Step</span>
+</div>
+<div class="p-space-lg flex flex-col gap-space-lg">
+<!-- Radio Selection -->
+<fieldset class="flex flex-col gap-space-sm">
+<legend class="font-headline-sm text-headline-sm text-primary mb-2">Authoring Attribution Mode <span class="text-error">*</span></legend>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Option A: Unchecked -->
+<label class="flex items-start gap-space-md p-space-md rounded-xl bg-surface-container-low cursor-pointer hover:bg-surface-container transition-colors group">
+<input class="mt-1 h-4 w-4 text-secondary focus:ring-secondary" name="ai_attribution_mode" type="radio" value="independent"/>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary">I did not use AI assistance</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Authored entirely independently using course lecture notes, textbooks, and C++ cppreference.com docs only.</span>
+</div>
+</label>
+<!-- Option B: Selected / Active -->
+<label class="flex items-start gap-space-md p-space-md rounded-xl bg-surface-container-high ring-2 ring-secondary cursor-pointer shadow-sm">
+<input checked="" class="mt-1 h-4 w-4 text-secondary focus:ring-secondary" name="ai_attribution_mode" type="radio" value="assisted"/>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-primary font-bold">I used AI assistance</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm">Active Selection</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface">Co-piloted, consulted generative models for syntax, ideation, boilerplate generation, or edge-case diagnostics.</span>
+</div>
+</label>
+</div>
+</fieldset>
+<!-- Conditional Interactive Sub-Section (AI Was Used) -->
+<div class="flex flex-col gap-space-lg pt-space-md">
+<!-- Sub-question 1: Models & Tools Chips -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-1">
+<span>Which tools or generative models were utilized?</span>
+<span class="text-error">*</span>
+</label>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-1">Select all environments invoked during research, drafting, or implementation.</p>
+<div class="flex flex-wrap gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-secondary text-on-secondary font-label-md text-label-md flex items-center gap-1.5 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px]">check</span>
+<span>GitHub Copilot</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg bg-secondary text-on-secondary font-label-md text-label-md flex items-center gap-1.5 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px]">check</span>
+<span>ChatGPT-4o</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg bg-secondary text-on-secondary font-label-md text-label-md flex items-center gap-1.5 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px]">check</span>
+<span>Claude 3.5 Sonnet</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors font-label-md text-label-md" type="button">
+<span>+ Gemini 1.5 Pro</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors font-label-md text-label-md" type="button">
+<span>+ Phind</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors font-label-md text-label-md" type="button">
+<span>+ Cursor</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors font-label-md text-label-md" type="button">
+<span>+ Local LLM (Ollama/Llama-3)</span>
+</button>
+</div>
+</div>
+<!-- Sub-question 2: Textarea Narrative -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-1" for="ai_narrative">
+<span>How did you use AI during your problem solving?</span>
+<span class="text-error">*</span>
+</label>
+<span class="font-code-meta text-code-meta text-on-surface-variant font-medium">248 / 600 chars</span>
+</div>
+<textarea class="w-full p-space-md rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-secondary shadow-sm transition-all resize-y" id="ai_narrative" rows="3">Used ChatGPT-4o to explore dummy sentinel node initialization in C++ doubly linked lists to avoid segfaults during edge-case evictions. Later used Copilot for generating repetitive constructor boilerplate and unordered_map iterator typing.</textarea>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Briefly explain the role AI played in ideation, debugging, or syntax generation. Be specific about model-generated logic vs your own revisions.</span>
+</div>
+<!-- Sub-question 3: Code Range Annotation Feature -->
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">code_blocks</span>
+<span>Annotate AI-Assisted Code Ranges</span>
+</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Select specific line ranges in your submitted code that were generated or heavily adapted by AI, and provide conceptual justification.</p>
+</div>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-high text-primary hover:bg-surface-container-highest transition-colors font-label-md text-label-md font-semibold shrink-0" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>Annotate New Range</span>
+</button>
+</div>
+<!-- Code Viewer + Active Annotation Cards Split Matrix -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-md mt-1">
+<!-- Left Mini Syntax Code Viewer (Read-Only) -->
+<div class="xl:col-span-6 bg-primary rounded-xl overflow-hidden shadow-sm flex flex-col">
+<div class="px-space-md py-2 bg-primary-container text-on-primary-container flex items-center justify-between text-code-meta font-code-meta">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">data_object</span>
+<span>LRUCache.cpp (Submitted Workspace Buffer)</span>
+</div>
+<span class="text-secondary-fixed">C++20</span>
+</div>
+<div class="p-space-md font-code-body text-code-body text-on-primary/90 overflow-x-auto leading-relaxed max-h-96 select-none">
+<div class="flex hover:bg-primary-container/40 px-1 rounded"><span class="w-7 text-right pr-3 text-on-primary-container/60 shrink-0">1</span><span><span class="text-secondary-fixed">#include</span> &lt;unordered_map&gt;</span></div>
+<div class="flex hover:bg-primary-container/40 px-1 rounded"><span class="w-7 text-right pr-3 text-on-primary-container/60 shrink-0">2</span><span><span class="text-secondary-fixed">using namespace</span> std;</span></div>
+<div class="flex hover:bg-primary-container/40 px-1 rounded"><span class="w-7 text-right pr-3 text-on-primary-container/60 shrink-0">3</span><span></span></div>
+<div class="flex hover:bg-primary-container/40 px-1 rounded"><span class="w-7 text-right pr-3 text-on-primary-container/60 shrink-0">4</span><span><span class="text-secondary-fixed">class</span> <span class="text-primary-fixed">LRUCache</span> {</span></div>
+<div class="flex hover:bg-primary-container/40 px-1 rounded"><span class="w-7 text-right pr-3 text-on-primary-container/60 shrink-0">5</span><span><span class="text-secondary-fixed">private:</span></span></div>
+<div class="flex hover:bg-primary-container/40 px-1 rounded"><span class="w-7 text-right pr-3 text-on-primary-container/60 shrink-0">6</span><span> <span class="text-secondary-fixed">struct</span> <span class="text-primary-fixed">Node</span> {</span></div>
+<div class="flex hover:bg-primary-container/40 px-1 rounded"><span class="w-7 text-right pr-3 text-on-primary-container/60 shrink-0">7</span><span> <span class="text-secondary-fixed">int</span> key, val;</span></div>
+<div class="flex hover:bg-primary-container/40 px-1 rounded"><span class="w-7 text-right pr-3 text-on-primary-container/60 shrink-0">8</span><span>        Node *prev;</span></div>
+<div class="flex hover:bg-primary-container/40 px-1 rounded"><span class="w-7 text-right pr-3 text-on-primary-container/60 shrink-0">9</span><span>        Node *next;</span></div>
+<div class="flex hover:bg-primary-container/40 px-1 rounded"><span class="w-7 text-right pr-3 text-on-primary-container/60 shrink-0">10</span><span></span></div>
+<!-- Highlighted Lines 11-13 (Copilot Autocomplete) -->
+<div class="flex bg-secondary/25 px-1 rounded border-l-2 border-secondary"><span class="w-7 text-right pr-3 text-secondary-fixed shrink-0">11</span><span>        Node(<span class="text-secondary-fixed">int</span> k, <span class="text-secondary-fixed">int</span> v)</span></div>
+<div class="flex bg-secondary/25 px-1 rounded border-l-2 border-secondary"><span class="w-7 text-right pr-3 text-secondary-fixed shrink-0">12</span><span>            : key(k), val(v), prev(<span class="text-secondary-fixed">nullptr</span>), next(<span class="text-secondary-fixed">nullptr</span>) {}</span></div>
+<div class="flex bg-secondary/25 px-1 rounded border-l-2 border-secondary"><span class="w-7 text-right pr-3 text-secondary-fixed shrink-0">13</span><span>    };</span></div>
+<div class="flex hover:bg-primary-container/40 px-1 rounded"><span class="w-7 text-right pr-3 text-on-primary-container/60 shrink-0">14</span><span> <span class="text-secondary-fixed">int</span> cap;</span></div>
+<div class="flex hover:bg-primary-container/40 px-1 rounded"><span class="w-7 text-right pr-3 text-on-primary-container/60 shrink-0">15</span><span>    unordered_map&lt;<span class="text-secondary-fixed">int</span>, Node*&gt; cache;</span></div>
+<div class="flex hover:bg-primary-container/40 px-1 rounded"><span class="w-7 text-right pr-3 text-on-primary-container/60 shrink-0">16</span><span>    Node *head, *tail;</span></div>
+<div class="flex hover:bg-primary-container/40 px-1 rounded"><span class="w-7 text-right pr-3 text-on-primary-container/60 shrink-0">17</span><span></span></div>
+<div class="flex hover:bg-primary-container/40 px-1 rounded"><span class="w-7 text-right pr-3 text-on-primary-container/60 shrink-0">18</span><span> <span class="text-secondary-fixed">void</span> <span class="text-primary-fixed">addNode</span>(Node* node) {</span></div>
+<div class="flex hover:bg-primary-container/40 px-1 rounded"><span class="w-7 text-right pr-3 text-on-primary-container/60 shrink-0">19</span><span>        node-&gt;next = head-&gt;next;</span></div>
+<div class="flex hover:bg-primary-container/40 px-1 rounded"><span class="w-7 text-right pr-3 text-on-primary-container/60 shrink-0">20</span><span>        node-&gt;prev = head;</span></div>
+<div class="flex hover:bg-primary-container/40 px-1 rounded"><span class="w-7 text-right pr-3 text-on-primary-container/60 shrink-0">21</span><span>        head-&gt;next-&gt;prev = node;</span></div>
+<div class="flex hover:bg-primary-container/40 px-1 rounded"><span class="w-7 text-right pr-3 text-on-primary-container/60 shrink-0">22</span><span>        head-&gt;next = node;</span></div>
+<!-- Highlighted Lines 23-27 (AI-Assisted removeNode subroutine) -->
+<div class="flex bg-secondary/25 px-1 rounded border-l-2 border-secondary"><span class="w-7 text-right pr-3 text-secondary-fixed shrink-0">23</span><span> <span class="text-secondary-fixed">void</span> <span class="text-primary-fixed">removeNode</span>(Node* node) {</span></div>
+<div class="flex bg-secondary/25 px-1 rounded border-l-2 border-secondary"><span class="w-7 text-right pr-3 text-secondary-fixed shrink-0">24</span><span>        Node* p = node-&gt;prev;</span></div>
+<div class="flex bg-secondary/25 px-1 rounded border-l-2 border-secondary"><span class="w-7 text-right pr-3 text-secondary-fixed shrink-0">25</span><span>        Node* n = node-&gt;next;</span></div>
+<div class="flex bg-secondary/25 px-1 rounded border-l-2 border-secondary"><span class="w-7 text-right pr-3 text-secondary-fixed shrink-0">26</span><span>        p-&gt;next = n;</span></div>
+<div class="flex bg-secondary/25 px-1 rounded border-l-2 border-secondary"><span class="w-7 text-right pr-3 text-secondary-fixed shrink-0">27</span><span>        n-&gt;prev = p;</span></div>
+<div class="flex hover:bg-primary-container/40 px-1 rounded"><span class="w-7 text-right pr-3 text-on-primary-container/60 shrink-0">28</span><span>    }</span></div>
+</div>
+</div>
+<!-- Right Active Annotation Cards List -->
+<div class="xl:col-span-6 flex flex-col gap-space-sm justify-between">
+<div class="flex flex-col gap-space-sm">
+<!-- Card 1 -->
+<div class="p-space-md rounded-xl bg-surface-container-low shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded bg-primary text-on-primary font-code-meta text-code-meta font-semibold">Lines 23–27</span>
+<span class="font-code-meta text-code-meta text-on-surface-variant font-medium">LRUCache.cpp</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">AI-Assisted</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1 rounded text-on-surface-variant hover:text-primary hover:bg-surface-container" title="Edit Justification" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1 rounded text-error hover:bg-error-container" title="Remove Annotation" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface">
+                      "Suggested pointer detachment snippet <code class="font-code-body text-code-body bg-surface-container px-1 py-0.5 rounded">node-&gt;prev-&gt;next = node-&gt;next</code>. I adapted it to include null-guard checks for head and tail sentinels."
+                    </p>
+<div class="flex items-center gap-2 pt-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary text-[14px]">psychology</span>
+<span>Model: ChatGPT-4o • Verified in Viva checklist</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="p-space-md rounded-xl bg-surface-container-low shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded bg-primary text-on-primary font-code-meta text-code-meta font-semibold">Lines 11–13</span>
+<span class="font-code-meta text-code-meta text-on-surface-variant font-medium">LRUCache.cpp</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold">Copilot Autocomplete</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1 rounded text-on-surface-variant hover:text-primary hover:bg-surface-container" title="Edit Justification" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1 rounded text-error hover:bg-error-container" title="Remove Annotation" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface">
+                      "Boilerplate struct Node initialization with default nullptrs."
+                    </p>
+<div class="flex items-center gap-2 pt-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary text-[14px]">bolt</span>
+<span>Model: GitHub Copilot • Standard Idiom</span>
+</div>
+</div>
+</div>
+<!-- Add Another Range Quick Form -->
+<div class="p-space-sm rounded-lg bg-surface-container flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-on-surface font-medium">New Selection:</span>
+<span class="font-code-meta text-code-meta px-2 py-0.5 rounded bg-surface-container-lowest text-on-surface font-bold">Start: L20</span>
+<span class="text-outline">→</span>
+<span class="font-code-meta text-code-meta px-2 py-0.5 rounded bg-surface-container-lowest text-on-surface font-bold">End: L22</span>
+</div>
+<button class="px-3 py-1.5 rounded-lg bg-secondary text-on-secondary font-label-md text-label-md font-semibold hover:bg-secondary/90 transition-colors" type="button">
+                    + Add Range (L20–L22)
+                  </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ==================== STEP 3: LOGIC & ALGORITHMIC DEFENSE ==================== -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<!-- Section Header -->
+<div class="px-space-lg py-space-md bg-surface-container flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-primary text-on-primary flex items-center justify-center font-headline-sm text-headline-sm font-bold">
+            3
+          </div>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary font-bold">Step 3: Conceptual Logic &amp; Algorithmic Defense</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Demonstrate your personal mastery of the data structures and edge case invariants. You will defend these during your TA viva voce.</p>
+</div>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[16px]">record_voice_over</span>
+<span>Oral Viva Assessment Link</span>
+</div>
+</div>
+<div class="p-space-lg flex flex-col gap-space-lg">
+<!-- Field 1: Algorithmic Logic & Invariants -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-1" for="algo_invariants">
+<span>1. Algorithmic Logic &amp; Eviction Invariants</span>
+<span class="text-error">*</span>
+</label>
+<span class="font-code-meta text-code-meta text-secondary font-medium">532 / 1200 chars</span>
+</div>
+<textarea class="w-full p-space-md rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-secondary shadow-sm transition-all resize-y" id="algo_invariants" rows="4">The cache maintains an amortized O(1) time complexity by coupling a hash map with a doubly linked list. When `get(key)` is invoked, we verify presence in O(1) via the map. If present, the node is disconnected from its current position and spliced immediately after the pseudo-head (MRU). If `put(key, val)` is invoked on an existing key, the value updates and moves to MRU. If capacity is exceeded, the node immediately before pseudo-tail (LRU) is deleted both from the doubly linked list and erased from the hash map in O(1).</textarea>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span>Describe how your algorithm executes step-by-step and how invariant state is preserved.</span>
+<span class="text-secondary font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Invariant criteria met</span>
+</span>
+</div>
+</div>
+<!-- Field 2: Approach & Trade-off Analysis -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-1" for="tradeoff_analysis">
+<span>2. Approach &amp; Trade-off Analysis</span>
+<span class="text-error">*</span>
+</label>
+<span class="font-code-meta text-code-meta text-secondary font-medium">395 / 800 chars</span>
+</div>
+<textarea class="w-full p-space-md rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-secondary shadow-sm transition-all resize-y" id="tradeoff_analysis" rows="3">I evaluated using `std::list` alongside `std::unordered_map`, but opted for a custom `Node` doubly linked list with dummy head and tail sentinels. The custom implementation avoids standard library iterator invalidation overhead and guarantees no boundary null-checks are required during `removeNode()` and `addNode()`, preventing segfaults at high throughput (2x10^5 calls).</textarea>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span>Explain why you chose this design pattern over alternatives and address time/space trade-offs.</span>
+<span class="text-secondary font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Trade-off complexity justified</span>
+</span>
+</div>
+</div>
+<!-- Field 3: Data Structures & Memory Topology (WITH EXPLICIT VALIDATION ERROR DEMO) -->
+<div class="flex flex-col gap-space-xs p-space-md rounded-xl bg-error-container/20">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-bold flex items-center gap-1.5" for="data_structures">
+<span>3. Data Structures &amp; Memory Topology</span>
+<span class="text-error">*</span>
+<span class="px-2 py-0.2 rounded bg-error text-on-error font-label-sm text-label-sm">Requires Attention</span>
+</label>
+<span class="font-code-meta text-code-meta text-error font-bold">79 / 500 chars (Min: 80)</span>
+</div>
+<!-- Textarea in error state -->
+<div class="relative">
+<textarea class="w-full p-space-md rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md ring-2 ring-error focus:outline-none shadow-sm transition-all resize-y" id="data_structures" rows="2">std::unordered_map&lt;int, Node*&gt; and custom Doubly Linked List with sentinel nodes.</textarea>
+<span class="absolute right-3 top-3 material-symbols-outlined text-error text-[20px]">warning</span>
+</div>
+<!-- Inline error warning message -->
+<div class="flex items-center gap-2 text-error font-label-md text-label-md pt-1">
+<span class="material-symbols-outlined text-[16px]">error</span>
+<span class="font-semibold">Minimum 80 characters required for technical depth. Add 1 more character explaining pointer allocation or heap lifetime.</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+            Explicitly outline your memory layout, pointer relationships, and heap allocation strategies. Mention deallocation in the destructor <code class="font-code-body text-code-body bg-surface-container px-1 rounded">~LRUCache()</code>.
+          </span>
+</div>
+</div>
+</section>
+</form>
+<!-- BOTTOM STICKY ACTION NAVIGATION BAR -->
+<aside class="fixed bottom-0 left-64 right-0 h-20 bg-surface-container-lowest/95 backdrop-blur-xl shadow-xl z-40 px-space-lg flex items-center justify-between">
+<!-- Left Action & Autosave Branch Info -->
+<div class="flex items-center gap-space-lg">
+<button class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container-high text-primary hover:bg-surface-container-highest transition-colors font-headline-sm text-headline-sm font-semibold" type="button">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Back to Code Workspace</span>
+</button>
+<div class="hidden xl:flex items-center gap-2 font-code-meta text-code-meta text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-secondary">commit</span>
+<span>Branch: <span class="font-semibold text-on-surface">cs24b042/lab06-step2-3</span></span>
+<span>•</span>
+<span class="text-secondary font-medium">Synced with Git remote</span>
+</div>
+</div>
+<!-- Center Status Cue Alert -->
+<div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-error-container text-on-error-container font-label-md text-label-md font-medium">
+<span class="material-symbols-outlined text-error text-[18px]">error</span>
+<span>1 required field needs attention: Data Structures min length</span>
+</div>
+<!-- Right Submission Triggers -->
+<div class="flex items-center gap-space-md">
+<button class="px-4 py-2.5 rounded-lg bg-surface-container text-primary hover:bg-surface-container-high transition-colors font-headline-sm text-headline-sm font-medium" type="button">
+        Save Draft
+      </button>
+<!-- Next: Review & Submit (Disabled state demonstrating gating) -->
+<div class="relative group">
+<button class="px-6 py-2.5 rounded-lg bg-surface-container-highest text-on-surface-variant font-headline-sm text-headline-sm font-semibold opacity-60 cursor-not-allowed flex items-center gap-2" disabled="" type="button">
+<span>Next: Review &amp; Submit</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<!-- Hover Tooltip clarifying gating criteria -->
+<div class="absolute bottom-full right-0 mb-2 hidden group-hover:flex flex-col items-center pointer-events-none w-64">
+<div class="bg-primary text-on-primary text-label-sm font-label-sm px-3 py-2 rounded-lg shadow-xl text-center leading-tight">
+            Complete the 80-character requirement in Step 3 (Memory Topology) to unlock final submission.
+          </div>
+<div class="w-2 h-2 bg-primary rotate-45 -mt-1"></div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+<script>
+  // Dynamic character counting and validation feedback for the highlighted field
+  const dsInput = document.getElementById('data_structures');
+  if (dsInput) {
+    dsInput.addEventListener('input', function(e) {
+      const len = e.target.value.length;
+      const countDisplay = e.target.closest('.flex-col').querySelector('.font-code-meta');
+      if (countDisplay) {
+        if (len >= 80) {
+          countDisplay.textContent = `${len} / 500 chars (Requirement Satisfied)`;
+          countDisplay.classList.remove('text-error');
+          countDisplay.classList.add('text-secondary');
+        } else {
+          countDisplay.textContent = `${len} / 500 chars (Min: 80)`;
+          countDisplay.classList.add('text-error');
+          countDisplay.classList.remove('text-secondary');
+        }
+      }
+    });
+  }
+</script></main></div></body></html>

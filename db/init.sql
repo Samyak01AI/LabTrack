@@ -1,0 +1,5 @@
+CREATE DATABASE IF NOT EXISTS labtrack_dev;
+CREATE DATABASE IF NOT EXISTS labtrack_test;
+GRANT ALL PRIVILEGES ON labtrack_dev.* TO 'root'@'%';
+GRANT ALL PRIVILEGES ON labtrack_test.* TO 'root'@'%';
+FLUSH PRIVILEGES;

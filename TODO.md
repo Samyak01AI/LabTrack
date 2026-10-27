@@ -1,0 +1,87 @@
+# LabTrack ToDo
+
+Iterations 0–2 are implemented and verified on the MySQL port. The first two additive migrations are applied to WebDev-managed MySQL. Initial managed teacher provisioning, bootstrap-secret removal, the canonical checkpoint, and first publication remain pending. Iterations 3–9 remain open; website launch is not evidence those features are implemented.
+
+## Iteration 0 — vanilla faculty register (COMPLETE)
+
+- [x] Build the separate vanilla HTML/CSS/JS faculty register from scratch using the supplied teacher-dashboard UI; the original source was not provided and the user authorized a new baseline.
+- [x] Reject blank student records and duplicate IDs (trimmed, case-insensitive).
+- [x] Count only exact `Complete` status as complete; `Incomplete` is excluded.
+- [x] Implement search, status/section/date filters, working dropdowns, empty state, validated native date inputs, and persistence.
+- [x] Create repository structure and preserve supplied UI references under `docs/ui-reference/`.
+
+## Iteration 1 — backend, database, and access control (COMPLETE)
+
+- [x] Implement Node.js/Express schema/migrations, student and teacher login, role-based access control, and protected routes (original implementation used PostgreSQL; current implementation uses MySQL).
+- [x] Use bcrypt password hashing and JWTs only in HTTP-only cookies; public signup cannot self-assign teacher role.
+- [x] Port the users schema, migrations, query parameters/results, UUID handling, JSON/date mappings, teacher provisioning code and integration tests from PostgreSQL to the explicitly authorized WebDev-managed MySQL service.
+- [x] Preserve email normalization/uniqueness, user roles, active-account revocation, teacher-only provisioning, password hashing, and protected student/teacher routes after the port; verified by the MySQL API suite.
+- [x] Keep MySQL API integration and E2E fixture writes on an isolated local test database; never use the managed `DATABASE_URL` for automated test writes/deletions because managed development and publication share it.
+
+## Iteration 2 — assignments and student-facing views (COMPLETE)
+
+- [x] Implement teacher assignment creation, editing, publishing, archiving, and restoration.
+- [x] Implement API-backed student dashboard, real counts/deadlines, filters, and empty states.
+- [x] Implement assignment viewer for persisted statement, constraints, samples, deadlines, points, and languages.
+- [x] Match supplied screen structure, colors, and components; reconstruct the broken teacher-admin screenshot from its source HTML and record the decision.
+- [x] Verify desktop and 390px interactions with real browser runs; no uncaught browser exceptions.
+- [x] Port assignments schema, JSON sample cases/language options, UTC timestamps, unique teacher assignment codes, ownership queries and integration/browser tests to MySQL without changing the user-visible screens or assignment behavior.
+- [x] Preserve published-only student visibility and teacher ownership/authorization after migration; verified by MySQL API tests.
+
+## Permanent website — WebDev-managed deployment (IN PROGRESS — TEACHER CREDENTIAL GATE)
+
+- [ ] Transfer the current app and project documentation into the initialized WebDev canonical repository; preserve the supplied UI references and legacy prototype, and do not transfer `.env`, credentials, `node_modules`, or unneeded build artifacts.
+- [x] Configure the existing WebDev-managed MySQL service as the runtime database; use an idempotent, non-destructive MySQL schema history. Do not perform E2E writes or cleanup against the shared managed database.
+- [x] Serve React/Vite and Express from one Node service on the configured Preview port and same origin; in production, serve the built React assets and `/api` from the Express container, with all browser URLs relative.
+- [x] Keep `/api/health` unauthenticated and return success, respect `PORT`, bind the Cloud service to `0.0.0.0`, and return SPA page routes without intercepting API or asset failures.
+- [x] Preserve the current login and role model; set the session cookie `SameSite=None; Secure` for HTTPS Preview/published access without deriving it from `NODE_ENV` or internal proxy scheme; keep plain-HTTP local-test behavior separately configured.
+- [ ] Store production signing credentials only using protected WebDev secret input, never in committed files or the browser bundle. Provision any first teacher out of band and remove temporary bootstrap credentials after successful provisioning. The managed bootstrap password has not passed the app's 12–128-character validation, so no teacher account was written yet.
+- [x] Keep the `/manus-routes.json` route manifest complete and synchronized with React page routes; verify it returns valid JSON rather than SPA HTML.
+- [x] Configure the Docker build/run contract and unauthenticated health path.
+- [ ] Save a canonical-main checkpoint after the affected tests pass and no High/Critical bugs are open; request publication only after the checkpoint is saved.
+- [ ] Confirm a successful Publish result before reporting the stable website URL. Do not enable auto-publish or always-on hosting; state that the default on-demand service may sleep and have a cold start.
+
+## Iteration 3 — code workspace and sandboxed execution (BLOCKED — CREDENTIAL GATE)
+
+- [ ] Implement the C++/Java editor and sandboxed execution through Judge0 only.
+- [ ] Provide per-test results, time, memory, errors, and time limits.
+- [ ] Never run student code outside the sandbox.
+- [ ] Obtain the Judge0 API endpoint and required API key/header through user-provided configuration; keep credentials in ignored `.env` locally and protected server configuration in production; never commit them.
+
+## Iteration 4 — AI-use declaration and understanding evidence
+
+- [ ] Require an AI-use declaration, explanation of logic, and annotation of AI-assisted code.
+- [ ] Apply mandatory validation to the declaration, explanation, and annotation.
+
+## Iteration 5 — similarity review
+
+- [ ] Implement token-based similarity fingerprints, matched segments, and a teacher-set threshold.
+- [ ] Present scores as review flags, never verdicts; never auto-fail a student.
+- [ ] Never claim the system detects AI-written code.
+
+## Iteration 6 — teacher assessment
+
+- [ ] Implement rubric scoring, final marks, and teacher marking interface.
+- [ ] Assess correctness and demonstrated understanding.
+
+## Iteration 7 — history and reporting
+
+- [ ] Implement submission history and student-wise results.
+- [ ] Implement reports with CSV and print export.
+
+## Iteration 8 — optional declared AI assistance
+
+- [ ] Implement optional declared AI assistance behind a backend-only feature flag that is off by default.
+- [ ] Log any assistance against the AI-use declaration.
+
+## Iteration 9 — release hardening
+
+- [ ] Complete security review, load/responsive checks, final regression, and documentation.
+
+## Cross-cutting requirements
+
+- [x] Keep source-controlled files secret-free; local `.env` is ignored, and protected production values use platform secret configuration.
+- [x] Record product assumptions and preserve the planned feature boundary in `docs/DECISIONS.md`.
+- [x] Use real test runs for results, counts, and dates; mark untestable items explicitly.
+- [x] Follow Plan → Build → Test → Fix → Document → Commit → Report for each iteration; do not pass a gate with failed tests or open High/Critical bugs.
+- [x] Record all website-port/deployment test runs in `docs/TEST_LOG.md` using `Test ID | Module | Input | Expected | Actual | Status`; record bugs in `docs/BUG_LOG.md` using `Issue ID | Description | Severity | Root Cause | Fix | Status | Date`; update `CHANGELOG.md` and `docs/DECISIONS.md`.

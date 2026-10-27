@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "inverse-on-surface": "#eaf1ff", "secondary-container": "#96eef9", "on-primary-container": "#8ba2d5", "on-background": "#0b1c30", "tertiary-container": "#30384d", "tertiary": "#1b2336", "inverse-surface": "#213145", "on-tertiary-fixed": "#131b2e", "primary-container": "#1f3864", "on-tertiary-container": "#9aa2ba", "surface-variant": "#d3e4fe", "surface-container-lowest": "#ffffff", "error": "#ba1a1a", "on-primary": "#ffffff", "inverse-primary": "#afc6fb", "on-surface-variant": "#44474f", "background": "#f8f9ff", "tertiary-fixed": "#dae2fd", "secondary": "#006972", "primary-fixed-dim": "#afc6fb", "on-surface": "#0b1c30", "surface-container-low": "#eff4ff", "on-tertiary": "#ffffff", "surface": "#f8f9ff", "on-secondary-container": "#006d77", "outline-variant": "#c4c6d0", "on-secondary-fixed-variant": "#004f56", "on-secondary-fixed": "#001f23", "surface-dim": "#cbdbf5", "error-container": "#ffdad6", "secondary-fixed-dim": "#7cd4df", "surface-tint": "#475e8c", "on-error-container": "#93000a", "on-secondary": "#ffffff", "outline": "#747780", "primary-fixed": "#d8e2ff", "on-error": "#ffffff", "surface-container-high": "#dce9ff", "on-tertiary-fixed-variant": "#3f465c", "tertiary-fixed-dim": "#bec6e0", "surface-bright": "#f8f9ff", "secondary-fixed": "#98f0fb", "on-primary-fixed": "#001a41", "on-primary-fixed-variant": "#2e4673", "surface-container-highest": "#d3e4fe", "surface-container": "#e5eeff", "primary": "#03224d" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "2rem", "space-xl": "2rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "margin-tablet": "1.25rem", "gutter-tablet": "1rem", "gutter": "1.5rem", "space-md": "1rem", "space-xs": "0.25rem" }, "fontFamily": { "headline-sm": ["Inter"], "body-lg": ["Inter"], "body-sm": ["Inter"], "headline-xl": ["Inter"], "label-sm": ["Inter"], "headline-md": ["Inter"], "code-meta": ["JetBrains Mono"], "body-md": ["Inter"], "headline-lg": ["Inter"], "code-body": ["JetBrains Mono"], "headline-xl-mobile": ["Inter"], "label-md": ["Inter"] }, "fontSize": { "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "0", "fontWeight": "600" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "headline-xl": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "code-meta": ["11px", { "lineHeight": "16px", "fontWeight": "500" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "code-body": ["13px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-xl-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "label-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "500" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-primary text-on-primary z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center justify-between bg-primary"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-secondary flex items-center justify-center"><span class="material-symbols-outlined text-on-secondary text-[20px]">terminal</span></div><div class="flex items-baseline gap-space-xs"><span class="font-headline-sm text-headline-sm font-bold text-on-primary tracking-tight">LabTrack</span><span class="px-1.5 py-0.5 rounded text-[10px] font-code-meta text-code-meta bg-primary-container text-primary-fixed">V4.2</span></div></div></div><div class="px-space-md py-space-sm"><span class="px-space-sm font-label-sm text-label-sm text-on-primary-container uppercase tracking-wider">DSA Workbench</span></div><nav class="flex flex-col gap-1 px-space-md" data-active-classes="bg-primary-container text-on-primary font-headline-sm"><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-on-primary-container hover:bg-primary-container hover:text-on-primary transition-colors font-body-md text-body-md" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span>Dashboard</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-on-primary-container hover:bg-primary-container hover:text-on-primary transition-colors font-body-md text-body-md" data-path="assignments" href="#"><span class="material-symbols-outlined text-[20px]">code_blocks</span><span>Assignments</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-on-primary-container hover:bg-primary-container hover:text-on-primary transition-colors font-body-md text-body-md" data-path="submission-history" href="#"><span class="material-symbols-outlined text-[20px]">history_edu</span><span>Submission History</span></a><a class="flex items-center gap-space-md px-space-md py-2.5 rounded-lg text-on-primary-container hover:bg-primary-container hover:text-on-primary transition-colors font-body-md text-body-md" data-path="profile" href="#"><span class="material-symbols-outlined text-[20px]">account_box</span><span>Profile</span></a></nav></div><div class="p-space-md m-space-md rounded-xl bg-tertiary-container text-on-tertiary-container flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-sm text-label-sm uppercase tracking-wide text-on-tertiary-fixed">Lab Node: Active</span><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span></div><div class="font-code-meta text-code-meta text-tertiary-fixed flex items-center gap-1.5"><span class="material-symbols-outlined text-[14px]">dns</span><span>node-04b.lab.cs.edu</span></div><div class="font-body-sm text-body-sm text-on-tertiary-container pt-1">Cohort: <span class="font-label-md text-label-md text-on-tertiary font-semibold">CS-2026 / Sec B</span></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-secondary text-[20px]">school</span><span class="font-label-md text-label-md text-on-surface-variant font-medium">Dept. of Computer Science &amp; Engineering</span></div><div class="hidden md:flex items-center gap-space-xs px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span><span class="font-label-sm text-label-sm font-semibold">TERM FALL 24 • LAB 08</span></div></div><div class="flex items-center gap-space-md"><button class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error"></span></button><div class="flex items-center gap-space-md pl-space-sm"><div class="text-right hidden sm:block"><div class="font-label-md text-label-md text-on-surface font-semibold">Alex V. Chen</div><div class="font-code-meta text-code-meta text-on-surface-variant">CS24B042 • <span class="px-1.5 py-0.5 rounded text-[10px] font-label-sm text-label-sm bg-surface-container text-secondary font-bold">STUDENT</span></div></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative pt-16 w-full px-space-lg min-h-screen bg-surface"><div class="flex flex-col w-full">
+<!-- TOP CONTEXT BAR: Breadcrumbs, Session Metadata & Stepper -->
+<section class="w-full bg-surface-container-lowest shadow-sm rounded-xl mb-space-md p-space-md">
+<div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-space-md">
+<!-- Breadcrumb & Assignment Info -->
+<div class="flex flex-col gap-1 min-w-0">
+<nav class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm">
+<span class="hover:text-secondary cursor-pointer">Assignments</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="font-semibold text-primary">Lab 06: Implement LRU Cache</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-secondary font-bold uppercase tracking-wider">Workspace</span>
+</nav>
+<div class="flex flex-wrap items-center gap-space-sm pt-0.5">
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface">Assignment 06: Implement LRU Cache with O(1) Operations</h1>
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">C++20</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-code-meta text-code-meta">Max Marks: 100</span>
+</div>
+</div>
+<!-- Live Session Status & Autosave Status -->
+<div class="flex flex-wrap items-center gap-space-md text-on-surface-variant font-body-sm text-body-sm self-start xl:self-auto">
+<div class="flex items-center gap-2 bg-surface-container-low px-3 py-1.5 rounded-lg">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
+</span>
+<span class="font-code-meta text-code-meta text-on-surface font-medium">Autosaved 14:32:05</span>
+<span class="text-outline text-[11px]">•</span>
+<span class="font-code-meta text-code-meta text-on-surface-variant">git:sub-arjun-lru</span>
+</div>
+<div class="flex items-center gap-1.5 bg-primary text-on-primary px-3 py-1.5 rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary-fixed">timer</span>
+<span class="font-code-meta text-code-meta tracking-wide font-medium">Lab Session: 01:48:12</span>
+</div>
+</div>
+</div>
+<!-- 4-Step Academic Workflow Stepper -->
+<div class="mt-space-lg pt-space-md bg-surface-container-low/60 rounded-xl px-space-md py-3">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-sm">
+<!-- Step 1: Active Code Editor -->
+<div class="flex items-center gap-space-sm p-2 rounded-lg bg-surface-container-lowest shadow-sm">
+<div class="w-7 h-7 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-headline-sm text-headline-sm font-bold shadow-sm">
+            1
+          </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm font-bold text-secondary uppercase tracking-wider">Step 1 • Active</span>
+<span class="font-body-md text-body-md font-semibold text-on-surface truncate">Code Implementation</span>
+</div>
+<span class="ml-auto material-symbols-outlined text-secondary text-[20px]" style="font-variation-settings: 'FILL' 1;">terminal</span>
+</div>
+<!-- Step 2: Upcoming AI Declaration -->
+<div class="flex items-center gap-space-sm p-2 rounded-lg opacity-65 hover:opacity-100 transition-opacity">
+<div class="w-7 h-7 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-headline-sm text-headline-sm font-semibold">
+            2
+          </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Step 2</span>
+<span class="font-body-md text-body-md text-on-surface font-medium truncate">AI-Use Declaration</span>
+</div>
+<span class="ml-auto material-symbols-outlined text-on-surface-variant text-[18px]">psychology</span>
+</div>
+<!-- Step 3: Upcoming Logic Explanation -->
+<div class="flex items-center gap-space-sm p-2 rounded-lg opacity-65 hover:opacity-100 transition-opacity">
+<div class="w-7 h-7 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-headline-sm text-headline-sm font-semibold">
+            3
+          </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Step 3</span>
+<span class="font-body-md text-body-md text-on-surface font-medium truncate">Logic Explanation</span>
+</div>
+<span class="ml-auto material-symbols-outlined text-on-surface-variant text-[18px]">menu_book</span>
+</div>
+<!-- Step 4: Upcoming Review & Submit -->
+<div class="flex items-center gap-space-sm p-2 rounded-lg opacity-65 hover:opacity-100 transition-opacity">
+<div class="w-7 h-7 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-headline-sm text-headline-sm font-semibold">
+            4
+          </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Step 4</span>
+<span class="font-body-md text-body-md text-on-surface font-medium truncate">Review &amp; Submit</span>
+</div>
+<span class="ml-auto material-symbols-outlined text-on-surface-variant text-[18px]">verified</span>
+</div>
+</div>
+</div>
+</section>
+<!-- MAIN DUAL/TRI-PANE WORKSPACE -->
+<div class="grid grid-cols-12 gap-space-md mb-space-xl items-start">
+<!-- LEFT PANEL: Problem Brief & Academic Specs (Collapsible 3-col on XL) -->
+<aside class="col-span-12 lg:col-span-4 xl:col-span-3 flex flex-col gap-space-md transition-all duration-200" id="problemDrawer">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<!-- Drawer Header -->
+<div class="p-space-md bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">assignment</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">Problem Brief</span>
+</div>
+<button class="p-1 rounded hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors" id="toggleDrawerBtn" title="Collapse Specifications">
+<span class="material-symbols-outlined text-[20px]">first_page</span>
+</button>
+</div>
+<div class="p-space-md flex flex-col gap-space-md">
+<!-- Summary Box -->
+<div>
+<div class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider mb-1">Core Objective</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Design a data structure that follows the constraints of a <strong class="text-on-surface font-semibold">Least Recently Used (LRU) Cache</strong> with strict <code class="font-code-meta text-code-meta bg-surface-container px-1 py-0.5 rounded text-primary font-semibold">O(1)</code> average time complexity for both operations.
+            </p>
+</div>
+<!-- Method Signatures Card -->
+<div class="bg-surface-container-low rounded-lg p-3">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-sm text-label-sm font-bold text-primary uppercase">Required Signatures</span>
+<span class="material-symbols-outlined text-outline text-[16px]">code</span>
+</div>
+<ul class="flex flex-col gap-1.5 font-code-meta text-code-meta text-on-surface">
+<li class="bg-surface-container-lowest px-2 py-1 rounded shadow-sm text-primary">LRUCache(int capacity)</li>
+<li class="bg-surface-container-lowest px-2 py-1 rounded shadow-sm text-primary">int get(int key)</li>
+<li class="bg-surface-container-lowest px-2 py-1 rounded shadow-sm text-primary">void put(int key, int val)</li>
+</ul>
+</div>
+<!-- Strict Constraints Matrix -->
+<div>
+<div class="font-label-sm text-label-sm text-on-surface font-bold uppercase tracking-wider mb-2 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[16px]">tune</span>
+<span>System Constraints</span>
+</div>
+<div class="grid grid-cols-1 gap-1.5 font-body-sm text-body-sm">
+<div class="flex justify-between items-center py-1.5 px-2.5 rounded bg-surface-container-low">
+<span class="text-on-surface-variant">Capacity Range</span>
+<span class="font-code-meta text-code-meta font-semibold text-primary">1 ≤ cap ≤ 3,000</span>
+</div>
+<div class="flex justify-between items-center py-1.5 px-2.5 rounded bg-surface-container-low">
+<span class="text-on-surface-variant">Key / Value</span>
+<span class="font-code-meta text-code-meta font-semibold text-primary">0 ≤ k, v ≤ 10<sup>4</sup></span>
+</div>
+<div class="flex justify-between items-center py-1.5 px-2.5 rounded bg-surface-container-low">
+<span class="text-on-surface-variant">Total Invocations</span>
+<span class="font-code-meta text-code-meta font-semibold text-primary">≤ 2 × 10<sup>5</sup> calls</span>
+</div>
+<div class="flex justify-between items-center py-1.5 px-2.5 rounded bg-surface-container-low">
+<span class="text-on-surface-variant">Operation Bound</span>
+<span class="font-code-meta text-code-meta font-bold text-secondary">Strict O(1) Amortized</span>
+</div>
+</div>
+</div>
+<!-- Academic Invariant Hint Callout -->
+<div class="p-3 rounded-lg bg-surface-container text-on-surface flex flex-col gap-1.5">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[18px]">lightbulb</span>
+<span class="font-label-sm text-label-sm font-bold uppercase">Department Invariant Note</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-tight">
+              Maintain pseudo <code class="font-code-meta text-code-meta text-secondary font-bold">dummy head &amp; tail</code> pointers. Fast unlinking and immediate insertion at head prevents corner-case branching during concurrent operations.
+            </p>
+</div>
+<!-- Workspace Starter Files Inventory -->
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold block mb-2">Project Manifest</span>
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-lowest hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[16px]">description</span>
+<span class="font-code-meta text-code-meta font-medium text-primary">LRUCache.cpp</span>
+</div>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-label-sm text-label-sm bg-surface-container-high text-primary font-bold">MAIN</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-lowest hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[16px]">data_object</span>
+<span class="font-code-meta text-code-meta font-medium text-on-surface-variant">Node.hpp</span>
+</div>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-label-sm text-label-sm bg-surface-container text-on-surface-variant">HEADER</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-lowest hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[16px]">science</span>
+<span class="font-code-meta text-code-meta font-medium text-on-surface-variant">test_runner.cpp</span>
+</div>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-label-sm text-label-sm bg-surface-container text-on-surface-variant">HARNESS</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- RIGHT / CENTRAL WORKBENCH: Code Editor & Execution Harness (9-col on XL) -->
+<div class="col-span-12 lg:col-span-8 xl:col-span-9 flex flex-col gap-space-md" id="mainEditorContainer">
+<!-- Integrated Monaco-Style Code Editor Section -->
+<div class="bg-tertiary text-on-tertiary rounded-xl shadow-md overflow-hidden flex flex-col">
+<!-- Editor Header Bar with Language, Config & Actions -->
+<div class="bg-tertiary-container px-space-md py-2.5 flex flex-wrap items-center justify-between gap-space-sm">
+<!-- Left: Language selector & file tab -->
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-2 bg-tertiary px-3 py-1.5 rounded-lg">
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]">terminal</span>
+<select class="bg-transparent text-on-tertiary font-code-meta text-code-meta font-medium focus:outline-none cursor-pointer">
+<option class="bg-tertiary text-on-tertiary" selected="" value="cpp20">C++ (GCC 13.2 / C++20)</option>
+<option class="bg-tertiary text-on-tertiary" value="java21">Java (OpenJDK 21.0.2)</option>
+<option class="bg-tertiary text-on-tertiary" value="py311">Python 3.11 (PyPy)</option>
+</select>
+</div>
+<div class="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded bg-tertiary/60 font-code-meta text-code-meta text-tertiary-fixed">
+<span>LRUCache.cpp</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+</div>
+</div>
+<!-- Right: Tool settings & Execution trigger actions -->
+<div class="flex items-center gap-2">
+<div class="hidden md:flex items-center gap-1 text-on-tertiary-container pr-2">
+<button class="px-2 py-1 rounded hover:bg-tertiary text-tertiary-fixed font-code-meta text-code-meta transition-colors" title="Toggle Vim Mode">
+                Vim: OFF
+              </button>
+<button class="px-2 py-1 rounded hover:bg-tertiary text-tertiary-fixed font-code-meta text-code-meta transition-colors" title="Font size 14px">
+                14px
+              </button>
+<button class="p-1 rounded hover:bg-tertiary text-tertiary-fixed transition-colors" title="Reset to template">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+</button>
+</div>
+<!-- Action buttons -->
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-tertiary hover:bg-tertiary-fixed/20 text-on-tertiary font-body-sm text-body-sm transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[16px]">save</span>
+<span>Draft</span>
+</button>
+<button class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-primary-container text-on-primary hover:bg-primary transition-colors font-body-sm text-body-sm shadow-sm" id="runSingleTestBtn">
+<span class="material-symbols-outlined text-[16px] text-secondary-fixed">play_arrow</span>
+<span>Run Code</span>
+</button>
+<button class="flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-secondary text-on-secondary hover:bg-on-secondary-container transition-colors font-headline-sm text-headline-sm font-medium shadow-sm" id="runAllTestsBtn">
+<span class="material-symbols-outlined text-[18px]">splitscreen</span>
+<span>Run All Tests</span>
+</button>
+</div>
+</div>
+<!-- Editor Canvas Surface with Code Lines -->
+<div class="grid grid-cols-12 bg-[#0d121f] text-on-tertiary font-code-body text-code-body leading-relaxed min-h-[460px] p-2 select-text overflow-x-auto">
+<!-- Gutter / Line Numbers -->
+<div class="col-span-1 select-none text-right pr-4 text-tertiary-fixed/40 font-code-meta text-code-meta flex flex-col pt-2">
+<span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+<span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+<span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
+<span>16</span><span>17</span><span>18</span><span>19</span><span>20</span>
+<span>21</span><span>22</span><span>23</span><span>24</span><span>25</span>
+<span>26</span><span>27</span><span>28</span>
+</div>
+<!-- Code Content Panel -->
+<div class="col-span-11 pl-2 pt-2 flex flex-col font-mono text-[13px] leading-[22px]">
+<div><span class="text-[#7cd4df]">#include</span> <span class="text-[#fca5a5]">&lt;unordered_map&gt;</span></div>
+<div><span class="text-[#7cd4df]">#include</span> <span class="text-[#fca5a5]">&lt;iostream&gt;</span></div>
+<div><span class="text-tertiary-fixed/50">// Institutional Laboratory 06: Doubly Linked Hash Cache</span></div>
+<div class="text-[#93c5fd]">using namespace <span class="text-[#fef08a]">std</span>;</div>
+<div class="h-2"></div>
+<div><span class="text-[#93c5fd]">struct</span> <span class="text-[#67e8f9] font-semibold">Node</span> {</div>
+<div class="pl-6"><span class="text-[#93c5fd]">int</span> key, val;</div>
+<div class="pl-6"><span class="text-[#67e8f9]">Node</span>* prev;</div>
+<div class="pl-6"><span class="text-[#67e8f9]">Node</span>* next;</div>
+<div class="pl-6"><span class="text-[#67e8f9]">Node</span>(<span class="text-[#93c5fd]">int</span> k, <span class="text-[#93c5fd]">int</span> v) : key(k), val(v), prev(<span class="text-[#f87171]">nullptr</span>), next(<span class="text-[#f87171]">nullptr</span>) {}</div>
+<div>};</div>
+<div class="h-2"></div>
+<div><span class="text-[#93c5fd]">class</span> <span class="text-[#67e8f9] font-bold">LRUCache</span> {</div>
+<div><span class="text-[#fca5a5]">private:</span></div>
+<div class="pl-6">unordered_map&lt;<span class="text-[#93c5fd]">int</span>, <span class="text-[#67e8f9]">Node</span>*&gt; cacheMap;</div>
+<div class="pl-6"><span class="text-[#93c5fd]">int</span> capacity;</div>
+<div class="pl-6"><span class="text-[#67e8f9]">Node</span>* head;</div>
+<div class="pl-6"><span class="text-[#67e8f9]">Node</span>* tail;</div>
+<div class="h-2"></div>
+<div class="pl-6"><span class="text-[#93c5fd]">void</span> <span class="text-[#93c5fd] font-semibold">removeNode</span>(<span class="text-[#67e8f9]">Node</span>* node) {</div>
+<div class="pl-12 bg-primary/40 rounded py-0.5"><span class="text-tertiary-fixed/70">// WARNING: potential dangling pointer loop under high throughput</span></div>
+<div class="pl-12">node-&gt;prev-&gt;next = node-&gt;next;</div>
+<div class="pl-12">node-&gt;next-&gt;prev = node-&gt;prev;</div>
+<div class="pl-6">}</div>
+<div class="h-2"></div>
+<div><span class="text-[#fca5a5]">public:</span></div>
+<div class="pl-6"><span class="text-[#67e8f9]">LRUCache</span>(<span class="text-[#93c5fd]">int</span> cap) : capacity(cap) {</div>
+<div class="pl-12">head = <span class="text-[#93c5fd]">new</span> <span class="text-[#67e8f9]">Node</span>(-<span class="text-[#fca5a5]">1</span>, -<span class="text-[#fca5a5]">1</span>);</div>
+<div class="pl-12">tail = <span class="text-[#93c5fd]">new</span> <span class="text-[#67e8f9]">Node</span>(-<span class="text-[#fca5a5]">1</span>, -<span class="text-[#fca5a5]">1</span>);</div>
+<div class="pl-12">head-&gt;next = tail; tail-&gt;prev = head;</div>
+<div class="pl-6">}</div>
+</div>
+</div>
+<!-- Editor Status Footer -->
+<div class="bg-tertiary-container px-space-md py-1.5 flex items-center justify-between text-on-tertiary-container font-code-meta text-code-meta">
+<div class="flex items-center gap-space-md">
+<span>Spaces: 4</span>
+<span>UTF-8</span>
+<span>LF</span>
+<span class="text-secondary-fixed">Pointer Safety: Strict</span>
+</div>
+<div>Ln 21, Col 13</div>
+</div>
+</div>
+<!-- Execution Console & Test Harness Multi-Pane Panel -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<!-- Interactive Tabs Header -->
+<div class="bg-surface-container-low px-space-md pt-2 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-2 px-3 py-2 rounded-t-lg bg-surface-container-lowest text-primary font-headline-sm text-headline-sm font-bold shadow-sm transition-colors" id="tabTestCasesBtn">
+<span class="material-symbols-outlined text-[18px] text-secondary">checklist</span>
+<span>Automated Test Cases</span>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-bold">3/4 Passing</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-2 rounded-t-lg hover:bg-surface-container text-on-surface-variant font-label-md text-label-md font-medium transition-colors" id="tabConsoleBtn">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+<span>Console &amp; Compiler</span>
+<span class="w-2 h-2 rounded-full bg-error"></span>
+</button>
+</div>
+<div class="hidden sm:flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm pb-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">memory</span>
+<span>Memory Limit: 256MB</span>
+<span class="text-outline">•</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">schedule</span>
+<span>Timeout: 1.50s</span>
+</div>
+</div>
+<!-- TAB 1 CONTENT: Detailed Test Cases Matrix -->
+<div class="p-space-md flex flex-col gap-space-sm" id="testCasesContent">
+<!-- Test Case 1: PASS -->
+<div class="p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors flex flex-col md:flex-row md:items-center justify-between gap-3">
+<div class="flex items-start gap-3 min-w-0">
+<div class="w-6 h-6 rounded-full bg-[#dcfce7] text-[#15803d] flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px] font-bold">check</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">Case 1: Standard Put &amp; Get</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-label-sm text-label-sm bg-[#dcfce7] text-[#15803d] font-bold">PASS</span>
+</div>
+<div class="font-code-meta text-code-meta text-on-surface-variant pt-1 truncate">
+<span class="text-primary font-medium">Input:</span> LRUCache(2) → put(1,1), put(2,2), get(1)
+                </div>
+</div>
+</div>
+<div class="flex items-center gap-space-md font-code-meta text-code-meta text-on-surface-variant self-end md:self-auto shrink-0">
+<div class="text-right">
+<div class="text-on-surface font-semibold">Output: 1</div>
+<div class="text-[11px] text-outline">Expected: 1</div>
+</div>
+<div class="bg-surface-container-lowest px-2 py-1 rounded shadow-sm flex flex-col items-end">
+<span class="text-secondary font-bold">1.2 ms</span>
+<span class="text-[10px] text-outline">4.1 MB</span>
+</div>
+</div>
+</div>
+<!-- Test Case 2: PASS -->
+<div class="p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors flex flex-col md:flex-row md:items-center justify-between gap-3">
+<div class="flex items-start gap-3 min-w-0">
+<div class="w-6 h-6 rounded-full bg-[#dcfce7] text-[#15803d] flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px] font-bold">check</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">Case 2: Eviction on Capacity</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-label-sm text-label-sm bg-[#dcfce7] text-[#15803d] font-bold">PASS</span>
+</div>
+<div class="font-code-meta text-code-meta text-on-surface-variant pt-1 truncate">
+<span class="text-primary font-medium">Input:</span> put(3,3) → eviction → get(2)
+                </div>
+</div>
+</div>
+<div class="flex items-center gap-space-md font-code-meta text-code-meta text-on-surface-variant self-end md:self-auto shrink-0">
+<div class="text-right">
+<div class="text-on-surface font-semibold">Output: -1</div>
+<div class="text-[11px] text-outline">Expected: -1</div>
+</div>
+<div class="bg-surface-container-lowest px-2 py-1 rounded shadow-sm flex flex-col items-end">
+<span class="text-secondary font-bold">1.8 ms</span>
+<span class="text-[10px] text-outline">4.2 MB</span>
+</div>
+</div>
+</div>
+<!-- Test Case 3: PASS -->
+<div class="p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors flex flex-col md:flex-row md:items-center justify-between gap-3">
+<div class="flex items-start gap-3 min-w-0">
+<div class="w-6 h-6 rounded-full bg-[#dcfce7] text-[#15803d] flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px] font-bold">check</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">Case 3: Update Existing Key Value</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-label-sm text-label-sm bg-[#dcfce7] text-[#15803d] font-bold">PASS</span>
+</div>
+<div class="font-code-meta text-code-meta text-on-surface-variant pt-1 truncate">
+<span class="text-primary font-medium">Input:</span> put(1,10), put(1,20), get(1)
+                </div>
+</div>
+</div>
+<div class="flex items-center gap-space-md font-code-meta text-code-meta text-on-surface-variant self-end md:self-auto shrink-0">
+<div class="text-right">
+<div class="text-on-surface font-semibold">Output: 20</div>
+<div class="text-[11px] text-outline">Expected: 20</div>
+</div>
+<div class="bg-surface-container-lowest px-2 py-1 rounded shadow-sm flex flex-col items-end">
+<span class="text-secondary font-bold">1.1 ms</span>
+<span class="text-[10px] text-outline">4.0 MB</span>
+</div>
+</div>
+</div>
+<!-- Test Case 4: FAIL (TIME LIMIT EXCEEDED) -->
+<div class="p-space-sm rounded-lg bg-error-container/40 hover:bg-error-container/60 transition-colors flex flex-col md:flex-row md:items-center justify-between gap-3">
+<div class="flex items-start gap-3 min-w-0">
+<div class="w-6 h-6 rounded-full bg-error text-on-error flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px] font-bold">timer_off</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">Case 4: High-Throughput Stress Test (10<sup>5</sup> Operations)</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-label-sm text-label-sm bg-error text-on-error font-bold">TIME LIMIT EXCEEDED</span>
+</div>
+<div class="font-code-meta text-code-meta text-error pt-1">
+                  Execution terminated: Cycle detected in linked list or non-amortized traversal in removeNode().
+                </div>
+</div>
+</div>
+<div class="flex items-center gap-space-md font-code-meta text-code-meta text-on-surface-variant self-end md:self-auto shrink-0">
+<div class="text-right">
+<div class="text-error font-bold">TLE • 1.52s &gt; 1.50s</div>
+<div class="text-[11px] text-on-surface-variant">Max Ops: 100,000</div>
+</div>
+<div class="bg-surface-container-lowest px-2 py-1 rounded shadow-sm flex flex-col items-end">
+<span class="text-error font-bold">TIMEOUT</span>
+<span class="text-[10px] text-outline">48.2 MB</span>
+</div>
+</div>
+</div>
+</div>
+<!-- TAB 2 CONTENT: Interactive Compiler & Console Diagnostics -->
+<div class="hidden p-space-md flex-col gap-space-sm bg-tertiary text-on-tertiary" id="consoleContent">
+<div class="flex items-center justify-between pb-2">
+<div class="flex items-center gap-2 font-code-meta text-code-meta text-secondary-fixed">
+<span class="material-symbols-outlined text-[16px]">terminal</span>
+<span>Diagnostic Sandbox Output (g++ 13.2.0)</span>
+</div>
+<button class="text-on-tertiary-container hover:text-on-tertiary text-[11px] font-code-meta" id="clearConsoleBtn">Clear Output</button>
+</div>
+<div class="bg-[#0b121e] p-space-md rounded-lg font-code-body text-code-body leading-relaxed flex flex-col gap-1 text-tertiary-fixed">
+<div class="text-secondary-fixed font-semibold">$ g++ -std=c++20 -O2 -Wall -Wextra LRUCache.cpp test_runner.cpp -o suite_exec</div>
+<div class="text-on-tertiary-container">Compiling object files for cohort runner CS24B042...</div>
+<div class="text-[#fef08a] mt-1">
+              LRUCache.cpp:42:19: <span class="font-bold underline">warning:</span> unused variable 'dummy' [-Wunused-variable]
+            </div>
+<div class="pl-4 text-tertiary-fixed/60">
+              42 |     int dummy = 0;
+            </div>
+<div class="text-error-container mt-1">
+              LRUCache.cpp:68:5: <span class="font-bold underline text-error">fatal fault:</span> potential infinite cycle in removeNode() pointer reconnection; timeout triggered on test case 4.
+            </div>
+<div class="pl-4 text-tertiary-fixed/60">
+              68 |     node-&gt;prev-&gt;next = node-&gt;next;
+            </div>
+<div class="text-[#8ba2d5] mt-2">
+              == RUNNER SUMMARY: 3 PASSED, 1 TIMEOUT, 0 RUNTIME CRASHES ==
+            </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- BOTTOM STICKY ACTION & STEP TRANSITION BAR -->
+<aside class="sticky bottom-0 z-30 w-full bg-surface-container-lowest/95 backdrop-blur-md rounded-xl p-space-md shadow-xl flex flex-col sm:flex-row items-center justify-between gap-space-md mt-auto">
+<!-- Left: Git Synchronized Status Pill -->
+<div class="flex items-center gap-2.5 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-secondary text-[20px]">cloud_sync</span>
+<span>All changes synced to institutional git sandbox:</span>
+<span class="font-code-meta text-code-meta bg-surface-container px-2 py-0.5 rounded text-primary font-bold">cs21b042/lab06</span>
+</div>
+<!-- Right: Navigation and Workflow Buttons -->
+<div class="flex items-center gap-space-sm w-full sm:w-auto justify-end">
+<button class="px-3.5 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-body-md text-body-md transition-colors">
+        Reset to Starter
+      </button>
+<button class="px-4 py-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-primary font-headline-sm text-headline-sm font-semibold transition-colors flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span>Save Draft</span>
+</button>
+<button class="px-5 py-2 rounded-lg bg-secondary text-on-secondary hover:bg-on-secondary-container transition-all font-headline-sm text-headline-sm font-bold flex items-center gap-2 shadow-md" id="nextStepBtn">
+<span>Next: AI-Use Declaration</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</aside>
+</div>
+<script>
+  // Simple micro-interactions for tab switching and drawer toggle
+  const tabTestCasesBtn = document.getElementById('tabTestCasesBtn');
+  const tabConsoleBtn = document.getElementById('tabConsoleBtn');
+  const testCasesContent = document.getElementById('testCasesContent');
+  const consoleContent = document.getElementById('consoleContent');
+  const toggleDrawerBtn = document.getElementById('toggleDrawerBtn');
+  const problemDrawer = document.getElementById('problemDrawer');
+  const mainEditorContainer = document.getElementById('mainEditorContainer');
+
+  tabTestCasesBtn.addEventListener('click', () => {
+    tabTestCasesBtn.className = 'flex items-center gap-2 px-3 py-2 rounded-t-lg bg-surface-container-lowest text-primary font-headline-sm text-headline-sm font-bold shadow-sm transition-colors';
+    tabConsoleBtn.className = 'flex items-center gap-2 px-3 py-2 rounded-t-lg hover:bg-surface-container text-on-surface-variant font-label-md text-label-md font-medium transition-colors';
+    testCasesContent.classList.remove('hidden');
+    consoleContent.classList.add('hidden');
+  });
+
+  tabConsoleBtn.addEventListener('click', () => {
+    tabConsoleBtn.className = 'flex items-center gap-2 px-3 py-2 rounded-t-lg bg-tertiary text-on-tertiary font-headline-sm text-headline-sm font-bold shadow-sm transition-colors';
+    tabTestCasesBtn.className = 'flex items-center gap-2 px-3 py-2 rounded-t-lg hover:bg-surface-container text-on-surface-variant font-label-md text-label-md font-medium transition-colors';
+    consoleContent.classList.remove('hidden');
+    testCasesContent.classList.add('hidden');
+  });
+
+  let isDrawerCollapsed = false;
+  toggleDrawerBtn.addEventListener('click', () => {
+    isDrawerCollapsed = !isDrawerCollapsed;
+    if (isDrawerCollapsed) {
+      problemDrawer.classList.add('hidden');
+      mainEditorContainer.className = 'col-span-12 flex flex-col gap-space-md';
+    } else {
+      problemDrawer.classList.remove('hidden');
+      mainEditorContainer.className = 'col-span-12 lg:col-span-8 xl:col-span-9 flex flex-col gap-space-md';
+    }
+  });
+
+  document.getElementById('nextStepBtn').addEventListener('click', () => {
+    alert('Navigating to Step 2: AI-Use Declaration & Academic Integrity Audit.');
+  });
+</script></main></div></body></html>

@@ -1,0 +1,662 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-secondary-fixed":"#001f23","outline":"#747780","secondary-fixed":"#98f0fb","surface-container-highest":"#d3e4fe","on-surface-variant":"#44474f","on-primary-fixed":"#001a41","surface-container-high":"#dce9ff","tertiary-fixed-dim":"#bec6e0","tertiary-fixed":"#dae2fd","secondary-fixed-dim":"#7cd4df","on-secondary":"#ffffff","primary-container":"#1f3864","error-container":"#ffdad6","primary-fixed":"#d8e2ff","primary-fixed-dim":"#afc6fb","tertiary-container":"#30384d","tertiary":"#1b2336","surface-container-low":"#eff4ff","surface-container-lowest":"#ffffff","surface":"#f8f9ff","surface-container":"#e5eeff","inverse-on-surface":"#eaf1ff","on-primary":"#ffffff","secondary":"#006972","primary":"#03224d","surface-dim":"#cbdbf5","on-secondary-fixed-variant":"#004f56","on-tertiary":"#ffffff","on-primary-fixed-variant":"#2e4673","on-surface":"#0b1c30","on-tertiary-fixed-variant":"#3f465c","on-tertiary-container":"#9aa2ba","outline-variant":"#c4c6d0","background":"#f8f9ff","on-background":"#0b1c30","surface-variant":"#d3e4fe","surface-tint":"#475e8c","surface-bright":"#f8f9ff","on-secondary-container":"#006d77","secondary-container":"#96eef9","on-tertiary-fixed":"#131b2e","on-primary-container":"#8ba2d5","error":"#ba1a1a","inverse-primary":"#afc6fb","on-error-container":"#93000a","inverse-surface":"#213145","on-error":"#ffffff"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"space-lg":"1.5rem","space-xl":"2rem","space-sm":"0.5rem","margin":"2rem","gutter-tablet":"1rem","margin-tablet":"1.25rem","space-xs":"0.25rem","gutter":"1.5rem","space-md":"1rem"},fontFamily:{"label-sm":["Inter"],"code-meta":["JetBrains Mono"],"body-sm":["Inter"],"headline-xl":["Inter"],"label-md":["Inter"],"headline-md":["Inter"],"headline-xl-mobile":["Inter"],"headline-lg":["Inter"],"headline-sm":["Inter"],"body-lg":["Inter"],"code-body":["JetBrains Mono"],"body-md":["Inter"]},fontSize:{"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.04em","fontWeight":"600"}],"code-meta":["11px",{"lineHeight":"16px","fontWeight":"500"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"headline-xl":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"700"}],"label-md":["13px",{"lineHeight":"18px","letterSpacing":"0.01em","fontWeight":"500"}],"headline-md":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-xl-mobile":["26px",{"lineHeight":"34px","letterSpacing":"-0.015em","fontWeight":"700"}],"headline-lg":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-sm":["16px",{"lineHeight":"24px","letterSpacing":"0","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"code-body":["13px",{"lineHeight":"20px","fontWeight":"400"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}]}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-64 bg-primary text-on-primary z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="h-16 px-space-md flex items-center justify-between bg-primary-container/40"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-secondary flex items-center justify-center text-on-secondary font-headline-sm text-headline-sm"><span class="material-symbols-outlined text-[20px]">terminal</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-primary tracking-tight leading-none">LabTrack</span><span class="font-code-meta text-code-meta text-on-primary-container mt-0.5">v4.2 • Core Engine</span></div></div><span class="font-code-meta text-code-meta px-1.5 py-0.5 rounded bg-surface-container-highest/20 text-secondary-fixed">LIVE</span></div><div class="px-space-md pt-space-md pb-space-sm"><span class="font-label-sm text-label-sm text-on-primary-container uppercase tracking-wider">Curriculum Operations</span></div><nav class="px-space-sm flex flex-col gap-1" data-active-classes="bg-primary-container text-on-primary font-label-md relative after:content-[''] after:absolute after:left-0 after:top-1 after:bottom-1 after:w-1 after:bg-secondary after:rounded-r"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md bg-primary-container text-on-primary relative after:content-[''] after:absolute after:left-0 after:top-1 after:bottom-1 after:w-1 after:bg-secondary-fixed after:rounded-r transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[18px]">space_dashboard</span><span class="">Dashboard</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-primary-fixed-dim hover:bg-primary-container/50 hover:text-on-primary transition-colors" data-path="assignments" href="#"><span class="material-symbols-outlined text-[18px]">assignment</span><span class="">Assignments</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-primary-fixed-dim hover:bg-primary-container/50 hover:text-on-primary transition-colors" data-path="submissions" href="#"><span class="material-symbols-outlined text-[18px]">code_blocks</span><span class="">Submissions</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-primary-fixed-dim hover:bg-primary-container/50 hover:text-on-primary transition-colors" data-path="similarity-flags" href="#"><span class="material-symbols-outlined text-[18px]">policy</span><span class="">Similarity Flags</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-primary-fixed-dim hover:bg-primary-container/50 hover:text-on-primary transition-colors" data-path="results" href="#"><span class="material-symbols-outlined text-[18px]">fact_check</span><span class="">Results</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-primary-fixed-dim hover:bg-primary-container/50 hover:text-on-primary transition-colors" data-path="reports" href="#"><span class="material-symbols-outlined text-[18px]">insights</span><span class="">Reports</span></a></nav></div><div class="p-space-md m-space-sm rounded-lg bg-surface-container-highest/10"><div class="flex items-center gap-2 mb-1"><span class="w-2 h-2 rounded-full bg-secondary-fixed animate-pulse"></span><span class="font-label-sm text-label-sm text-secondary-fixed font-semibold tracking-wide uppercase">Active Lab Cluster</span></div><p class="font-code-meta text-code-meta text-on-primary tracking-tight truncate">cluster-primary.cs.mit.edu</p><p class="font-code-meta text-code-meta text-on-primary-container mt-1">28 Active Sandboxes</p></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-secondary text-[22px]">account_balance</span><span class="font-headline-sm text-headline-sm text-on-surface">Dept. of Computer Science &amp; Engineering</span></div><span class="font-label-sm text-label-sm px-2.5 py-1 rounded bg-surface-container-high text-on-surface-variant font-medium">Term Fall 24</span></div><div class="flex items-center gap-space-md"><button class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-secondary"></span></button><div class="h-8 w-[1px] bg-outline-variant/40"></div><div class="flex items-center gap-space-sm"><div class="text-right"><div class="font-label-md text-label-md font-semibold text-on-surface leading-tight">Prof. David K. Karger</div><div class="flex items-center justify-end gap-1 mt-0.5"><span class="font-label-sm text-label-sm text-on-secondary px-1.5 py-0.5 rounded bg-secondary tracking-wide uppercase">FACULTY / COURSE HEAD</span></div></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Content Area Wrapper -->
+<div class="p-space-lg space-y-space-lg">
+<!-- Course & Section Header Strip -->
+<div class="flex flex-col xl:flex-row xl:items-center justify-between gap-space-md bg-surface-container-lowest p-space-lg rounded-xl shadow-sm">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="font-code-meta text-code-meta uppercase px-2 py-0.5 rounded bg-surface-container text-secondary font-semibold">Course Code: CS301</span>
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Undergraduate Core</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">CS301 Data Structures &amp; Algorithms — Course Administration Fall 2024</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-4xl">
+          Automated test harness telemetry, viva defense queues, and AST tree-isomorphism forensics active across <span class="font-semibold text-on-surface">142 enrolled students</span>.
+        </p>
+</div>
+<div class="flex items-center flex-wrap gap-space-sm pt-2 xl:pt-0">
+<button class="flex items-center gap-2 h-10 px-4 rounded-lg bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-colors font-label-md text-label-md font-medium" type="button">
+<span class="material-symbols-outlined text-[18px]">difference</span>
+<span class="">Run AST Similarity Batch</span>
+</button>
+<button class="flex items-center gap-2 h-10 px-4 rounded-lg bg-surface-container text-primary hover:bg-surface-container-high transition-colors font-label-md text-label-md font-medium" type="button">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span class="">Export Gradebook (CSV)</span>
+</button>
+<button class="flex items-center gap-2 h-10 px-4 rounded-lg bg-secondary text-on-secondary hover:bg-on-secondary-container transition-colors shadow-sm font-label-md text-label-md font-semibold" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span class="">Create Assignment +</span>
+</button>
+</div>
+</div>
+<!-- 4 High-Impact Stat Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Published Assignments -->
+<div class="p-space-lg bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">Curriculum Scope</span>
+<div class="font-headline-xl text-headline-xl text-on-surface mt-1 tracking-tight">8 Labs</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">terminal</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant">
+<span class="flex items-center gap-1.5 font-medium text-on-surface">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>6 Active Lab Sessions
+          </span>
+<span class="font-code-meta text-code-meta text-on-surface-variant">2 Upcoming</span>
+</div>
+</div>
+<!-- Submissions Awaiting Review -->
+<div class="p-space-lg bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">Verification Queue</span>
+<div class="font-headline-xl text-headline-xl text-on-surface mt-1 tracking-tight">23 Pending</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[22px]">pending_actions</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant font-medium">14 Automated pass</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-container-high text-primary font-semibold">9 Viva Defense</span>
+</div>
+</div>
+<!-- Similarity Flags -->
+<div class="p-space-lg bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">Integrity Watch</span>
+<div class="font-headline-xl text-headline-xl text-error mt-1 tracking-tight">5 Flagged</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-error-container flex items-center justify-center text-on-error-container">
+<span class="material-symbols-outlined text-[22px]">shield_with_heart</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between text-body-sm font-body-sm">
+<span class="font-semibold text-error flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">priority_high</span>2 Critical &gt;85%
+          </span>
+<span class="font-code-meta text-code-meta text-on-surface-variant">3 under MOSS audit</span>
+</div>
+</div>
+<!-- Cohort Mean Score -->
+<div class="p-space-lg bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">Cohort Mean Score</span>
+<div class="font-headline-xl text-headline-xl text-on-surface mt-1 tracking-tight">84.2%</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">query_stats</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-secondary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>+3.8% vs Fall 23
+          </span>
+<span class="font-code-meta text-code-meta text-on-surface-variant">σ = 6.4 pts</span>
+</div>
+</div>
+</div>
+<!-- Analytics Strip: Average Marks per Assignment Bar Visualization -->
+<div class="p-space-lg bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Average Marks per Assignment</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Automated test matrix score aggregated across 142 submissions</p>
+</div>
+<div class="flex items-center gap-space-md text-label-sm font-label-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded bg-secondary"></span>
+<span class="text-on-surface">Cohort Avg</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-4 h-0.5 bg-outline"></span>
+<span class="text-on-surface-variant">Benchmark (80%)</span>
+</div>
+</div>
+</div>
+<!-- Custom SVG / HTML Hybrid Bar Chart -->
+<div class="relative w-full pt-4 pb-2">
+<!-- 80% Benchmark Reference Line -->
+<div class="absolute inset-x-0 top-14 pointer-events-none z-10 flex items-center">
+<div class="w-full h-px bg-outline-variant/60"></div>
+<span class="absolute right-0 -top-3 font-code-meta text-code-meta text-outline px-1.5 py-0.5 rounded bg-surface-container-lowest">80% Target</span>
+</div>
+<div class="grid grid-cols-6 gap-3 sm:gap-6 items-end h-48 pt-6">
+<!-- Lab 01 -->
+<div class="flex flex-col items-center h-full justify-end group">
+<span class="font-code-meta text-code-meta font-semibold text-on-surface mb-1 group-hover:text-secondary transition-colors">91%</span>
+<div class="w-full max-w-[56px] bg-surface-container rounded-t-md overflow-hidden flex flex-col justify-end h-full">
+<div class="w-full bg-secondary rounded-t-md transition-all duration-500 group-hover:bg-on-secondary-container" style="height: 91%;"></div>
+</div>
+<div class="mt-2 text-center">
+<p class="font-label-md text-label-md font-semibold text-on-surface truncate">Lab 01</p>
+<p class="font-code-meta text-code-meta text-on-surface-variant hidden md:block">Linked Lists</p>
+</div>
+</div>
+<!-- Lab 02 -->
+<div class="flex flex-col items-center h-full justify-end group">
+<span class="font-code-meta text-code-meta font-semibold text-on-surface mb-1 group-hover:text-secondary transition-colors">86%</span>
+<div class="w-full max-w-[56px] bg-surface-container rounded-t-md overflow-hidden flex flex-col justify-end h-full">
+<div class="w-full bg-secondary rounded-t-md transition-all duration-500 group-hover:bg-on-secondary-container" style="height: 86%;"></div>
+</div>
+<div class="mt-2 text-center">
+<p class="font-label-md text-label-md font-semibold text-on-surface truncate">Lab 02</p>
+<p class="font-code-meta text-code-meta text-on-surface-variant hidden md:block">Stack Parser</p>
+</div>
+</div>
+<!-- Lab 03 -->
+<div class="flex flex-col items-center h-full justify-end group">
+<span class="font-code-meta text-code-meta font-semibold text-on-surface mb-1 group-hover:text-secondary transition-colors">88%</span>
+<div class="w-full max-w-[56px] bg-surface-container rounded-t-md overflow-hidden flex flex-col justify-end h-full">
+<div class="w-full bg-secondary rounded-t-md transition-all duration-500 group-hover:bg-on-secondary-container" style="height: 88%;"></div>
+</div>
+<div class="mt-2 text-center">
+<p class="font-label-md text-label-md font-semibold text-on-surface truncate">Lab 03</p>
+<p class="font-code-meta text-code-meta text-on-surface-variant hidden md:block">Ring Buffer</p>
+</div>
+</div>
+<!-- Lab 04 -->
+<div class="flex flex-col items-center h-full justify-end group">
+<span class="font-code-meta text-code-meta font-semibold text-on-surface mb-1 group-hover:text-secondary transition-colors">76%</span>
+<div class="w-full max-w-[56px] bg-surface-container rounded-t-md overflow-hidden flex flex-col justify-end h-full">
+<div class="w-full bg-secondary-fixed-dim rounded-t-md transition-all duration-500 group-hover:bg-secondary" style="height: 76%;"></div>
+</div>
+<div class="mt-2 text-center">
+<p class="font-label-md text-label-md font-semibold text-on-surface truncate">Lab 04</p>
+<p class="font-code-meta text-code-meta text-on-surface-variant hidden md:block">RB-Tree Bal.</p>
+</div>
+</div>
+<!-- Lab 05 -->
+<div class="flex flex-col items-center h-full justify-end group">
+<span class="font-code-meta text-code-meta font-semibold text-on-surface mb-1 group-hover:text-secondary transition-colors">82%</span>
+<div class="w-full max-w-[56px] bg-surface-container rounded-t-md overflow-hidden flex flex-col justify-end h-full">
+<div class="w-full bg-secondary rounded-t-md transition-all duration-500 group-hover:bg-on-secondary-container" style="height: 82%;"></div>
+</div>
+<div class="mt-2 text-center">
+<p class="font-label-md text-label-md font-semibold text-on-surface truncate">Lab 05</p>
+<p class="font-code-meta text-code-meta text-on-surface-variant hidden md:block">Fib Heap Dijkstra</p>
+</div>
+</div>
+<!-- Lab 06 -->
+<div class="flex flex-col items-center h-full justify-end group">
+<span class="font-code-meta text-code-meta font-semibold text-secondary mb-1">84%</span>
+<div class="w-full max-w-[56px] bg-surface-container rounded-t-md overflow-hidden flex flex-col justify-end h-full">
+<div class="w-full bg-secondary rounded-t-md transition-all duration-500" style="height: 84%;"></div>
+</div>
+<div class="mt-2 text-center">
+<span class="font-label-sm text-label-sm px-1.5 py-0.2 rounded bg-secondary-container text-on-secondary-container uppercase">Current</span>
+<p class="font-label-md text-label-md font-semibold text-on-surface truncate">Lab 06</p>
+<p class="font-code-meta text-code-meta text-on-surface-variant hidden md:block">LRU Cache</p>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 pt-2 text-body-sm font-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-secondary">info</span>
+<span class="">Lab 04 RB-Tree average was impacted by strict test case 14 (concurrent rotate rebalance under 50ms timeout).</span>
+</div>
+</div>
+<!-- Main 2-Column Core Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Left Column: Recent Submissions Data Table (8 Cols) -->
+<section class="lg:col-span-8 flex flex-col gap-space-md">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<!-- Table Controls Header -->
+<div class="p-space-lg flex flex-col sm:flex-row sm:items-center justify-between gap-space-md bg-surface-container-lowest">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Recent Submissions</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Live telemetry from cluster sandboxes</p>
+</div>
+<div class="flex flex-wrap items-center gap-2">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-[18px] text-on-surface-variant">search</span>
+<input class="h-9 pl-9 pr-3 rounded-lg bg-surface-container-low font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:bg-surface-container w-44 sm:w-56" placeholder="Filter student, roll no..." type="text">
+</div>
+<select class="h-9 px-3 rounded-lg bg-surface-container-low font-body-sm text-body-sm text-on-surface focus:outline-none">
+<option>Lab 06: LRU Cache</option>
+<option>Lab 05: Fib Heap Dijkstra</option>
+<option>Lab 04: RB-Tree Balancing</option>
+</select>
+<button class="h-9 px-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+<span class="">Filters</span>
+</button>
+</div>
+</div>
+<!-- Dense Responsive Table -->
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<th class="py-3 px-4">Student &amp; Roll No</th>
+<th class="py-3 px-4">Assignment</th>
+<th class="py-3 px-4">Submitted</th>
+<th class="py-3 px-4">Test Result</th>
+<th class="py-3 px-4">AI &amp; AST Telemetry</th>
+<th class="py-3 px-4">Status</th>
+<th class="py-3 px-4 text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 text-body-md font-body-md">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary font-label-md text-label-md flex items-center justify-center font-bold">
+                        AC
+                      </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Alex V. Chen</span>
+<span class="font-code-meta text-code-meta text-on-surface-variant">CS24B042</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Lab 06: LRU Cache</span>
+<span class="font-code-meta text-code-meta text-on-surface-variant">v3 • commit 7b42f1</span>
+</div>
+</td>
+<td class="py-3.5 px-4 font-code-meta text-code-meta text-on-surface-variant">12m ago<br><span class="text-outline">14:48 UTC</span></td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1.5">
+<span class="font-code-meta text-code-meta font-semibold text-on-surface">15/15</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container text-secondary font-semibold">100%</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-semibold">
+<span class="material-symbols-outlined text-[14px]">flag</span>
+<span class="">87% MOSS Match</span>
+</span>
+</td>
+<td class="py-3.5 px-4">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-primary font-medium">Pending Review</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="h-8 px-3 rounded bg-secondary hover:bg-on-secondary-container text-on-secondary font-label-md text-label-md transition-colors font-medium" type="button">Review</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container text-primary font-label-md text-label-md flex items-center justify-center font-bold">
+                        RM
+                      </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Rohan Mukherjee</span>
+<span class="font-code-meta text-code-meta text-on-surface-variant">CS24B018</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Lab 06: LRU Cache</span>
+<span class="font-code-meta text-code-meta text-on-surface-variant">v2 • commit 1a99cd</span>
+</div>
+</td>
+<td class="py-3.5 px-4 font-code-meta text-code-meta text-on-surface-variant">28m ago<br><span class="text-outline">14:32 UTC</span></td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1.5">
+<span class="font-code-meta text-code-meta font-semibold text-on-surface">15/15</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container text-secondary font-semibold">100%</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-semibold">
+<span class="material-symbols-outlined text-[14px]">flag</span>
+<span class="">87% AST Match</span>
+</span>
+</td>
+<td class="py-3.5 px-4">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-primary font-medium">Viva Scheduled</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="h-8 px-3 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors font-medium" type="button">Review</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center justify-center font-bold">
+                        PS
+                      </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Priya S. Sharma</span>
+<span class="font-code-meta text-code-meta text-on-surface-variant">CS24B089</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Lab 05: Fib Heap Dijkstra</span>
+<span class="font-code-meta text-code-meta text-on-surface-variant">v1 • commit e4f310</span>
+</div>
+</td>
+<td class="py-3.5 px-4 font-code-meta text-code-meta text-on-surface-variant">1h ago<br><span class="text-outline">13:58 UTC</span></td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1.5">
+<span class="font-code-meta text-code-meta font-semibold text-on-surface">14/15</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container text-on-surface font-semibold">93%</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-medium">
+<span class="material-symbols-outlined text-[14px]">psychology</span>
+<span class="">Disclosed AI / Clean AST</span>
+</span>
+</td>
+<td class="py-3.5 px-4">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container text-secondary font-semibold">Passed</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="h-8 px-3 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors font-medium" type="button">Review</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container text-primary font-label-md text-label-md flex items-center justify-center font-bold">
+                        KD
+                      </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Karan Deshmukh</span>
+<span class="font-code-meta text-code-meta text-on-surface-variant">CS24B103</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Lab 05: Fib Heap Dijkstra</span>
+<span class="font-code-meta text-code-meta text-on-surface-variant">v2 • commit b31198</span>
+</div>
+</td>
+<td class="py-3.5 px-4 font-code-meta text-code-meta text-on-surface-variant">2h ago<br><span class="text-outline">12:44 UTC</span></td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1.5">
+<span class="font-code-meta text-code-meta font-semibold text-on-surface">11/15</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container-high text-outline font-semibold">73% TLE</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-medium">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span class="">0% AST Similarity</span>
+</span>
+</td>
+<td class="py-3.5 px-4">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container text-primary font-medium">Needs Re-run</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="h-8 px-3 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors font-medium" type="button">Review</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-primary font-label-md text-label-md flex items-center justify-center font-bold">
+                        AR
+                      </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Ananya Roy</span>
+<span class="font-code-meta text-code-meta text-on-surface-variant">CS24B015</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Lab 06: LRU Cache</span>
+<span class="font-code-meta text-code-meta text-on-surface-variant">v1 • commit cc092a</span>
+</div>
+</td>
+<td class="py-3.5 px-4 font-code-meta text-code-meta text-on-surface-variant">3h ago<br><span class="text-outline">11:15 UTC</span></td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1.5">
+<span class="font-code-meta text-code-meta font-semibold text-on-surface">15/15</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container text-secondary font-semibold">100%</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-semibold">
+<span class="material-symbols-outlined text-[14px]">public</span>
+<span class="">92% GitHub Match</span>
+</span>
+</td>
+<td class="py-3.5 px-4">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-error-container text-on-error-container font-semibold">Flagged</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="h-8 px-3 rounded bg-secondary hover:bg-on-secondary-container text-on-secondary font-label-md text-label-md transition-colors font-medium" type="button">Review</button>
+</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container text-primary font-label-md text-label-md flex items-center justify-center font-bold">
+                        SK
+                      </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Siddharth Kumar</span>
+<span class="font-code-meta text-code-meta text-on-surface-variant">CS24B067</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Lab 06: LRU Cache</span>
+<span class="font-code-meta text-code-meta text-on-surface-variant">v4 • commit 89f41b</span>
+</div>
+</td>
+<td class="py-3.5 px-4 font-code-meta text-code-meta text-on-surface-variant">3h ago<br><span class="text-outline">11:02 UTC</span></td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1.5">
+<span class="font-code-meta text-code-meta font-semibold text-on-surface">15/15</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container text-secondary font-semibold">100%</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-container text-secondary font-semibold">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+<span class="">Clean Tree</span>
+</span>
+</td>
+<td class="py-3.5 px-4">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container text-secondary font-semibold">Passed</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="h-8 px-3 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors font-medium" type="button">Review</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="p-space-md bg-surface-container-lowest flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Showing <span class="font-semibold text-on-surface">1-6</span> of <span class="font-semibold text-on-surface">142</span> submissions</span>
+<div class="flex items-center gap-1">
+<button class="h-8 px-2.5 rounded bg-surface-container-low text-on-surface-variant disabled:opacity-50 font-label-sm text-label-sm flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</button>
+<button class="h-8 w-8 rounded bg-secondary text-on-secondary font-label-sm text-label-sm font-semibold" type="button">1</button>
+<button class="h-8 w-8 rounded bg-surface-container-low hover:bg-surface-container text-on-surface font-label-sm text-label-sm" type="button">2</button>
+<button class="h-8 w-8 rounded bg-surface-container-low hover:bg-surface-container text-on-surface font-label-sm text-label-sm" type="button">3</button>
+<span class="px-1 text-outline font-code-meta text-code-meta">...</span>
+<button class="h-8 w-8 rounded bg-surface-container-low hover:bg-surface-container text-on-surface font-label-sm text-label-sm" type="button">24</button>
+<button class="h-8 px-2.5 rounded bg-surface-container-low hover:bg-surface-container text-on-surface font-label-sm text-label-sm flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- System Sandbox Infrastructure Footnote Card -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[24px]">dns</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Cluster Docker Autograder: 28 Workers Operating</p>
+<p class="font-code-meta text-code-meta text-on-surface-variant">Valgrind memory leak checks enabled • -fsanitize=address,undefined</p>
+</div>
+</div>
+<button class="font-label-sm text-label-sm text-secondary hover:text-on-secondary-container font-semibold tracking-wide uppercase flex items-center gap-1" type="button">
+<span class="">Cluster Metrics</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- Right Column: Priority Side Panels (4 Cols) -->
+<section class="lg:col-span-4 flex flex-col gap-space-md">
+<!-- Card: Flags for Review (Priority AST Clusters) -->
+<div class="p-space-lg bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-[20px]">policy</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Flags for Review</h3>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-semibold">5 Action Required</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Syntactic tree isomorphism detected above 75% threshold:</p>
+<div class="flex flex-col gap-space-sm">
+<!-- Flag 1 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 font-code-meta text-code-meta font-semibold text-on-surface">
+<span class="">CS24B018</span>
+<span class="text-error">↔</span>
+<span class="">CS24B042</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-error-container text-on-error-container font-semibold">87% AST Match</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Rohan M. &amp; Alex V. Chen • <span class="font-code-meta text-code-meta text-on-surface">Lab 06: LRUCache.cpp</span></p>
+<div class="flex items-center justify-between pt-1">
+<span class="font-code-meta text-code-meta text-outline">Identical doubly-linked list logic</span>
+<button class="font-label-sm text-label-sm text-secondary hover:text-on-secondary-container font-semibold flex items-center gap-0.5" type="button">
+<span class="">Inspect Diff</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Flag 2 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 font-code-meta text-code-meta font-semibold text-on-surface">
+<span class="">CS24B089</span>
+<span class="text-error">↔</span>
+<span class="">CS24B103</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-primary font-semibold">78% Token Match</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Priya S. &amp; Karan D. • <span class="font-code-meta text-code-meta text-on-surface">Lab 05: FibonacciHeap.cpp</span></p>
+<div class="flex items-center justify-between pt-1">
+<span class="font-code-meta text-code-meta text-outline">Cascading cut subtree tokens</span>
+<button class="font-label-sm text-label-sm text-secondary hover:text-on-secondary-container font-semibold flex items-center gap-0.5" type="button">
+<span class="">Inspect Diff</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Flag 3: External Corpus Match -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 font-code-meta text-code-meta font-semibold text-on-surface">
+<span class="">CS24B015</span>
+<span class="text-error">→</span>
+<span class="flex items-center gap-1 text-primary"><span class="material-symbols-outlined text-[14px]">public</span> GitHub</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-error-container text-on-error-container font-semibold">92% Fingerprint</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Ananya R. • Public Corpus: <span class="font-code-meta text-code-meta text-on-surface">cs-solutions-2023</span></p>
+<div class="flex items-center justify-between pt-1">
+<span class="font-code-meta text-code-meta text-outline">Direct variable synonym map</span>
+<button class="font-label-sm text-label-sm text-secondary hover:text-on-secondary-container font-semibold flex items-center gap-0.5" type="button">
+<span class="">View Source</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</button>
+</div>
+</div>
+</div>
+<a class="w-full py-2 rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors text-center font-label-md text-label-md text-primary font-semibold flex items-center justify-center gap-1" href="#">
+<span class="">View All Similarity Clusters in AST Analyzer</span>
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</a>
+</div>
+<!-- Card: Deadlines this week -->
+<div class="p-space-lg bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">event_available</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Deadlines This Week</h3>
+</div>
+<span class="font-code-meta text-code-meta text-on-surface-variant">UTC +5:30</span>
+</div>
+<div class="space-y-space-md">
+<!-- Deadline Item 1 -->
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-error-container flex flex-col items-center justify-center shrink-0 text-on-error-container">
+<span class="font-label-sm text-label-sm uppercase font-bold leading-none">TODAY</span>
+<span class="font-code-meta text-code-meta font-bold">23:59</span>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Lab 06: LRU Cache O(1)</span>
+<span class="font-code-meta text-code-meta text-error font-semibold shrink-0">9 hrs left</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Strict auto-lockout • Turned in: 112 / 142 (78%)</p>
+<div class="w-full bg-surface-container rounded-full h-1.5 mt-2">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 78.8%;"></div>
+</div>
+</div>
+</div>
+<!-- Deadline Item 2 -->
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex flex-col items-center justify-center shrink-0 text-primary">
+<span class="font-label-sm text-label-sm uppercase font-bold leading-none">OCT 31</span>
+<span class="font-code-meta text-code-meta font-bold">18:00</span>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Lab 07: B-Tree Indexer</span>
+<span class="font-code-meta text-code-meta text-on-surface-variant shrink-0">In 3 days</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Starter repo published • 52 Clones</p>
+</div>
+</div>
+<!-- Deadline Item 3 -->
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex flex-col items-center justify-center shrink-0 text-secondary">
+<span class="font-label-sm text-label-sm uppercase font-bold leading-none">NOV 02</span>
+<span class="font-code-meta text-code-meta font-bold">10:00</span>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Viva Defense Round 2</span>
+<span class="font-code-meta text-code-meta text-secondary font-semibold shrink-0">Scheduled</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Labs 04 to 06 • 34 Students (TAs: S. Jenkins, N. Patel)</p>
+</div>
+</div>
+</div>
+<!-- Policy notice -->
+<div class="p-space-sm rounded-lg bg-surface-container-low text-on-surface-variant font-body-sm text-body-sm flex items-start gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary shrink-0 mt-0.5">gavel</span>
+<span class="font-code-meta text-code-meta">Late Penalty Matrix: 15m grace window, then -10% per 24h rolling deduction until 72h max ceiling.</span>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div></main></div>
+
+</body></html>

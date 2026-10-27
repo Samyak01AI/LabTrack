@@ -1,0 +1,28 @@
+{
+  "name": "labtrack",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/api",
+    "apps/web"
+  ],
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "python3 tests/browser-smoke.py && python3 tests/browser-smoke-web.py",
+    "test:api": "node --test --test-concurrency=1 tests/api/*.test.mjs",
+    "db:migrate": "node scripts/migrate.mjs",
+    "provision:teacher": "node scripts/provision-teacher.mjs",
+    "api:dev": "npm --workspace @labtrack/api run dev",
+    "api:dev:http": "AUTH_COOKIE_SAME_SITE=lax AUTH_COOKIE_SECURE=false npm --workspace @labtrack/api run dev",
+    "api:browser": "node scripts/start-browser-api.mjs",
+    "api:start": "npm --workspace @labtrack/api run start",
+    "web:dev": "npm --workspace @labtrack/web run dev",
+    "web:build": "npm --workspace @labtrack/web run build",
+    "serve:prototype": "python3 -m http.server 4173 --bind 0.0.0.0 --directory legacy-prototype/LabTrack"
+  },
+  "packageManager": "npm@10.9.2",
+  "engines": {
+    "node": ">=22.13.0"
+  }
+}
