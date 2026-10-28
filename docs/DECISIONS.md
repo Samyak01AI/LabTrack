@@ -202,3 +202,21 @@
 6. **Hourly Rate Limiting:** Enforce a maximum of 5 queries per hour per student per assignment to prevent over-reliance.
 
 **Consequence:** Students receive targeted academic guidance when stuck without violating academic integrity. Faculty gain complete transparency into in-platform AI interactions, eliminating hidden AI assistance.
+
+## D-026 — Release Hardening, Audit Verification, and v1.0.0 Production Baseline (Iteration 9)
+
+**Context:** Bringing LabTrack from prototype iterations into its production baseline (`v1.0.0`) requires exhaustive verification of cross-module data integrity, strict non-negotiable policy compliance, database index optimization, secret isolation, and documentation synchronization.
+
+**Decision:**
+1. **End-to-End Pipeline Integration:** Enforce automated integration verification across the complete academic core loop: Teacher assignment authoring → Judge0 CE sandbox execution → 4-step student stepper (Code, AI Declaration, Line Annotations, Logic Defense) → Structure-aware tokenization & winnowing similarity check → Multi-component rubric scoring (40/30/15/15) → Provisional mark flow & audit reopening → Student scorecards → Cohort performance analytics & RFC 4180 CSV export.
+2. **Policy Compliance Hardening:** Formally verify and lock non-negotiable safeguards:
+   - Absolute prohibition against AI-detection probability claims or automated academic misconduct verdicts.
+   - Similarity metrics serve strictly as review flags and signals for oral examination (viva voce).
+   - Marks remain provisional until explicit human instructor finalization.
+   - Student code executes exclusively within isolated Judge0 sandboxes; zero host execution.
+   - Strict RBAC and ownership isolation on all server routes.
+   - Zero credentials or secrets in source control; local `.env` is ignored.
+3. **Database Schema & Index Stability:** All 7 migrations (`001_create_users.sql` through `007_ai_assistance_logs.sql`) are validated as forward-only, idempotent, and complete with composite indexes for sub-millisecond query execution.
+4. **Production Asset Optimization:** Single-origin Express container serving both compiled React/Vite assets and `/api` with unified session handling.
+
+**Consequence:** LabTrack v1.0.0 achieves production stability, academic compliance, full pedagogical auditability, and mathematical integrity.

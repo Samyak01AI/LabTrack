@@ -18,3 +18,4 @@ CREATE TABLE IF NOT EXISTS ai_assistance_logs (
 );
 
 CREATE INDEX idx_ai_logs_rate_limit ON ai_assistance_logs (student_id, assignment_id, created_at);
+

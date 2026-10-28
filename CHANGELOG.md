@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.0.0] — 2026-10-29
+
+### Added
+- **Full-Spectrum End-to-End Workflow Integration Test Suite** (`tests/iteration-9-hardening.test.mjs`):
+  - Validates the complete academic core loop: Teacher assignment creation → Student code execution via Judge0 sandbox → 4-step stepper (Code, AI Declaration, Line Annotations, Logic Defense) → Token-based similarity & winnowing review → Multi-component rubric grading (40/30/15/15) → Provisional mark flow & audit reopening → Student scorecards → Cohort performance analytics & RFC 4180 CSV export.
+- **Security & Non-Negotiable Policy Audit** (`tests/iteration-9-hardening.test.mjs`):
+  - Codebase-wide automated regex scan verifying zero AI-detection probability claims or auto-fail routines.
+  - Verification that student code never executes on host server (Judge0 sandbox adapter only).
+  - Verification that marks remain provisional until explicit human instructor action.
+  - Verification of strict RBAC isolation across all endpoints.
+- **Database Schema & Index Audit** (`tests/iteration-9-hardening.test.mjs`):
+  - Verification of all 7 migrations (`001_create_users.sql` through `007_ai_assistance_logs.sql`) with primary keys, foreign key cascade rules, check constraints, and composite indexes.
+- **Route Manifest Synchronization** (`tests/iteration-9-hardening.test.mjs`):
+  - Verification of `apps/web/public/manus-routes.json` synchronization with React Router route table.
+- **Architecture Decision D-026** (`docs/DECISIONS.md`): Formally documented the Release Hardening, Audit Verification, and v1.0.0 Production Baseline.
+
+### Changed
+- `package.json`: Version bumped to v1.0.0 (Production Release).
+- `README.md` and `TODO.md`: Updated to reflect full completion of Iterations 0–9.
+
+
 ## [v0.9.0] — 2026-10-28
 
 ### Added

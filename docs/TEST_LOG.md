@@ -67,3 +67,17 @@
 | I8-FLAG-001 | API Config & Hard Rules | `ENABLE_AI_ASSISTANCE` defaults to false | HTTP 503 returned when disabled; zero AI detection claims | Feature flag defaults to false; 503 returned when disabled | PASS |
 | I8-BUILD-001 | React/Vite web build (`npm run web:build`) | Production asset build including Socratic Assistant tab and audit logs | Clean asset bundle | 53 modules transformed in 1.05s with zero errors | PASS |
 | I8-REGRESS-001 | Full Test Suite (`npm test`) | 7 test suites across iterations 0 through 8 | All regression tests pass without errors | 54 passed, 0 failed, 0 skipped in 326ms | PASS |
+
+## Iteration 9 — Release Hardening & Audit Verification (v1.0.0)
+
+| Test ID | Module | Input | Expected Output | Actual Output | Status |
+| --- | --- | --- | --- | --- | --- |
+| I9-E2E-001 | Full Lifecycle Integration | Complete assignment pipeline: authoring -> sandbox -> declaration -> similarity -> marking -> reporting | 100% data fidelity across all modules with zero data corruption | Verified end-to-end pipeline executes cleanly | PASS |
+| I9-AUDIT-001 | Platform Hard Rules | Codebase regex scan for forbidden AI detection claims | Zero occurrences of AI detection claims or auto-fail functions | Clean codebase with zero AI probability metrics | PASS |
+| I9-AUDIT-002 | Platform Hard Rules | Verification of provisional marks banners | Marks require explicit human teacher finalization | Provisional warnings present on student views; teacher finalization required | PASS |
+| I9-AUDIT-003 | Platform Hard Rules | Verification of sandbox adapter invocation | Student code routes exclusively through Judge0 sandbox adapter | Verified zero host execution in submissions route | PASS |
+| I9-DB-001 | Database Migrations | Schema verification across all 7 migrations (001-007) | Complete DDL with primary keys, foreign keys, and indexes | All 7 migrations verified syntactically complete | PASS |
+| I9-SEC-001 | Security & Credentials | Git ignore check and .env placeholder inspection | Zero secrets tracked in git repository; .env ignored | Verified .env is properly ignored and no secrets in repo | PASS |
+| I9-ROUTE-001 | Navigation & Route Table | Route synchronization check with `manus-routes.json` | All student and teacher paths registered and synchronized | All 13 routes verified present and documented | PASS |
+| I9-BUILD-001 | React/Vite Asset Build (`npm run web:build`) | Production asset compilation | Clean production bundle without syntax or asset errors | 53 modules transformed in 1.09s with zero errors | PASS |
+| I9-REGRESS-001 | Full Test Suite (`npm test`) | 8 test suites across iterations 0 through 9 | All regression tests pass without errors | 61 passed, 0 failed, 0 skipped in 366ms | PASS |

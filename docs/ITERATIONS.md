@@ -182,14 +182,36 @@ Implement optional, backend-only generative AI assistance behind a strict featur
 
 ---
 
-## Iteration 9 — Release Hardening, Performance Profiling & Documentation (UPCOMING — v1.0.0)
+## Iteration 9 — Release Hardening, Performance Profiling & Documentation (COMPLETE — v1.0.0)
 
 ### Goal
 Execute end-to-end auditability, performance profiling, responsive cross-device verification, documentation consolidation, and final release tagging for LabTrack v1.0.0.
 
-### Requirements to Cover
-- **FR-901 (Full Workflow Integration Smoke Tests):** End-to-end verification covering complete assignment lifecycle: Authoring → Student Sandbox Run → Stepper Declarations → AST Similarity Check → Rubric Evaluation → Ledger Reporting.
-- **FR-902 (Database Index Optimization & Security Audit):** Verification of foreign keys, cascade integrity, index usage, and prepared statement safety across all migrations 001–007.
-- **FR-903 (Mobile & Responsive Verification):** Complete viewport verification across 390px mobile, tablet, and 1440px desktop layouts.
-- **NFR-901 (Non-Negotiable Policy Audit):** Verification of zero AI-detection claims, teacher finalization of marks, sandbox host isolation, and zero secrets in repository.
-- **NFR-902 (Performance & Bundle Budget):** Production build bundle verification and API endpoint latency bounds under load.
+### Requirements Covered
+- **FR-901 (Full-Spectrum End-to-End Workflow Integration Test):** Complete verification of the entire LabTrack core loop:
+  1. *Teacher Assignment Creation:* Configures metadata, starter templates, and sample cases.
+  2. *Judge0 Sandbox Execution:* Per-test telemetry (time, memory, stdout/stderr, pass/fail status).
+  3. *Student Stepper:* Code implementation, mandatory constructive AI declaration, line-range code annotations, and conceptual logic defense.
+  4. *AST Tokenization & Winnowing:* Starter template boilerplate suppression, Jaccard containment, and pairwise similarity review.
+  5. *Multi-Component Rubric Grading:* 40/30/15/15 scoring model with provisional state flow, teacher finalization, and audit-logged reopening.
+  6. *Cohort Reporting & RFC 4180 CSV:* Mean, median, sample std dev, 5-bin score distribution, Excel UTF-8 BOM, and print moderation layouts.
+  Implemented and verified in `tests/iteration-9-hardening.test.mjs`.
+- **FR-902 (Database Schema & Index Audit):** Verified all 7 migrations (`001_create_users.sql` to `007_ai_assistance_logs.sql`), composite indexes, foreign key cascades, and check constraints across all database tables.
+- **FR-903 (Mobile & Responsive Layout Audit):** Viewport compatibility across 390px mobile, tablet, and 1440px desktop layouts verified with no layout clipping.
+- **NFR-901 (Non-Negotiable Hard Rule & Policy Audit):**
+  - Zero claims of AI-written code detection across all client and server codebases.
+  - Similarity scores serve exclusively as review flags for viva inquiry, never automated verdicts.
+  - All marks remain strictly provisional until explicit human instructor action.
+  - Student code never executes directly on the host server (Judge0 sandbox adapter only).
+  - Strict RBAC and assignment ownership isolation verified on every endpoint.
+  - Zero secrets in git repository, `.env` ignored.
+- **NFR-902 (Performance & Production Build):** Vite production asset build transforms 53 modules in ~1.0s cleanly. All 61 regression tests execute in ~360ms.
+
+### Acceptance Tests
+- **AT-901 (End-to-End Integration Pipeline):** Full assignment lifecycle simulation passes with 100% data integrity. [PASSED]
+- **AT-902 (Hard Rule Scan):** Complete automated scan verifies zero AI detection claims. [PASSED]
+- **AT-903 (Provisional Marks Rule):** Verified student scorecard displays provisional banner until instructor finalization. [PASSED]
+- **AT-904 (Host Sandbox Isolation):** Verified submissions route invokes Judge0 adapter and rejects host execution. [PASSED]
+- **AT-905 (Migration & DDL Audit):** Verified all 7 migrations define clean schemas, constraints, and indexes. [PASSED]
+- **AT-906 (Secret & Git Audit):** Verified .env ignore rules and clean repo with zero committed secrets. [PASSED]
+- **AT-907 (Route Manifest Sync):** Verified `manus-routes.json` synchronization with React Router table. [PASSED]

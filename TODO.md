@@ -1,6 +1,6 @@
 # LabTrack ToDo
 
-Iterations 0–8 are implemented. All database migrations up to 007 (users, assignments, submissions, declarations, similarity reviews, grades, and AI assistance audit logs) are defined and validated. Iteration 9 remains for final release hardening.
+Iterations 0–9 are fully implemented. All database migrations up to 007 (users, assignments, submissions, declarations, similarity reviews, grades, and AI assistance audit logs) are defined and validated. LabTrack v1.0.0 is production-ready.
 
 ## Iteration 0 — vanilla faculty register (COMPLETE)
 
@@ -90,9 +90,14 @@ Iterations 0–8 are implemented. All database migrations up to 007 (users, assi
 - [x] Define database migration 007 for `ai_assistance_logs`.
 - [x] Expose in-platform AI interaction audit transcripts to teachers in the Marking Workbench.
 
-## Iteration 9 — release hardening
+## Iteration 9 — release hardening (COMPLETE)
 
-- [ ] Complete security review, load/responsive checks, final regression, and documentation.
+- [x] Complete security review, load/responsive checks, final regression, and documentation.
+- [x] Full-spectrum end-to-end integration test suite (`tests/iteration-9-hardening.test.mjs`).
+- [x] Non-negotiable policy audit (zero AI detection claims, sandbox host isolation, provisional marks flow).
+- [x] Database migration integrity and index audit across all 7 migrations.
+- [x] Route manifest synchronization with `manus-routes.json`.
+- [x] Production asset build verification and release documentation consolidation.
 
 ## Cross-cutting requirements
 

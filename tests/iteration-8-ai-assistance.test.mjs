@@ -240,3 +240,4 @@ test('Hard Rule Safeguards: strict feature flagging, no AI code detection, sandb
     'Workspace renders AI Socratic Assistant tab',
   );
 });
+
