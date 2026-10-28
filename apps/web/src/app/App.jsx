@@ -4,7 +4,12 @@ import AppShell from '../components/AppShell.jsx';
 import AuthPage from '../pages/AuthPage.jsx';
 import StudentDashboardPage from '../pages/StudentDashboardPage.jsx';
 import AssignmentViewerPage from '../pages/AssignmentViewerPage.jsx';
+import CodeWorkspacePage from '../pages/CodeWorkspacePage.jsx';
 import TeacherAssignmentsPage from '../pages/TeacherAssignmentsPage.jsx';
+import SimilarityReviewPage from '../pages/SimilarityReviewPage.jsx';
+import TeacherMarkingPage from '../pages/TeacherMarkingPage.jsx';
+import StudentSubmissionHistoryPage from '../pages/StudentSubmissionHistoryPage.jsx';
+import TeacherReportsPage from '../pages/TeacherReportsPage.jsx';
 
 function HomeRedirect() {
   const { user } = useAuth();
@@ -33,10 +38,18 @@ function RouteTable() {
           <Route path="/" element={<HomeRedirect />} />
           <Route element={<RequireRole role="student" />}>
             <Route path="/student/dashboard" element={<StudentDashboardPage />} />
+            <Route path="/student/history" element={<StudentSubmissionHistoryPage />} />
             <Route path="/student/assignments/:id" element={<AssignmentViewerPage />} />
+            <Route path="/student/assignments/:id/workspace" element={<CodeWorkspacePage />} />
           </Route>
           <Route element={<RequireRole role="teacher" />}>
             <Route path="/teacher/assignments" element={<TeacherAssignmentsPage />} />
+            <Route path="/teacher/reports" element={<TeacherReportsPage />} />
+            <Route path="/teacher/assignments/:assignmentId/reports" element={<TeacherReportsPage />} />
+            <Route path="/teacher/assignments/:assignmentId/marking" element={<TeacherMarkingPage />} />
+            <Route path="/teacher/submissions/:submissionId/marking" element={<TeacherMarkingPage />} />
+            <Route path="/teacher/assignments/:assignmentId/similarity" element={<SimilarityReviewPage />} />
+            <Route path="/teacher/similarity/:reportId" element={<SimilarityReviewPage />} />
           </Route>
         </Route>
       </Route>

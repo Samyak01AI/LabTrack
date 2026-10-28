@@ -6,8 +6,12 @@ const linksByRole = {
   student: [
     { to: '/student/dashboard', label: 'Dashboard', icon: 'grid_view' },
     { to: '/student/dashboard#assignment-list', label: 'Assignments', icon: 'code_blocks' },
+    { to: '/student/history', label: 'History', icon: 'history_edu' },
   ],
-  teacher: [{ to: '/teacher/assignments', label: 'Assignments', icon: 'assignment' }],
+  teacher: [
+    { to: '/teacher/assignments', label: 'Assignments', icon: 'assignment' },
+    { to: '/teacher/reports', label: 'Reports', icon: 'analytics' },
+  ],
 };
 
 export default function AppShell() {

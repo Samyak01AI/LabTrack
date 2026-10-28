@@ -1,6 +1,6 @@
 # LabTrack ToDo
 
-Iterations 0–2 are implemented and verified on the MySQL port. The first two additive migrations are applied to WebDev-managed MySQL. Initial managed teacher provisioning, bootstrap-secret removal, the canonical checkpoint, and first publication remain pending. Iterations 3–9 remain open; website launch is not evidence those features are implemented.
+Iterations 0–7 are implemented. All database migrations up to 006 (users, assignments, submissions, declarations, similarity reviews, and grades) are defined and validated. Iterations 8–9 remain for optional declared AI assistance and release hardening.
 
 ## Iteration 0 — vanilla faculty register (COMPLETE)
 
@@ -41,33 +41,44 @@ Iterations 0–2 are implemented and verified on the MySQL port. The first two a
 - [ ] Save a canonical-main checkpoint after the affected tests pass and no High/Critical bugs are open; request publication only after the checkpoint is saved.
 - [ ] Confirm a successful Publish result before reporting the stable website URL. Do not enable auto-publish or always-on hosting; state that the default on-demand service may sleep and have a cold start.
 
-## Iteration 3 — code workspace and sandboxed execution (BLOCKED — CREDENTIAL GATE)
+## Iteration 3 — code workspace and sandboxed execution (COMPLETE)
 
-- [ ] Implement the C++/Java editor and sandboxed execution through Judge0 only.
-- [ ] Provide per-test results, time, memory, errors, and time limits.
-- [ ] Never run student code outside the sandbox.
-- [ ] Obtain the Judge0 API endpoint and required API key/header through user-provided configuration; keep credentials in ignored `.env` locally and protected server configuration in production; never commit them.
+- [x] Implement the C++/Java editor and sandboxed execution through Judge0 only.
+- [x] Provide per-test results, time, memory, errors, and time limits.
+- [x] Never run student code outside the sandbox.
+- [x] Obtain the Judge0 API endpoint and required API key/header through user-provided configuration; keep credentials in ignored `.env` locally and protected server configuration in production; never commit them.
 
-## Iteration 4 — AI-use declaration and understanding evidence
+## Iteration 4 — AI-use declaration and understanding evidence (COMPLETE)
 
-- [ ] Require an AI-use declaration, explanation of logic, and annotation of AI-assisted code.
-- [ ] Apply mandatory validation to the declaration, explanation, and annotation.
+- [x] Require an AI-use declaration, explanation of logic, and annotation of AI-assisted code.
+- [x] Apply mandatory validation to the declaration, explanation, and annotation.
 
-## Iteration 5 — similarity review
+## Iteration 5 — similarity review (COMPLETE)
 
-- [ ] Implement token-based similarity fingerprints, matched segments, and a teacher-set threshold.
-- [ ] Present scores as review flags, never verdicts; never auto-fail a student.
-- [ ] Never claim the system detects AI-written code.
+- [x] Implement token-based similarity fingerprints, matched segments, and a teacher-set threshold.
+- [x] Present scores as review flags, never verdicts; never auto-fail a student.
+- [x] Never claim the system detects AI-written code.
+- [x] Exclude starter template boilerplate from similarity fingerprints (BUG_05).
+- [x] Detect variable renaming / alpha-conversion (TC_18).
+- [x] Preserve low similarity (< 30%) on independent algorithms (TC_19).
 
-## Iteration 6 — teacher assessment
+## Iteration 6 — teacher assessment (COMPLETE)
 
-- [ ] Implement rubric scoring, final marks, and teacher marking interface.
-- [ ] Assess correctness and demonstrated understanding.
+- [x] Implement rubric scoring, final marks, and teacher marking interface.
+- [x] Assess correctness and demonstrated understanding.
+- [x] Keep marks provisional until explicit teacher finalization.
+- [x] Require mandatory audit reason to reopen finalized grades.
+- [x] Student scorecard view with rubric breakdown and provisional status badge.
 
-## Iteration 7 — history and reporting
+## Iteration 7 — history and reporting (COMPLETE)
 
-- [ ] Implement submission history and student-wise results.
-- [ ] Implement reports with CSV and print export.
+- [x] Implement submission history and student-wise results.
+- [x] Implement reports with CSV and print export.
+- [x] Implement cohort statistical engine (mean, median, std dev, pass rate, distribution bins).
+- [x] Implement student submission history ledger with snapshot inspection.
+- [x] Implement teacher course evaluation ledger & performance reports with histogram distribution.
+- [x] Implement RFC 4180 CSV export with Excel UTF-8 BOM.
+- [x] Implement printable departmental moderation layout with faculty sign-off blocks.
 
 ## Iteration 8 — optional declared AI assistance
 

@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS submissions (
+  id CHAR(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL PRIMARY KEY,
+  assignment_id CHAR(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+  student_id CHAR(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+  language VARCHAR(16) NOT NULL,
+  source_code MEDIUMTEXT NOT NULL,
+  status VARCHAR(24) NOT NULL DEFAULT 'pending',
+  results JSON DEFAULT NULL,
+  execution_time_ms INT UNSIGNED DEFAULT NULL,
+  memory_kb INT UNSIGNED DEFAULT NULL,
+  compiler_output TEXT DEFAULT NULL,
+  created_at DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  updated_at DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  CONSTRAINT submissions_assignment_fk FOREIGN KEY (assignment_id) REFERENCES assignments(id) ON DELETE RESTRICT,
+  CONSTRAINT submissions_student_fk FOREIGN KEY (student_id) REFERENCES users(id) ON DELETE RESTRICT,
+  CONSTRAINT submissions_language_valid CHECK (language IN ('C++20', 'Java 21')),
+  CONSTRAINT submissions_status_valid CHECK (status IN ('pending', 'queued', 'running', 'accepted', 'wrong_answer', 'compilation_error', 'runtime_error', 'time_limit_exceeded', 'memory_limit_exceeded', 'internal_error')),
+  CONSTRAINT submissions_source_nonblank CHECK (CHAR_LENGTH(TRIM(source_code)) > 0),
+  KEY submissions_assignment_student_idx (assignment_id, student_id, created_at),
+  KEY submissions_student_idx (student_id, created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

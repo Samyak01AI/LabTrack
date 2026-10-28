@@ -13,6 +13,8 @@ const envSchema = z.object({
   AUTH_COOKIE_MAX_AGE_MS: z.coerce.number().int().min(60_000).default(28_800_000),
   LOGIN_RATE_LIMIT_WINDOW_MS: z.coerce.number().int().min(1000).default(900000),
   LOGIN_RATE_LIMIT_MAX: z.coerce.number().int().min(1).default(10),
+  JUDGE0_API_URL: z.string().default(''),
+  JUDGE0_API_KEY: z.string().default(''),
 });
 
 export function loadConfig(env = process.env) {
@@ -39,5 +41,7 @@ export function loadConfig(env = process.env) {
     cookieMaxAgeMs: value.AUTH_COOKIE_MAX_AGE_MS,
     loginRateLimitWindowMs: value.LOGIN_RATE_LIMIT_WINDOW_MS,
     loginRateLimitMax: value.LOGIN_RATE_LIMIT_MAX,
+    judge0ApiUrl: value.JUDGE0_API_URL || '',
+    judge0ApiKey: value.JUDGE0_API_KEY || '',
   });
 }

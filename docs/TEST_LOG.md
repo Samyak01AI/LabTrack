@@ -1,5 +1,53 @@
-
+# Test Log
 
 | Test ID | Module | Input | Expected | Actual | Status |
 |---|---|---|---|---|---|
 | REL-PROVISION-04 | Final managed teacher bootstrap gate | Latest approved secure card; fresh-shell Boolean-only policy check and read-only managed TLS counts. Provisioning command withheld. | Proceed only with a valid 12–128 character value and absent target account. | Password present=true but in-range=false; managed users=0, assignments=0, target account absent. No provisioner call or data write. | BLOCKED |
+| I3-UNIT-001 | Root unit regressions (`tests/iteration-0.test.mjs`) | Student registration validation, duplicate ID rejection, complete count filter | All 8 tests pass | 8/8 passed in 148ms | PASS |
+| I3-UNIT-002 | Submissions & Workspace (`tests/iteration-3-submissions.test.mjs`) | Route manifest, 003 migration syntax, Judge0 adapter fallback, language validation, rate limiting, no-host-exec rule | All 7 tests pass | 7/7 passed in 158ms | PASS |
+| I3-CONFIG-001 | API configuration suite (`tests/api/config.test.mjs`) | Cookie security, SameSite=None + Secure assertion, JWT secret size | All 4 tests pass | 4/4 passed in 163ms | PASS |
+| I3-BUILD-001 | React/Vite web workspace build (`npm run web:build`) | Production asset build including `CodeWorkspacePage` | Clean build producing HTML/CSS/JS bundles | 49 modules transformed, built in 1.61s with zero errors | PASS |
+| I3-MIGRATE-001 | MySQL submissions migration (`db/migrations/003_create_submissions.sql`) | DDL syntax validation with CHAR(36), CHECK constraints, foreign keys | Clean migration file ready for idempotent deployment | Migration file verified | PASS |
+| I3-DB-LIVE-001 | MySQL integration suite (`npm run test:api`) | Dedicated loopback test database at `127.0.0.1:3306` | Database connection and integration assertions | Untestable in local sandbox: loopback MySQL daemon not running on host (ECONNREFUSED) | UNTESTABLE (SANDBOX) |
+| I3-BROWSER-001 | Browser E2E smoke tests (`npm run test:browser`) | Playwright browser runner against test API | Chromium UI interactions | Untestable in local sandbox: requires running background server and loopback MySQL | UNTESTABLE (SANDBOX) |
+| I4-UNIT-001 | Annotation status computation (`computeAnnotationStatus`) | Independent, AI with annotations, AI without annotations, blank justifications | Accurate annotation status (`not_required`, `complete`, `incomplete`) | 4/4 status assertions passed in 0.62ms | PASS |
+| I4-VALID-001 | Zod validation matrix (`tests/iteration-4-declarations.test.mjs`) | Missing declaration, <60 chars explanation, AI with 0 annotations | Block invalid submissions, allow valid submissions | Assertions passed in 1.25ms | PASS |
+| I4-DRAFT-001 | Partial draft tolerance | Submit partial work with `isDraft: true` | Draft saved successfully without blocking | Passed in 0.11ms | PASS |
+| I4-MIGRATE-001 | Migration syntax (`004_iteration_4_declarations.sql`) | Schema DDL for `ai_declaration`, `logic_explanation`, `annotations`, `annotation_status`, `is_final`, `submitted_at` | Matches MySQL 8.4 syntax with valid CHECK constraints | File verified in 0.78ms | PASS |
+| I4-TC07-001 | Language switch bug fix (`TC_07`) | Switch editor from C++20 to Java 21 and back with edited code | Both language code buffers preserved independently without data destruction | Passed in 0.12ms | PASS |
+| I4-IMMUT-001 | Snapshot immutability | Final submission followed by draft edit | Final submission row remains unchanged (`is_final = 1`) | Passed in 0.15ms | PASS |
+| I4-BUILD-001 | React/Vite web production build (`npm run web:build`) | Production asset build with 4-step workflow, Stepper, and teacher review modal | Clean asset build | 49 modules transformed in 976ms with zero errors | PASS |
+| I5-TOKEN-001 | Tokenizer unit test (`tests/iteration-5-similarity.test.mjs`) | C++ and Java code with single/multi-line comments, identifiers, literals, and `#include` | Comments stripped, literals normalized (`N`/`S`/`C`/`B`), identifiers normalized to `V`, keywords preserved | Passed in 1.19ms | PASS |
+| I5-WINNOW-001 | Winnowing algorithm | Binary search code converted to 5-grams and window size 4 | Deterministic fingerprints with rightmost minimum selection | Passed in 2.03ms | PASS |
+| I5-TC18-001 | Renamed variables / alpha-conversion (`TC_18`) | C++ LRU Cache with variable renaming (`prevNode` -> `p`, `cacheMap` -> `mp`), whitespace variations | High similarity ($\ge 80\%$, flagged for review) | Similarity = 89.47%, flagged, variable renaming detected | PASS |
+| I5-TC19-001 | Independent algorithms (`TC_19`) | Java QuickSort vs MergeSort | Low similarity ($< 30\%$, dismissed) | Similarity = 14.29%, dismissed | PASS |
+| I5-BUG05-001 | Boilerplate suppression (`BUG_05`) | Starter template submitted by both students | Boilerplate k-grams excluded, similarity = 0% | Similarity = 0.00%, dismissed, 0 matched segments | PASS |
+| I5-DETERM-001 | Determinism test | Same GCD implementation run twice | Strictly identical similarity score, token similarity, and segments | Passed in 0.60ms | PASS |
+| I5-MIGRATE-001 | MySQL migration syntax (`005_similarity_reviews.sql`) | Schema DDL for `similarity_reports` table, foreign keys, CHECK constraint on status | Clean migration file ready for idempotent deployment | Migration file verified in 0.79ms | PASS |
+| I5-COPY-001 | Non-negotiable review copy verification | Check UI copy for mandatory disclaimer: *"Automated structural analysis signal. Intended for instructor review and viva inquiry, not an automated verdict of misconduct."* | Prohibit AI detection or misconduct claims, ensure review disclaimer | Verified in 0.47ms | PASS |
+| I5-BUILD-001 | React/Vite production web build (`npm run web:build`) | Production asset build including `SimilarityReviewPage` and teacher review routing | Clean asset build | 50 modules transformed in 920ms with zero errors | PASS |
+| I6-RUBRIC-001 | Provisional grade calculation (`computeProvisionalGrade`) | Perfect submission (4/4 tests passed, comprehensive logic and complexity, independent declaration) | Correctness = 40, transparency = 15, logic >= 20, complexity >= 10, status = provisionally_scored | Passed in 1.57ms | PASS |
+| I6-PARTIAL-001 | Partial test correctness scaling | 1 of 2 test cases passed | Correctness = 20/40 pts | Passed in 0.16ms | PASS |
+| I6-CAP-001 | Score capping & boundary check (`calculateTotal`) | Component sum exceeding 100 and negative component scores | Total capped at maxScore (100) and negative values bounded at 0 | Passed in 0.11ms | PASS |
+| I6-WEIGHTS-001 | Baseline rubric weights sum | Sum of correctness, logic, complexity, transparency weights | Strictly equal to 100 points | Passed in 0.07ms | PASS |
+| I6-REOPEN-001 | Audit reopening transition | Reopen finalised grade with and without valid reason | Rejects <5 char reasons; transitions status to `reopened` and clears `finalisedAt` on valid reason | Passed in 1.38ms | PASS |
+| I6-MIGRATE-001 | MySQL migration syntax (`006_grades_and_evaluations.sql`) | DDL for `grades` table, foreign keys, CHECK constraint on status, and unique constraint on submission | Clean migration file ready for idempotent deployment | Migration file verified in 0.78ms | PASS |
+| I6-COPY-001 | Hard rule enforcement (Teacher finalizes marks) | Verify student view displays provisional warning and teacher interface requires explicit Finalise Mark action | Prohibits autonomous grading; ensures student sees provisional notice | Verified in 0.59ms | PASS |
+| I6-BUILD-001 | React/Vite web production build (`npm run web:build`) | Production asset build including `TeacherMarkingPage` and student scorecard view | Clean asset build | 51 modules transformed in 996ms with zero errors | PASS |
+
+## Iteration 7 — Submission History & Cohort Reporting (v0.8.0)
+
+| Test ID | Module | Input | Expected Output | Actual Output | Status |
+| --- | --- | --- | --- | --- | --- |
+| I7-STAT-001 | Analytics Engine (`analytics.js`) | Empty array, single score, normal score distributions | Mean computed with precision and zero edge-case handling | Arithmetic mean calculated correctly (0, 85, 80, 85, 72.67) | PASS |
+| I7-STAT-002 | Analytics Engine (`analytics.js`) | Odd, even, and unsorted score arrays | Median computed on sorted sequence without mutating input | Median computed correctly (0, 75, 70, 75, 60) | PASS |
+| I7-STAT-003 | Analytics Engine (`analytics.js`) | Empty array, $N=1$, identical values, sample array | Sample standard deviation with Bessel's correction $N-1$ | StdDev computed correctly (0, 0, 0, 10.0) | PASS |
+| I7-STAT-004 | Analytics Engine (`analytics.js`) | Scores `[50, 59.9, 60, 75, 95]`, pass threshold 60 | Pass rate $\ge 60\%$ and 5-bin histogram distribution | Pass rate 60.0%, 5 bins (<60: 2, 60-69: 1, 70-79: 1, 80-89: 0, 90-100: 1) | PASS |
+| I7-COHORT-001 | Analytics Engine (`analytics.js`) | 4 submissions with mix of graded, pending, AI, and similarity | Evaluated counts, pass rate across graded, AI rate, flag rate | total: 4, evaluated: 3, passRate: 66.7%, aiRate: 50.0%, flagRate: 25.0% | PASS |
+| I7-CSV-001 | Analytics Engine (`analytics.js`) | Strings with commas, double quotes, semicolons, newlines | RFC 4180 escaped CSV with UTF-8 BOM for Microsoft Excel | Correct RFC 4180 double-quoted fields and `\uFEFF` prefix | PASS |
+| I7-AUTH-001 | Reporting API (`routes.js`) | Student & teacher route mounts and permission middleware | Strict RBAC isolation: students access own history, teachers access owned cohort | `requireRole('student')` and `getByTeacher` ownership verified | PASS |
+| I7-UI-001 | Web Frontend (`StudentSubmissionHistoryPage.jsx`) | Component render and action definitions | Matches Stitch reference with metrics bento, table, snapshot modal, CSV export | Verified all titles, table fields, export buttons, and ledger actions | PASS |
+| I7-UI-002 | Web Frontend (`TeacherReportsPage.jsx`) | Component render and action definitions | Matches Stitch reference with histogram, KPI cards, filter bar, CSV, Print/PDF | Verified histogram intervals, GPA projection, CSV export, Print sign-off | PASS |
+| I7-RULE-001 | Platform Safeguards | Code audit of analytics engine and reports UI | No AI code detection claims, similarity is review flag only | Zero AI probability metrics, labels clearly indicate 'AI Disclosed' / 'Clean AST' | PASS |
+| I7-BUILD-001 | React/Vite web build (`npm run web:build`) | Production asset build including history and reports pages | Clean production asset bundle | 53 modules transformed in 1.00s with zero errors | PASS |
+| I7-REGRESS-001 | Full Test Suite (`npm test`) | 6 test suites across iterations 0 through 7 | All regression tests pass without errors | 45 passed, 0 failed, 0 skipped in 294ms | PASS |

@@ -14,7 +14,6 @@
 
 No open High/Critical issues remain. This does not substitute for the separate Iteration 9 security review.
 
-
 ## Release-preparation issues — 2026-10-22
 
 | Issue ID | Description | Severity | Root Cause | Fix | Status | Date |
@@ -23,3 +22,46 @@ No open High/Critical issues remain. This does not substitute for the separate I
 | REL-DEV-001 | `npm run api:dev` repeatedly restarted while Vite initialized, so the first readiness request landed during a restart gap. | Low | The Node watch restart was observed after Vite dependency optimization; the trigger was not isolated. | Stopped the watcher and used the existing non-watch `npm run api:start` entrypoint; the refreshed managed runtime then served health, SPA, and route-manifest requests successfully. | Open — investigate local watcher separately | 2026-10-22 |
 
 No open High/Critical issues remain from this release-preparation check. The open Low watcher issue does not affect the production Docker entrypoint, which starts `node apps/api/src/server.js` without watch mode.
+
+## Iteration 3 issues — 2026-10-28
+
+| Issue ID | Description | Severity | Root Cause | Fix | Status | Date |
+|---|---|---|---|---|---|---|
+| I3-FK-001 | Foreign key conflict during test data cleanup | Medium | `clearTestData` deleted from `assignments` before `submissions`, which would violate foreign key `submissions_assignment_fk` when submissions exist. | Updated `clearTestData()` in `tests/api/db-test-support.mjs` to delete from `submissions` before `assignments`. | Closed | 2026-10-28 |
+| I3-PAYLOAD-001 | Large source code payload risk (HTTP 413 Payload Too Large) | Medium | `express.json` in `apps/api/src/app.js` was configured with `limit: '16kb'`, which could reject larger C++/Java submissions. | Raised body limit to `256kb` in `apps/api/src/app.js`. | Closed | 2026-10-28 |
+| I3-DRAWER-001 | Collapsed problem drawer layout shift | Low | Collapsing drawer in `CodeWorkspacePage` did not dynamically adjust main editor grid column spans. | Implemented responsive `col-span-12` vs `col-span-12 lg:col-span-8 xl:col-span-9` toggle button to collapse and re-expand drawer. | Closed | 2026-10-28 |
+
+No open High/Critical issues remain in Iteration 3.
+
+## Iteration 4 issues — 2026-10-28
+
+| Issue ID | Description | Severity | Root Cause | Fix | Status | Date |
+|---|---|---|---|---|---|---|
+| TC_07 | Switching editor language (C++ ↔ Java) destroyed/overwrote user code buffer | High | Single string code state was shared across language selection; selecting a new language could discard student edits or replace them with the other language template. | Implemented independent `codeBuffers` keyed by language in `CodeWorkspacePage.jsx`. | Closed | 2026-10-28 |
+| TC_14 | AI-use declaration not enforced on final submit | High | API allowed submissions with only source code without validating AI declaration or conceptual logic depth. | Added server-side Zod validation in `apps/api/src/submissions/routes.js` enforcing mandatory declaration, AI tools, and code annotations. | Closed | 2026-10-28 |
+| TC_15 | AI declaration, annotations, and logic defense not persisted | High | Schema lacked columns for declaration, annotations, and defense text. | Added migration `004_iteration_4_declarations.sql` with JSON columns and repository methods. | Closed | 2026-10-28 |
+
+No open High/Critical issues remain in Iteration 4.
+
+## Iteration 5 issues — 2026-10-28
+
+| Issue ID | Description | Severity | Root Cause | Fix | Status | Date |
+|---|---|---|---|---|---|---|
+| TC_18 | Renamed variables and whitespace variations bypass basic text diff | High | Simple line-by-line diff fails when identifiers are renamed (alpha-conversion). | Implemented canonical tokenization normalizing identifiers to placeholder `V` and literals to `N`/`S`/`C` before k-gram rolling hashing and winnowing. | Closed | 2026-10-28 |
+| TC_19 | Independent algorithm solutions risk false-positive flag | High | Naive n-gram matching can flag standard language idioms in independent algorithms. | Combined winnowing with Jaccard containment and AST sensitivity threshold (default 75%); distinct algorithms (QuickSort vs MergeSort) score $< 30\%$ and remain unflagged/dismissed. | Closed | 2026-10-28 |
+| BUG_05 | Starter template and common boilerplate inflate similarity | High | Shared headers (`#include`, `import`) and instructor starter code produced false similarity across student pairs. | Added `extractBoilerplateHashes()` and `filterBoilerplate()` to suppress starter template $k$-grams from student fingerprints, yielding 0% similarity for boilerplate-only code. | Closed | 2026-10-28 |
+
+No open High/Critical issues remain in Iteration 5.
+
+## Iteration 6 issues — 2026-10-28
+
+No open High/Critical issues found or introduced during Iteration 6. Rubric scoring, provisional capping, state transitions, audit reopening, and teacher-finalized marks verified cleanly across unit and web build tests.
+
+## Iteration 7 issues — 2026-10-28
+
+| Issue ID | Description | Severity | Root Cause | Fix | Status | Date |
+|---|---|---|---|---|---|---|
+| I7-STAT-001 | Un-graded submissions artificially skewed cohort pass rate and mean | Medium | Computing pass rate over all submissions treated pending submissions with unassigned grades as 0% failures. | Filtered cohort roster to evaluated submissions (`totalScore != null` or status not `pending_review`) when computing class average, median, and pass rate. | Closed | 2026-10-28 |
+| I7-CSV-001 | Microsoft Excel garbled non-ASCII UTF-8 characters on CSV open | Low | Standard UTF-8 CSV exports lack byte order mark, causing Excel on Windows to interpret text using legacy system code pages. | Prepended UTF-8 BOM (`\uFEFF`) to CSV exports in `generateCohortCsv`. | Closed | 2026-10-28 |
+
+No open High/Critical issues remain in Iteration 7. All 45 regression and reporting tests pass cleanly.

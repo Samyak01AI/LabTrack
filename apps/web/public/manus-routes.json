@@ -4,7 +4,15 @@
     { "path": "/login", "title": "Sign in to LabTrack" },
     { "path": "/register", "title": "Create a student account" },
     { "path": "/student/dashboard", "title": "Student dashboard" },
+    { "path": "/student/history", "title": "Student submission history and audit ledger" },
     { "path": "/student/assignments/:id", "title": "Assignment specification" },
-    { "path": "/teacher/assignments", "title": "Teacher assignment management" }
+    { "path": "/student/assignments/:id/workspace", "title": "Code workspace & test harness" },
+    { "path": "/teacher/assignments", "title": "Teacher assignment management" },
+    { "path": "/teacher/reports", "title": "Course evaluation ledger and performance reports" },
+    { "path": "/teacher/assignments/:assignmentId/reports", "title": "Assignment cohort performance reports" },
+    { "path": "/teacher/assignments/:assignmentId/marking", "title": "Teacher grading & marking workbench" },
+    { "path": "/teacher/submissions/:submissionId/marking", "title": "Teacher submission evaluation" },
+    { "path": "/teacher/assignments/:assignmentId/similarity", "title": "Teacher similarity flags & comparison workbench" },
+    { "path": "/teacher/similarity/:reportId", "title": "Teacher similarity pair inspection" }
   ]
 }

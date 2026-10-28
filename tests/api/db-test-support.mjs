@@ -25,6 +25,11 @@ export async function applyTestMigrations() {
 }
 
 export async function clearTestData() {
+  try {
+    await pool.execute('DELETE FROM submissions');
+  } catch (_ignored) {
+    // Table may not exist prior to migration
+  }
   await pool.execute('DELETE FROM assignments');
   await pool.execute('DELETE FROM users');
 }

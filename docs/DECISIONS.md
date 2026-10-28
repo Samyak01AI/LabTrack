@@ -138,3 +138,50 @@
 **Decision:** The teacher provisioner reports only whether provisioning succeeded and the explicitly selected target; it does not print the teacher's email.
 **Reason:** Bootstrap identities are operational inputs and are not needed in terminal logs to establish success. Browser fixtures now assert the generic success message instead of matching the email.
 **Consequence:** Protected values remain out of source and logs, and the test harness retains its success check without echoing identifying data.
+
+## D-020 — Code Workspace and Sandboxed Execution Architecture (Iteration 3)
+
+**Date:** 2026-10-28
+**Decision:** Provide an integrated in-browser code editor supporting C++20 and Java 21 for students. The workspace connects to the backend submission API (`POST /api/student/assignments/:id/submit`) and executes tests exclusively through Judge0 CE API if configured, or records submissions in a safe pending status with mockable testing capabilities for sandboxed evaluation. Student code is strictly forbidden from executing on the host application process or server.
+**Reason:** Hard security rule dictates student code only runs in the sandbox. The UI matches `docs/ui-reference/labtrack_code_workspace_test_harness/`.
+**Consequence:** The student workspace displays per-sample-case outcomes, execution time, memory usage, compiler/console output, and transitions to upcoming AI-use declaration in Iteration 4.
+
+
+## D-021 — AI-Use Declaration, Code Annotations, and Logic Defense Workflow (Iteration 4)
+
+**Date:** 2026-10-28
+**Decision:** Implement the 4-step submission workflow (Step 1: Code Implementation → Step 2: AI-Use Declaration → Step 3: Conceptual Logic Defense → Step 4: Review & Submit). Declaration supports independent authoring versus AI-assisted authoring with multi-tool selection. If AI is declared, code annotations (line ranges + personalized justifications) are mandatory (`annotation_status = 'complete'`); final submission is blocked if annotations are missing (`incomplete`). Conceptual logic explanation requires at least 60 characters covering algorithmic approach, trade-offs, and data structure topology. Final submissions are immutable snapshots (`is_final = 1`), while drafts allow saving partial progress.
+**Reason:** Alignment with Constructive AI Disclosure Protocol; transparency without punitive penalties, preparing evidence for TA viva voce.
+**Consequence:** Both student workbench and teacher assignment inspection views display verified declarations, line-annotated code, and conceptual defense cards.
+
+
+## D-022 — Token-Based Similarity Review & Winnowing Engine (Iteration 5)
+
+**Date:** 2026-10-28
+**Decision:** Implement a structure-aware similarity comparison engine using canonical tokenization (stripping comments/whitespace, preserving control-flow keywords and operators, normalizing identifiers to `V` and literals to `N`/`S`/`C`), $k$-gram polynomial rolling hashing ($k = 5$), sliding window winnowing ($w = 4$), and boilerplate template suppression (`BUG_05`). The system calculates Jaccard token overlap, containment, AST isomorphism, variable renaming detection, and control-flow divergence. Pairwise comparisons run exclusively across final submissions (`is_final = 1`) for the same assignment and programming language. Results are presented in a dedicated teacher dual-split code inspection workbench with AST sensitivity threshold tuning (50%–95%), highlighted matched clusters, and confidential teacher viva evaluation notes.
+**Reason:** Strict compliance with non-negotiable rules: similarity scores serve solely as a review flag and signal for instructor oral inquiry (viva voce), never an automated misconduct verdict or AI-detection claim.
+**Consequence:** Teachers have reproducible, explainable syntactic evidence to guide oral examination, while students are protected from automated grading penalties or exposure of peer submissions.
+
+
+## D-023 — Teacher Evaluation, Rubric Scoring, and Provisional Marks Workflow (Iteration 6)
+
+**Date:** 2026-10-28
+**Decision:** Implement an integrated teacher grading workflow combining automated test correctness (0–40 pts), algorithmic approach defense (0–30 pts), data structure & complexity bounds (0–15 pts), and constructive AI transparency & viva defense (0–15 pts). All evaluated marks are stored with status `provisionally_scored` and labeled "PROVISIONAL" until an authorized teacher explicitly finalizes them via "Finalise Mark" (`status = 'finalised'`). Finalized grades are immutable from standard editing and can only be modified through an audited "Reopen" action requiring a non-blank reason. Students view an itemized scorecard breakdown on their assignment viewer, accompanied by a prominent provisional notice until finalized.
+**Reason:** Core product philosophy: conventional autograders check only test output, whereas LabTrack balances automated execution with human-evaluated conceptual defense and transparent AI disclosure. Non-negotiable rule dictates that marks are finalized solely by human instructors.
+**Consequence:** Teachers have a 3-pane workbench (`TeacherMarkingPage`) for reviewing code, test telemetry, logic defense, and annotations while scoring against rubrics. Students receive transparent, constructive feedback without black-box grading penalties.
+
+## D-024 — Submission History and Cohort Reporting Architecture (Iteration 7)
+
+**Context:** Academic departments require longitudinal transparency into student submission attempts, as well as aggregated cohort performance metrics (mean, median, standard deviation, pass rate, score distributions) and standardized CSV / printable reports for departmental grade moderation and external accreditation.
+
+**Decision:**
+1. **Student Submission History:** Provide a reverse-chronological audit trail of all attempts (draft autosaves and immutable final submissions). Include test case execution telemetry, declared AI attributions, code snapshot modals, and direct links to evaluation scorecards.
+2. **Cohort Analytics Engine:** Compute statistical metrics exclusively over final submissions deduplicated by student ID. Ensure mathematical integrity across edge cases:
+   - $N=0$ returns zeros without division-by-zero errors.
+   - $N=1$ sets standard deviation $\sigma=0$ without crashing.
+   - Standard deviation uses sample variance with Bessel's correction $N-1$.
+   - Pass rate and average marks are computed over evaluated/graded submissions to avoid skewing cohorts with un-graded pending attempts.
+3. **RFC 4180 CSV & Departmental Moderation:** Implement clean CSV exports with UTF-8 byte order mark (`\uFEFF`) to prevent character encoding issues in Microsoft Excel. Provide printable departmental moderation layouts with instructor, department chair, and exam controller signature blocks.
+4. **Strict RBAC & Privacy Isolation:** Students can only access and export their own submission history. Instructors can only access and export cohort reports for assignments they authored.
+
+**Consequence:** Students maintain complete visibility into their algorithmic journey and grading status. Faculty and department administrators gain statistical insights, histogram distributions, and exportable ledgers for moderation without compromising academic data privacy.

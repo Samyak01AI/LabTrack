@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { api } from '../lib/api.js';
 
 const DAY = 86_400_000;
@@ -33,6 +34,12 @@ export default function TeacherAssignmentsPage() {
   const [form, setForm] = useState(blankForm);
   const [busy, setBusy] = useState(false);
 
+  // Submissions drawer state for Teacher review
+  const [viewingSubmissionsAssignment, setViewingSubmissionsAssignment] = useState(null);
+  const [submissionsList, setSubmissionsList] = useState([]);
+  const [submissionsLoading, setSubmissionsLoading] = useState(false);
+  const [activeSubmissionDetail, setActiveSubmissionDetail] = useState(null);
+
   const refresh = useCallback(async () => {
     setLoading(true);
     try {
@@ -61,6 +68,20 @@ export default function TeacherAssignmentsPage() {
     setForm((current) => ({ ...current, languageOptions: current.languageOptions.includes(language)
       ? current.languageOptions.filter((item) => item !== language)
       : [...current.languageOptions, language] }));
+  }
+
+  async function openSubmissionsViewer(assignment) {
+    setViewingSubmissionsAssignment(assignment);
+    setActiveSubmissionDetail(null);
+    setSubmissionsLoading(true);
+    try {
+      const res = await api(`/api/teacher/assignments/${assignment.id}/submissions`);
+      setSubmissionsList(res.submissions || []);
+    } catch (err) {
+      setError(`Could not load submissions: ${err.message}`);
+    } finally {
+      setSubmissionsLoading(false);
+    }
   }
 
   async function submit(event) {
@@ -118,11 +139,244 @@ export default function TeacherAssignmentsPage() {
         </div>
         {loading ? <div className="p-8 text-center text-sm text-on-surface-variant">Loading assignments…</div> : visible.length === 0 ? <div className="empty-state m-5"><span className="material-symbols-outlined text-3xl text-secondary">inbox</span><h3 className="mt-2 font-semibold">{assignments.length ? 'No matching assignments' : 'No assignments created yet'}</h3><p className="mt-1 text-sm text-on-surface-variant">{assignments.length ? 'Try a different search.' : 'Create a draft, review its specification, and publish it when ready.'}</p>{!assignments.length && <button className="primary-button mt-4" onClick={openCreate} type="button">Create first assignment</button>}</div> : (
           <div className="overflow-x-auto"><table className="data-table min-w-[840px]"><thead><tr><th>Assignment</th><th>Topic</th><th>Deadline</th><th>Status</th><th className="text-center">Points</th><th className="text-right">Actions</th></tr></thead><tbody>
-            {visible.map((item) => <tr key={item.id}><td><span className="table-title">{item.assignmentCode}: {item.title}</span><span className="table-subtitle">{item.courseCode} · {item.summary}</span></td><td><span className="tag tag-topic">{item.topic}</span></td><td className="font-mono text-xs">{new Date(item.dueAt).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })}</td><td><span className={`status-pill ${item.status === 'published' ? 'status-open' : item.status === 'archived' ? 'status-archived' : 'status-draft'}`}><span className="material-symbols-outlined text-sm">{item.status === 'published' ? 'check_circle' : item.status === 'archived' ? 'archive' : 'edit_note'}</span>{item.status}</span></td><td className="text-center font-mono text-sm">{item.maxScore}</td><td><div className="flex justify-end gap-2"><button className="table-action" type="button" onClick={() => openEdit(item)}>Edit</button>{item.status === 'draft' && <button className="table-action table-action-primary" type="button" onClick={() => changeStatus(item, 'published')}>Publish</button>}{item.status === 'published' && <button className="table-action" type="button" onClick={() => changeStatus(item, 'draft')}>Unpublish</button>}{item.status !== 'archived' && <button className="table-action" type="button" onClick={() => changeStatus(item, 'archived')}>Archive</button>}{item.status === 'archived' && <button className="table-action" type="button" onClick={() => changeStatus(item, 'draft')}>Restore draft</button>}</div></td></tr>)}
+            {visible.map((item) => <tr key={item.id}><td><span className="table-title">{item.assignmentCode}: {item.title}</span><span className="table-subtitle">{item.courseCode} · {item.summary}</span></td><td><span className="tag tag-topic">{item.topic}</span></td><td className="font-mono text-xs">{new Date(item.dueAt).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })}</td><td><span className={`status-pill ${item.status === 'published' ? 'status-open' : item.status === 'archived' ? 'status-archived' : 'status-draft'}`}><span className="material-symbols-outlined text-sm">{item.status === 'published' ? 'check_circle' : item.status === 'archived' ? 'archive' : 'edit_note'}</span>{item.status}</span></td><td className="text-center font-mono text-sm">{item.maxScore}</td><td><div className="flex justify-end gap-2">
+              <button className="table-action" type="button" onClick={() => openSubmissionsViewer(item)} title="View student submissions, declarations, and annotations">
+                Submissions
+              </button>
+              <Link
+                className="table-action"
+                to={`/teacher/assignments/${item.id}/marking`}
+                title="Open teacher marking workbench and evaluate submissions"
+              >
+                Marking
+              </Link>
+              <Link
+                className="table-action"
+                to={`/teacher/assignments/${item.id}/similarity`}
+                title="View token-based similarity review and flagged pairs"
+              >
+                Similarity
+              </Link>
+              <Link
+                className="table-action"
+                to={`/teacher/assignments/${item.id}/reports`}
+                title="View cohort evaluation metrics and grade reports"
+              >
+                Reports
+              </Link>
+              <button className="table-action" type="button" onClick={() => openEdit(item)}>Edit</button>
+              {item.status === 'draft' && <button className="table-action table-action-primary" type="button" onClick={() => changeStatus(item, 'published')}>Publish</button>}
+              {item.status === 'published' && <button className="table-action" type="button" onClick={() => changeStatus(item, 'draft')}>Unpublish</button>}
+              {item.status !== 'archived' && <button className="table-action" type="button" onClick={() => changeStatus(item, 'archived')}>Archive</button>}
+              {item.status === 'archived' && <button className="table-action" type="button" onClick={() => changeStatus(item, 'draft')}>Restore draft</button>}
+            </div></td></tr>)}
           </tbody></table></div>
         )}
         {!loading && assignments.length > 0 && <div className="flex flex-wrap justify-between gap-2 border-t border-outline-variant/40 px-5 py-3 text-xs text-on-surface-variant"><span>Showing <strong>{visible.length}</strong> of <strong>{assignments.length}</strong> assignments</span><span className="font-mono">{archived} archived</span></div>}
       </section>
+
+      {/* Submissions Review Modal for Teachers */}
+      {viewingSubmissionsAssignment && (
+        <div className="dialog-backdrop" role="presentation" onMouseDown={(e) => { if (e.target === e.currentTarget) setViewingSubmissionsAssignment(null); }}>
+          <section className="assignment-dialog max-w-4xl" role="dialog" aria-modal="true">
+            <header className="flex items-start justify-between gap-4 border-b border-outline-variant/40 p-5 bg-surface-container-low">
+              <div>
+                <span className="text-[10px] font-mono font-bold uppercase text-secondary tracking-wider">Submissions &amp; Declarations</span>
+                <h2 className="text-lg font-bold text-primary">{viewingSubmissionsAssignment.title}</h2>
+                <p className="text-xs text-on-surface-variant mt-0.5">
+                  Review student code implementations, constructive AI declarations, and logic defenses.
+                </p>
+              </div>
+              <button type="button" className="icon-button" aria-label="Close dialog" onClick={() => setViewingSubmissionsAssignment(null)}>
+                <span className="material-symbols-outlined">close</span>
+              </button>
+            </header>
+
+            <div className="p-5 max-h-[75vh] overflow-y-auto">
+              {submissionsLoading ? (
+                <div className="p-8 text-center text-xs text-on-surface-variant">Loading submissions…</div>
+              ) : submissionsList.length === 0 ? (
+                <div className="p-8 text-center text-xs text-on-surface-variant">
+                  No submissions recorded for this assignment yet.
+                </div>
+              ) : activeSubmissionDetail ? (
+                // Detailed inspection of single submission
+                <div className="flex flex-col gap-5">
+                  <button
+                    type="button"
+                    className="self-start flex items-center gap-1.5 text-xs font-semibold text-secondary hover:underline"
+                    onClick={() => setActiveSubmissionDetail(null)}
+                  >
+                    <span className="material-symbols-outlined text-sm">arrow_back</span>
+                    <span>Back to submissions list</span>
+                  </button>
+
+                  <div className="p-4 rounded-xl bg-surface-container-low flex flex-wrap items-center justify-between gap-3">
+                    <div>
+                      <p className="text-sm font-bold text-on-surface">{activeSubmissionDetail.studentName}</p>
+                      <p className="text-xs text-on-surface-variant font-mono">{activeSubmissionDetail.studentEmail}</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${
+                        activeSubmissionDetail.isFinal ? 'bg-green-100 text-green-800' : 'bg-surface-container-high text-on-surface'
+                      }`}>
+                        {activeSubmissionDetail.isFinal ? 'Final Submission' : 'Draft'}
+                      </span>
+                      <span className="font-mono text-xs text-on-surface-variant">
+                        {new Date(activeSubmissionDetail.submittedAt || activeSubmissionDetail.createdAt).toLocaleString()}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Declaration & Completeness Status */}
+                  <div className="p-4 rounded-xl border border-outline-variant/40 bg-surface-container-lowest flex flex-col gap-2">
+                    <div className="flex items-center justify-between">
+                      <h4 className="text-xs font-bold text-primary uppercase tracking-wider flex items-center gap-1.5">
+                        <span className="material-symbols-outlined text-base text-secondary">policy</span>
+                        <span>AI-Use Declaration</span>
+                      </h4>
+                      <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
+                        activeSubmissionDetail.annotationStatus === 'complete'
+                          ? 'bg-green-100 text-green-800'
+                          : activeSubmissionDetail.annotationStatus === 'not_required'
+                          ? 'bg-blue-100 text-blue-800'
+                          : 'bg-error-container text-on-error-container'
+                      }`}>
+                        Annotations: {activeSubmissionDetail.annotationStatus}
+                      </span>
+                    </div>
+
+                    <p className="text-xs text-on-surface">
+                      <strong>Attribution Mode:</strong>{' '}
+                      {activeSubmissionDetail.aiDeclaration?.aiUsed ? 'AI-Assisted' : 'Independent Authoring (No AI used)'}
+                    </p>
+
+                    {activeSubmissionDetail.aiDeclaration?.aiUsed && (
+                      <div className="text-xs text-on-surface-variant flex flex-col gap-1 pt-1 border-t border-outline-variant/30">
+                        <p><strong>Tools Declared:</strong> {activeSubmissionDetail.aiDeclaration.tools?.join(', ') || activeSubmissionDetail.aiDeclaration.otherTool || 'None specified'}</p>
+                        {activeSubmissionDetail.aiDeclaration.narrative && (
+                          <p className="italic bg-surface-container-low p-2 rounded">"{activeSubmissionDetail.aiDeclaration.narrative}"</p>
+                        )}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Code Annotations List */}
+                  {activeSubmissionDetail.annotations && activeSubmissionDetail.annotations.length > 0 && (
+                    <div className="flex flex-col gap-2">
+                      <h4 className="text-xs font-bold text-primary uppercase tracking-wider">
+                        AI-Assisted Code Annotations ({activeSubmissionDetail.annotations.length})
+                      </h4>
+                      <div className="grid gap-2">
+                        {activeSubmissionDetail.annotations.map((ann, i) => (
+                          <div key={i} className="p-3 rounded-lg bg-surface-container-low border border-outline-variant/30 text-xs">
+                            <div className="flex items-center justify-between font-mono font-semibold text-primary">
+                              <span>Lines {ann.startLine}–{ann.endLine}</span>
+                              <span className="text-[10px] text-secondary font-sans">{ann.tool || 'AI Tool'}</span>
+                            </div>
+                            <p className="mt-1 text-on-surface italic">"{ann.justification}"</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Logic Explanation */}
+                  <div className="p-4 rounded-xl border border-outline-variant/40 bg-surface-container-lowest flex flex-col gap-3">
+                    <h4 className="text-xs font-bold text-primary uppercase tracking-wider flex items-center gap-1.5">
+                      <span className="material-symbols-outlined text-base text-secondary">menu_book</span>
+                      <span>Conceptual Logic &amp; Algorithmic Defense</span>
+                    </h4>
+                    <div className="text-xs space-y-2">
+                      <div>
+                        <strong className="text-on-surface">Algorithmic Approach &amp; Invariants:</strong>
+                        <p className="text-on-surface-variant mt-0.5">{activeSubmissionDetail.logicExplanation?.approach || '—'}</p>
+                      </div>
+                      <div>
+                        <strong className="text-on-surface">Approach &amp; Trade-off Analysis:</strong>
+                        <p className="text-on-surface-variant mt-0.5">{activeSubmissionDetail.logicExplanation?.tradeoffAnalysis || '—'}</p>
+                      </div>
+                      <div>
+                        <strong className="text-on-surface">Data Structures &amp; Complexity:</strong>
+                        <p className="text-on-surface-variant mt-0.5">{activeSubmissionDetail.logicExplanation?.dataStructures || '—'}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Source Code */}
+                  <div className="flex flex-col gap-1.5">
+                    <span className="text-xs font-bold text-on-surface">Source Code ({activeSubmissionDetail.language})</span>
+                    <pre className="bg-[#0d121f] text-slate-100 font-mono text-xs p-4 rounded-xl max-h-72 overflow-y-auto leading-5">
+                      {activeSubmissionDetail.sourceCode}
+                    </pre>
+                  </div>
+                </div>
+              ) : (
+                // Submissions table
+                <table className="data-table">
+                  <thead>
+                    <tr>
+                      <th>Student</th>
+                      <th>Language</th>
+                      <th>Status</th>
+                      <th>AI Declaration</th>
+                      <th>Annotations</th>
+                      <th>Date</th>
+                      <th className="text-right">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {submissionsList.map((sub) => (
+                      <tr key={sub.id}>
+                        <td>
+                          <span className="font-semibold block text-on-surface">{sub.studentName}</span>
+                          <span className="text-[11px] text-on-surface-variant font-mono">{sub.studentEmail}</span>
+                        </td>
+                        <td className="font-mono text-xs">{sub.language}</td>
+                        <td>
+                          <span className={`status-pill ${sub.isFinal ? 'status-open' : 'status-draft'}`}>
+                            {sub.isFinal ? 'Final' : 'Draft'}
+                          </span>
+                        </td>
+                        <td>
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                            sub.aiDeclaration?.aiUsed ? 'bg-secondary-container text-on-secondary-container' : 'bg-surface-container text-on-surface'
+                          }`}>
+                            {sub.aiDeclaration?.aiUsed ? 'AI-Assisted' : 'Independent'}
+                          </span>
+                        </td>
+                        <td>
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                            sub.annotationStatus === 'complete'
+                              ? 'bg-green-100 text-green-800'
+                              : sub.annotationStatus === 'not_required'
+                              ? 'bg-blue-100 text-blue-800'
+                              : 'bg-error-container text-on-error-container'
+                          }`}>
+                            {sub.annotationStatus}
+                          </span>
+                        </td>
+                        <td className="font-mono text-xs">
+                          {new Date(sub.submittedAt || sub.createdAt).toLocaleDateString()}
+                        </td>
+                        <td className="text-right">
+                          <button
+                            type="button"
+                            className="table-action table-action-primary"
+                            onClick={() => setActiveSubmissionDetail(sub)}
+                          >
+                            Inspect
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+            </div>
+          </section>
+        </div>
+      )}
 
       {dialogOpen && <div className="dialog-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setDialogOpen(false); }}><section className="assignment-dialog" role="dialog" aria-modal="true" aria-labelledby="assignment-dialog-title">
         <header className="flex items-start justify-between gap-4 border-b border-outline-variant/40 p-5"><div><h2 id="assignment-dialog-title" className="text-xl font-bold text-primary">{editing ? 'Edit assignment' : 'Create assignment'}</h2><p className="mt-1 text-xs text-on-surface-variant">Publish only when the specification and deadline are ready.</p></div><button type="button" className="icon-button" aria-label="Close dialog" onClick={() => setDialogOpen(false)}><span className="material-symbols-outlined">close</span></button></header>
