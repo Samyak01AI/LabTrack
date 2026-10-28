@@ -51,3 +51,19 @@
 | I7-RULE-001 | Platform Safeguards | Code audit of analytics engine and reports UI | No AI code detection claims, similarity is review flag only | Zero AI probability metrics, labels clearly indicate 'AI Disclosed' / 'Clean AST' | PASS |
 | I7-BUILD-001 | React/Vite web build (`npm run web:build`) | Production asset build including history and reports pages | Clean production asset bundle | 53 modules transformed in 1.00s with zero errors | PASS |
 | I7-REGRESS-001 | Full Test Suite (`npm test`) | 6 test suites across iterations 0 through 7 | All regression tests pass without errors | 45 passed, 0 failed, 0 skipped in 294ms | PASS |
+
+## Iteration 8 — Optional Declared AI Assistance (v0.9.0)
+
+| Test ID | Module | Input | Expected Output | Actual Output | Status |
+| --- | --- | --- | --- | --- | --- |
+| I8-GUARD-001 | AI Service (`service.js`) | Prompts asking "write the code", "give me the solution", "solve it for me" | `isAskingForFullSolution` returns true; Socratic redirection returned | Correctly identifies solution requests and refuses to generate code | PASS |
+| I8-GUARD-002 | AI Service (`service.js`) | Prompts asking for invariant guidance or edge case reasoning | `isAskingForFullSolution` returns false; Socratic conceptual guidance returned | Permitted queries processed and return invariant tips | PASS |
+| I8-MODES-001 | AI Service (`service.js`) | Queries for 'hint', 'debug', and 'complexity' modes | Structured assistance addressing invariants, boundary checks, and asymptotic bounds | All 3 modes return focused pedagogical text without runnable functions | PASS |
+| I8-SANI-001 | AI Service (`service.js`) | Multi-line code block (>4 lines) within assistant output | Output sanitizer redacts detailed code and includes independent authoring note | Multi-line code block stripped; independent authoring note inserted | PASS |
+| I8-MOCK-001 | AI Service (`service.js`) | Offline mock provider query with no API key | Deterministic, instantaneous pedagogical advice without external network dependency | Query round-trip succeeded with 50+ chars advice and tokens count | PASS |
+| I8-RATE-001 | AI Routes (`routes.js`) | 5 queries in past hour by same student on assignment | 6th query blocked with HTTP 429 and hourly limit message | Enforces 5 queries/hour limit; below limit queries allowed | PASS |
+| I8-ATTR-001 | AI Service & Web Client | Query completion payload | Formatted attribution entry for Step 2 AI Declaration | Attribution object generated with tool name, mode, timestamp, and query summary | PASS |
+| I8-DB-001 | Migration 007 (`007_ai_assistance_logs.sql`) | DDL syntax and schema verification | Table `ai_assistance_logs`, foreign keys, mode check constraint, rate limit index | All constraints, types, and indexes verified | PASS |
+| I8-FLAG-001 | API Config & Hard Rules | `ENABLE_AI_ASSISTANCE` defaults to false | HTTP 503 returned when disabled; zero AI detection claims | Feature flag defaults to false; 503 returned when disabled | PASS |
+| I8-BUILD-001 | React/Vite web build (`npm run web:build`) | Production asset build including Socratic Assistant tab and audit logs | Clean asset bundle | 53 modules transformed in 1.05s with zero errors | PASS |
+| I8-REGRESS-001 | Full Test Suite (`npm test`) | 7 test suites across iterations 0 through 8 | All regression tests pass without errors | 54 passed, 0 failed, 0 skipped in 326ms | PASS |

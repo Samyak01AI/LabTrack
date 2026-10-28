@@ -185,3 +185,20 @@
 4. **Strict RBAC & Privacy Isolation:** Students can only access and export their own submission history. Instructors can only access and export cohort reports for assignments they authored.
 
 **Consequence:** Students maintain complete visibility into their algorithmic journey and grading status. Faculty and department administrators gain statistical insights, histogram distributions, and exportable ledgers for moderation without compromising academic data privacy.
+
+## D-025 — Optional Declared AI Assistance & Pedagogical Guardrails (Iteration 8)
+
+**Context:** While third-party AI tools are widely accessible, unguided usage often leads to students copying complete solutions without understanding underlying invariants. Course instructors require an optional, pedagogical in-platform assistant that scaffolds student thinking without giving away code, while automatically enforcing 100% attribution.
+
+**Decision:**
+1. **Strict Feature Flagging & Safe Defaults:** In-platform generative AI assistance is controlled by `ENABLE_AI_ASSISTANCE` (default `false`). When disabled, all AI assistance routes return HTTP 503 and UI components indicate that assistance is policy-disabled.
+2. **Pedagogical Socratic Guardrails:** System prompts and intent classifiers strictly prohibit generating complete solutions or functions. If a student asks "write the code" or "solve it for me", the assistant politely refuses and redirects to Socratic questions about invariants and base cases.
+3. **Structured Assistance Modes:** The assistant operates in three focused modes:
+   - *Conceptual Hint (`hint`):* Guides invariant discovery and lookup data structure choices.
+   - *Debugging Guide (`debug`):* Analyzes edge-case boundary checks and termination convergence.
+   - *Complexity Explainer (`complexity`):* Explains asymptotic time/space bounds and recurrence relations.
+4. **Output Code Redaction:** Responses containing code blocks longer than 4 lines are automatically sanitized and replaced with conceptual outlines to enforce independent authoring.
+5. **Automatic Attribution & Audit Logging:** All interactions are stored in `ai_assistance_logs` (Migration 007). In the student's workspace, inquiries automatically populate the Step 2 AI Declaration tools and usage narrative. Instructors can inspect exact student inquiries in the Marking Workbench.
+6. **Hourly Rate Limiting:** Enforce a maximum of 5 queries per hour per student per assignment to prevent over-reliance.
+
+**Consequence:** Students receive targeted academic guidance when stuck without violating academic integrity. Faculty gain complete transparency into in-platform AI interactions, eliminating hidden AI assistance.

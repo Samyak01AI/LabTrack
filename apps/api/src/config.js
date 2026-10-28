@@ -15,6 +15,12 @@ const envSchema = z.object({
   LOGIN_RATE_LIMIT_MAX: z.coerce.number().int().min(1).default(10),
   JUDGE0_API_URL: z.string().default(''),
   JUDGE0_API_KEY: z.string().default(''),
+  ENABLE_AI_ASSISTANCE: z.enum(['true', 'false']).default('false'),
+  LLM_PROVIDER: z.enum(['mock', 'gemini', 'openai']).default('mock'),
+  LLM_API_KEY: z.string().default(''),
+  LLM_MODEL: z.string().default('gemini-1.5-flash'),
+  LLM_BASE_URL: z.string().default(''),
+  AI_RATE_LIMIT_HOURLY_MAX: z.coerce.number().int().min(1).default(5),
 });
 
 export function loadConfig(env = process.env) {
@@ -43,5 +49,11 @@ export function loadConfig(env = process.env) {
     loginRateLimitMax: value.LOGIN_RATE_LIMIT_MAX,
     judge0ApiUrl: value.JUDGE0_API_URL || '',
     judge0ApiKey: value.JUDGE0_API_KEY || '',
+    enableAiAssistance: value.ENABLE_AI_ASSISTANCE === 'true',
+    llmProvider: value.LLM_PROVIDER,
+    llmApiKey: value.LLM_API_KEY,
+    llmModel: value.LLM_MODEL,
+    llmBaseUrl: value.LLM_BASE_URL,
+    aiRateLimitHourlyMax: value.AI_RATE_LIMIT_HOURLY_MAX,
   });
 }

@@ -1,6 +1,6 @@
 # LabTrack ToDo
 
-Iterations 0–7 are implemented. All database migrations up to 006 (users, assignments, submissions, declarations, similarity reviews, and grades) are defined and validated. Iterations 8–9 remain for optional declared AI assistance and release hardening.
+Iterations 0–8 are implemented. All database migrations up to 007 (users, assignments, submissions, declarations, similarity reviews, grades, and AI assistance audit logs) are defined and validated. Iteration 9 remains for final release hardening.
 
 ## Iteration 0 — vanilla faculty register (COMPLETE)
 
@@ -80,10 +80,15 @@ Iterations 0–7 are implemented. All database migrations up to 006 (users, assi
 - [x] Implement RFC 4180 CSV export with Excel UTF-8 BOM.
 - [x] Implement printable departmental moderation layout with faculty sign-off blocks.
 
-## Iteration 8 — optional declared AI assistance
+## Iteration 8 — optional declared AI assistance (COMPLETE)
 
-- [ ] Implement optional declared AI assistance behind a backend-only feature flag that is off by default.
-- [ ] Log any assistance against the AI-use declaration.
+- [x] Implement optional declared AI assistance behind a backend-only feature flag (`ENABLE_AI_ASSISTANCE`) that is off by default.
+- [x] Socratic pedagogical guardrails strictly prohibiting full code solution generation.
+- [x] Support 3 pedagogical assistance modes: Conceptual Hint, Debugging Guide, and Complexity Analysis.
+- [x] Automatically log and attribute in-platform AI interactions against the Step 2 AI-use declaration.
+- [x] Enforce hourly rate limiting (5 queries per hour per student per assignment).
+- [x] Define database migration 007 for `ai_assistance_logs`.
+- [x] Expose in-platform AI interaction audit transcripts to teachers in the Marking Workbench.
 
 ## Iteration 9 — release hardening
 

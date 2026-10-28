@@ -148,23 +148,48 @@ Implement student submission history and teacher cohort performance analytics wi
 
 ---
 
-## Iteration 8 — Optional Declared AI Assistance (UPCOMING — v0.9.0)
+## Iteration 8 — Optional Declared AI Assistance (COMPLETE — v0.9.0)
 
 ### Goal
 Implement optional, backend-only generative AI assistance behind a strict feature flag (disabled by default) that automatically logs all tool interactions into the student's AI-use declaration.
 
-### Requirements to Cover
-- **FR-801 (Strict Feature Flagging & Safe Defaults):** Generative AI assistance is controlled by `ENABLE_AI_ASSISTANCE=false` by default. When disabled, all AI assistance UI components are hidden and endpoints return HTTP 503 Service Unavailable with a clear message.
-- **FR-802 (Scaffolded AI Assistance Modes):** When enabled, provides structured, pedagogical assistance modes (never entire code dumps):
+### Requirements Covered
+- **FR-801 (Strict Feature Flagging & Safe Defaults):** Generative AI assistance is controlled by `ENABLE_AI_ASSISTANCE=false` by default. When disabled, all AI assistance UI components are policy-disabled and endpoints return HTTP 503 Service Unavailable with a clear message. Implemented in `apps/api/src/config.js` and `apps/api/src/ai/routes.js`.
+- **FR-802 (Scaffolded AI Assistance Modes):** Structured, pedagogical assistance modes (never entire code dumps):
   - *Conceptual Hint / Socratic Guidance:* Explains underlying algorithmic pattern without giving code.
   - *Debugging Assistant:* Analyzes compiler error output or failed test case and points to the conceptual error.
   - *Complexity Explainer:* Helps analyze theoretical time/space recurrence relations.
-- **FR-803 (Automatic Attribution & Audit Logging):** Every interaction with the in-platform AI assistant automatically appends to the student's AI-use declaration (recording timestamp, prompt type, and assist summary).
-- **FR-804 (Rate Limiting & Token Budgeting):** Per-student, per-assignment query limits (e.g., maximum 5 queries per hour) to promote independent struggle.
-- **NFR-801 (Zero Host Execution & Key Security):** LLM API keys loaded strictly via server-side environment variables (`LLM_API_KEY`). No secrets in frontend or git commits.
-- **NFR-802 (Pedagogical Safeguards):** AI system prompts strictly instruct the model to act as a university computer science teaching assistant that guides thinking rather than writing complete solutions.
+  Implemented in `apps/api/src/ai/service.js`.
+- **FR-803 (Automatic Attribution & Audit Logging):** Every interaction with the in-platform AI assistant automatically appends to the student's AI-use declaration (recording timestamp, prompt type, and assist summary) and stores an audit record in `ai_assistance_logs`. Implemented in `apps/api/src/ai/repository.js` and `apps/web/src/pages/CodeWorkspacePage.jsx`.
+- **FR-804 (Rate Limiting & Token Budgeting):** Per-student, per-assignment query limits (default 5 queries per hour) enforced server-side with HTTP 429 to promote independent struggle.
+- **FR-805 (Teacher Visibility into In-Platform Logs):** Instructors inspecting submissions in `TeacherMarkingPage.jsx` can view the student's exact in-platform AI assistance queries and responses.
+- **NFR-801 (Zero Host Execution & Key Security):** LLM API keys loaded strictly via server-side environment variables (`LLM_API_KEY`). No secrets in frontend or git commits. Offline mock simulator guarantees full testability without external network calls.
+- **NFR-802 (Pedagogical Safeguards):** AI system prompts strictly instruct the model to act as a university computer science teaching assistant that guides thinking rather than writing complete solutions. Output sanitizer strips code blocks longer than 4 lines.
 
-### Acceptance Criteria
-- Feature flag disabled by default; API blocks requests when off.
-- Prompts are restricted to pedagological guidance; responses are logged in audit ledger.
-- Full round-trip updates declaration stepper automatically.
+### Acceptance Tests
+- **AT-801 (Pedagogical Guardrails & Solution Refusal):** Detects prompts asking to "write code" and redirects to Socratic inquiry. [PASSED]
+- **AT-802 (Scaffolded Assistance Modes):** Verifies hint, debug, and complexity outputs without full runnable solutions. [PASSED]
+- **AT-803 (Output Sanitizer):** Long code blocks (>4 lines) are redacted to prevent spoonfeeding. [PASSED]
+- **AT-804 (Offline Determinism):** Mock provider handles query round-trip with zero network dependence. [PASSED]
+- **AT-805 (Hourly Rate Limiting):** Blocks requests exceeding 5 queries/hour per student per assignment. [PASSED]
+- **AT-806 (Automatic Attribution):** Queries auto-populate tool name and summary in Step 2 declaration. [PASSED]
+- **AT-807 (Database Migration 007):** Schema defines `ai_assistance_logs` with foreign keys and check constraints. [PASSED]
+- **AT-808 (Hard Rule Safeguards):** Safe defaults (`ENABLE_AI_ASSISTANCE=false`), HTTP 503 on disabled, zero AI detection claims. [PASSED]
+
+### Assumptions
+- AI assistance is off by default. When enabled, rate limits apply per student per assignment per hour.
+- Student code and prompts are processed strictly in-memory or logged in local MySQL; no student identifiable info is forwarded to public model training.
+
+---
+
+## Iteration 9 — Release Hardening, Performance Profiling & Documentation (UPCOMING — v1.0.0)
+
+### Goal
+Execute end-to-end auditability, performance profiling, responsive cross-device verification, documentation consolidation, and final release tagging for LabTrack v1.0.0.
+
+### Requirements to Cover
+- **FR-901 (Full Workflow Integration Smoke Tests):** End-to-end verification covering complete assignment lifecycle: Authoring → Student Sandbox Run → Stepper Declarations → AST Similarity Check → Rubric Evaluation → Ledger Reporting.
+- **FR-902 (Database Index Optimization & Security Audit):** Verification of foreign keys, cascade integrity, index usage, and prepared statement safety across all migrations 001–007.
+- **FR-903 (Mobile & Responsive Verification):** Complete viewport verification across 390px mobile, tablet, and 1440px desktop layouts.
+- **NFR-901 (Non-Negotiable Policy Audit):** Verification of zero AI-detection claims, teacher finalization of marks, sandbox host isolation, and zero secrets in repository.
+- **NFR-902 (Performance & Bundle Budget):** Production build bundle verification and API endpoint latency bounds under load.

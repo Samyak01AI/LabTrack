@@ -30,6 +30,7 @@ export default function TeacherMarkingPage() {
   const [isSaving, setIsSaving] = useState(false);
   const [reopenModalOpen, setReopenModalOpen] = useState(false);
   const [reopenReason, setReopenReason] = useState('');
+  const [studentAiLogs, setStudentAiLogs] = useState([]);
 
   // Queue filter
   const [queueFilter, setQueueFilter] = useState('all'); // 'all', 'pending', 'provisional', 'finalised'
@@ -73,6 +74,15 @@ export default function TeacherMarkingPage() {
             transparency: g.transparencyScore ?? g.rubricBreakdown?.transparency?.score ?? 0,
           });
           setFeedback(res.grade?.feedback || '');
+        }
+
+        // Fetch student's in-platform AI logs if available
+        if (res.submission?.assignmentId && res.submission?.studentId) {
+          api(`/api/teacher/assignments/${res.submission.assignmentId}/students/${res.submission.studentId}/ai-logs`)
+            .then((aiRes) => setStudentAiLogs(aiRes.logs || []))
+            .catch(() => setStudentAiLogs([]));
+        } else {
+          setStudentAiLogs([]);
         }
       })
       .catch((err) => {
@@ -568,6 +578,35 @@ export default function TeacherMarkingPage() {
                             {submission.aiDeclaration.narrative || 'No additional narrative provided.'}
                           </p>
                         </div>
+
+                        {studentAiLogs.length > 0 && (
+                          <div className="p-3 rounded-lg border border-secondary/30 bg-surface-container-low flex flex-col gap-2">
+                            <div className="flex items-center justify-between">
+                              <span className="font-bold text-primary flex items-center gap-1.5">
+                                <span className="material-symbols-outlined text-secondary text-sm">psychology</span>
+                                <span>In-Platform AI Assistant Inquiries ({studentAiLogs.length} logged)</span>
+                              </span>
+                              <span className="px-2 py-0.5 rounded-full bg-secondary text-white text-[10px] font-bold">
+                                Verified Audit Log
+                              </span>
+                            </div>
+                            <div className="flex flex-col gap-2 max-h-48 overflow-y-auto">
+                              {studentAiLogs.map((log) => (
+                                <div key={log.id} className="p-2.5 rounded-lg bg-white text-xs border border-outline-variant/30 flex flex-col gap-1">
+                                  <div className="flex items-center justify-between text-[11px] font-bold text-primary">
+                                    <span className="uppercase text-secondary font-mono">[{log.mode}] Query: "{log.prompt}"</span>
+                                    <span className="font-mono text-[10px] text-on-surface-variant">
+                                      {new Date(log.createdAt).toLocaleTimeString()}
+                                    </span>
+                                  </div>
+                                  <p className="text-[11px] text-on-surface leading-relaxed whitespace-pre-wrap pt-0.5">
+                                    {log.response?.slice(0, 200)}...
+                                  </p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </div>
                     )}
                   </div>

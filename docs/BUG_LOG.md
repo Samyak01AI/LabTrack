@@ -65,3 +65,7 @@ No open High/Critical issues found or introduced during Iteration 6. Rubric scor
 | I7-CSV-001 | Microsoft Excel garbled non-ASCII UTF-8 characters on CSV open | Low | Standard UTF-8 CSV exports lack byte order mark, causing Excel on Windows to interpret text using legacy system code pages. | Prepended UTF-8 BOM (`\uFEFF`) to CSV exports in `generateCohortCsv`. | Closed | 2026-10-28 |
 
 No open High/Critical issues remain in Iteration 7. All 45 regression and reporting tests pass cleanly.
+
+## Iteration 8 issues — 2026-10-28
+
+No open High/Critical issues found or introduced during Iteration 8. Socratic pedagogical guardrails, feature flag defaults (disabled by default with HTTP 503), hourly rate limiting, output code sanitizer, and automatic Step 2 attribution verified cleanly across 54 automated regression tests.

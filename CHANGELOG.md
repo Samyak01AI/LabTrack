@@ -2,6 +2,45 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v0.9.0] — 2026-10-28
+
+### Added
+- **Pedagogical Generative AI Service** (`apps/api/src/ai/service.js`):
+  - Socratic guidance engine providing structured assistance across 3 modes: Conceptual Hints (`hint`), Debugging Guides (`debug`), and Asymptotic Complexity Analysis (`complexity`).
+  - Strict solution refusal guardrail (`isAskingForFullSolution`) that detects requests to write code or complete solutions and redirects to invariant inquiry.
+  - Output code sanitizer (`sanitizePedagogicalOutput`) that redacts code blocks longer than 4 lines to preserve independent problem-solving.
+  - Safe, deterministic offline mock simulator allowing offline local execution and test suite runs without external network dependencies.
+  - Google Gemini API provider adapter with structured system prompts and temperature controls when `LLM_API_KEY` is provided.
+- **Database Schema Migration 007** (`db/migrations/007_ai_assistance_logs.sql`):
+  - Created `ai_assistance_logs` table with columns for `id`, `assignment_id`, `student_id`, `mode`, `prompt`, `response`, `code_snippet`, `tokens_used`, and `created_at`.
+  - Added CHECK constraint restricting modes to `'hint'`, `'debug'`, and `'complexity'`.
+  - Added composite index `idx_ai_logs_rate_limit` on `(student_id, assignment_id, created_at)` for sub-millisecond rate limit lookups.
+- **AI Audit & Rate Limiting Repository** (`apps/api/src/ai/repository.js`):
+  - `logInteraction()`: Persists student queries and pedagogical responses.
+  - `getRecentHourlyCount()`: Computes student queries in the trailing 1-hour window.
+  - `getStudentLogs()`: Returns interaction history for student workspace.
+  - `getTeacherAuditLogs()`: Exposes full interaction transcripts for instructor evaluation.
+- **AI Assistance API Endpoints** (`apps/api/src/ai/routes.js`):
+  - Student: `GET /api/student/assignments/:id/ai-status` (feature flag and hourly limit status), `GET /api/student/assignments/:id/ai-logs` (previous queries), and `POST /api/student/assignments/:id/ai-assist` (query pedagogical assistant with rate limit check).
+  - Teacher: `GET /api/teacher/assignments/:assignmentId/students/:studentId/ai-logs` (inspected student transcript) with strict assignment ownership verification.
+  - Strict feature flag enforcement: returns HTTP 503 when `ENABLE_AI_ASSISTANCE` is false; returns HTTP 429 when hourly query limit (default 5/hr) is exceeded.
+- **Workspace Socratic Assistant UI** (`apps/web/src/pages/CodeWorkspacePage.jsx`):
+  - Added `AI Socratic Assistant` workbench tab with mode selector (`Conceptual Hint`, `Debugging Guide`, `Complexity Analysis`), queries remaining counter, conversation transcript viewer, quick suggestion chips, and query input bar.
+  - Policy disabled banner when feature flag is off.
+  - Automatic attribution: each assistant inquiry automatically sets `aiDeclaration.aiUsed = true`, appends `'LabTrack In-Platform AI Assistant'` to declared tools, and appends the query summary to usage narrative.
+  - Step 2 in-platform inquiries audit card reviewing logged questions.
+- **Teacher Marking In-Platform AI Audit View** (`apps/web/src/pages/TeacherMarkingPage.jsx`):
+  - Added `In-Platform AI Assistant Inquiries` audit card in the AI Disclosure inspection tab displaying verified student query transcripts, modes, and timestamps.
+- **Iteration 8 Automated Test Suite** (`tests/iteration-8-ai-assistance.test.mjs`):
+  - 9 comprehensive unit tests covering solution refusal detection, Socratic mode outputs, code redaction, mock query round-trips, hourly rate limiting, auto-attribution formatting, migration 007 DDL, and hard rule compliance.
+- **Architecture Decision D-025** (`docs/DECISIONS.md`): Formally documented the Optional Declared AI Assistance & Pedagogical Guardrails architecture.
+
+### Changed
+- `apps/api/src/config.js` and `.env.example`: Added configuration variables for `ENABLE_AI_ASSISTANCE`, `LLM_PROVIDER`, `LLM_API_KEY`, `LLM_MODEL`, and `AI_RATE_LIMIT_HOURLY_MAX`.
+- `apps/api/src/app.js`: Mounted `createStudentAiRouter` and `createTeacherAiRouter`.
+- `package.json`: Version bumped to v0.9.0.
+
+
 ## [v0.8.0] — 2026-10-28
 
 ### Added

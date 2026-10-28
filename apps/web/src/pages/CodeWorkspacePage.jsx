@@ -40,6 +40,7 @@ public class Main {
 };
 
 const AVAILABLE_AI_TOOLS = [
+  'LabTrack In-Platform AI Assistant',
   'GitHub Copilot',
   'ChatGPT-4o',
   'Claude 3.5 Sonnet',
@@ -119,6 +120,19 @@ export default function CodeWorkspacePage() {
   const [sessionSeconds, setSessionSeconds] = useState(70);
   const [bannerNotice, setBannerNotice] = useState('');
 
+  // Iteration 8: Pedagogical AI Assistant state
+  const [aiStatus, setAiStatus] = useState({
+    enabled: false,
+    remainingQueries: 5,
+    hourlyLimit: 5,
+    usedInLastHour: 0,
+    reason: '',
+  });
+  const [aiMode, setAiMode] = useState('hint'); // 'hint' | 'debug' | 'complexity'
+  const [aiPrompt, setAiPrompt] = useState('');
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiHistory, setAiHistory] = useState([]);
+
   const textareaRef = useRef(null);
   const currentCode = codeBuffers[selectedLanguage] || '';
 
@@ -187,6 +201,19 @@ export default function CodeWorkspacePage() {
             timeMs: 0,
             memoryKb: 0,
           })));
+        }
+        // Fetch AI Assistance Status & Prior Logs (Iteration 8)
+        try {
+          const [statusRes, logsRes] = await Promise.all([
+            api(`/api/student/assignments/${id}/ai-status`),
+            api(`/api/student/assignments/${id}/ai-logs`),
+          ]);
+          if (active) {
+            setAiStatus(statusRes);
+            if (logsRes?.logs) setAiHistory(logsRes.logs);
+          }
+        } catch (_ignoreAi) {
+          // AI assistance endpoint may be unconfigured or disabled
         }
       } catch (err) {
         if (active) setError(err.status === 404 ? 'This assignment is not available to your account.' : err.message);
@@ -368,6 +395,67 @@ export default function CodeWorkspacePage() {
     } finally {
       setIsRunning(false);
       setTimeout(() => setBannerNotice(''), 4000);
+    }
+  }
+
+  // Iteration 8: Request Socratic AI Assistant guidance
+  async function handleAskAssistant() {
+    if (!aiPrompt.trim()) return;
+    if (aiPrompt.trim().length < 3) {
+      alert('Please ask a question with at least 3 characters.');
+      return;
+    }
+    setAiLoading(true);
+    try {
+      const res = await api(`/api/student/assignments/${id}/ai-assist`, {
+        method: 'POST',
+        body: {
+          mode: aiMode,
+          prompt: aiPrompt.trim(),
+          sourceCode: currentCode,
+          language: selectedLanguage,
+        },
+      });
+
+      const newEntry = {
+        id: res.attribution?.id || String(Date.now()),
+        mode: aiMode,
+        prompt: aiPrompt.trim(),
+        response: res.response,
+        createdAt: new Date().toISOString(),
+      };
+
+      setAiHistory((prev) => [...prev, newEntry]);
+      setAiPrompt('');
+      if (res.remainingQueries != null) {
+        setAiStatus((prev) => ({ ...prev, remainingQueries: res.remainingQueries }));
+      }
+
+      // Automatically attribute in Step 2 AI Declaration
+      setAiDeclaration((prev) => {
+        const tools = prev.tools.includes('LabTrack In-Platform AI Assistant')
+          ? prev.tools
+          : ['LabTrack In-Platform AI Assistant', ...prev.tools];
+        const narrativeAddition = `[${aiMode.toUpperCase()}]: ${newEntry.prompt.slice(0, 60)}...`;
+        const updatedNarrative = prev.narrative
+          ? `${prev.narrative}\n• ${narrativeAddition}`
+          : `• ${narrativeAddition}`;
+        const updated = {
+          ...prev,
+          aiUsed: true,
+          tools,
+          narrative: updatedNarrative,
+        };
+        persistLocal({ aiDeclaration: updated });
+        return updated;
+      });
+
+      setBannerNotice('Inquiry logged and automatically attributed to Step 2 AI declaration.');
+      setTimeout(() => setBannerNotice(''), 4500);
+    } catch (err) {
+      alert(`AI Assistant notice: ${err.message}`);
+    } finally {
+      setAiLoading(false);
     }
   }
 
@@ -894,6 +982,28 @@ export default function CodeWorkspacePage() {
                     <span>Console &amp; Compiler</span>
                     {compilerOutput && <span className="w-2 h-2 rounded-full bg-secondary" />}
                   </button>
+
+                  <button
+                    type="button"
+                    className={`flex items-center gap-2 px-3 py-2 rounded-t-lg text-xs font-medium transition-colors ${
+                      activeTab === 'assistant'
+                        ? 'bg-surface-container-lowest text-primary shadow-sm'
+                        : 'text-on-surface-variant hover:bg-surface-container'
+                    }`}
+                    onClick={() => setActiveTab('assistant')}
+                  >
+                    <span className="material-symbols-outlined text-base text-secondary">psychology</span>
+                    <span>AI Socratic Assistant</span>
+                    {aiStatus.enabled ? (
+                      <span className="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-bold">
+                        {aiStatus.remainingQueries}/{aiStatus.hourlyLimit} Left
+                      </span>
+                    ) : (
+                      <span className="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant text-[10px]">
+                        Policy Disabled
+                      </span>
+                    )}
+                  </button>
                 </div>
 
                 <div className="hidden sm:flex items-center gap-3 text-on-surface-variant text-xs pb-1">
@@ -1006,6 +1116,197 @@ export default function CodeWorkspacePage() {
                   <pre className="bg-[#0b121e] p-4 rounded-lg font-mono text-xs leading-relaxed overflow-x-auto text-slate-300 min-h-[140px] whitespace-pre-wrap">
                     {compilerOutput || 'No compiler warnings or execution logs yet. Run code to view output.'}
                   </pre>
+                </div>
+              )}
+
+              {/* Iteration 8: Pedagogical AI Socratic Assistant Tab */}
+              {activeTab === 'assistant' && (
+                <div className="p-4 flex flex-col gap-4 bg-surface-container-lowest">
+                  {!aiStatus.enabled ? (
+                    <div className="p-6 rounded-xl bg-surface-container-low border border-outline-variant/30 flex flex-col items-center text-center max-w-xl mx-auto my-4">
+                      <div className="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-secondary mb-3">
+                        <span className="material-symbols-outlined text-2xl">policy</span>
+                      </div>
+                      <h3 className="text-base font-bold text-primary">In-Platform AI Assistance Disabled</h3>
+                      <p className="text-xs text-on-surface-variant leading-relaxed mt-1.5">
+                        In accordance with academic policies for this course, generative AI assistance is disabled by default for this assignment. Students are expected to formulate algorithmic invariants independently.
+                      </p>
+                      <div className="mt-4 px-3 py-1.5 rounded-lg bg-surface-container text-xs text-on-surface-variant font-mono">
+                        Course Policy Setting: ENABLE_AI_ASSISTANCE = false
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col gap-4">
+                      {/* Top Assistant Control Bar */}
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-xl bg-surface-container-low border border-outline-variant/30">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-bold text-primary uppercase tracking-wider">Mode:</span>
+                          <div className="flex items-center gap-1.5 flex-wrap">
+                            <button
+                              type="button"
+                              onClick={() => setAiMode('hint')}
+                              className={`px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1 transition-all ${
+                                aiMode === 'hint'
+                                  ? 'bg-secondary text-white shadow-sm'
+                                  : 'bg-surface-container hover:bg-surface-container-high text-on-surface'
+                              }`}
+                            >
+                              <span className="material-symbols-outlined text-[15px]">lightbulb</span>
+                              <span>Conceptual Hint</span>
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => setAiMode('debug')}
+                              className={`px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1 transition-all ${
+                                aiMode === 'debug'
+                                  ? 'bg-secondary text-white shadow-sm'
+                                  : 'bg-surface-container hover:bg-surface-container-high text-on-surface'
+                              }`}
+                            >
+                              <span className="material-symbols-outlined text-[15px]">bug_report</span>
+                              <span>Debugging Guide</span>
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => setAiMode('complexity')}
+                              className={`px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1 transition-all ${
+                                aiMode === 'complexity'
+                                  ? 'bg-secondary text-white shadow-sm'
+                                  : 'bg-surface-container hover:bg-surface-container-high text-on-surface'
+                              }`}
+                            >
+                              <span className="material-symbols-outlined text-[15px]">speed</span>
+                              <span>Complexity Analysis</span>
+                            </button>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2 text-xs font-mono text-on-surface-variant">
+                          <span className="w-2 h-2 rounded-full bg-secondary"></span>
+                          <span>Queries: <strong>{aiStatus.remainingQueries}</strong> of {aiStatus.hourlyLimit} / hr</span>
+                        </div>
+                      </div>
+
+                      {/* Conversation History / Log Viewport */}
+                      <div className="flex flex-col gap-3 max-h-[360px] overflow-y-auto pr-1">
+                        {aiHistory.length === 0 ? (
+                          <div className="p-8 text-center rounded-xl bg-surface-container-low border border-dashed border-outline-variant/40 flex flex-col items-center">
+                            <span className="material-symbols-outlined text-secondary text-3xl mb-1">psychology</span>
+                            <p className="text-xs font-bold text-primary">Socratic Guidance Active</p>
+                            <p className="text-xs text-on-surface-variant max-w-md mt-1">
+                              Ask for algorithmic invariant hints, debugging edge-case pointers, or complexity recurrence relations. The Socratic TA guides your thinking and never outputs complete code.
+                            </p>
+                            <div className="mt-4 flex flex-wrap gap-2 justify-center">
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setAiMode('hint');
+                                  setAiPrompt('What invariant should I maintain across my main traversal loop?');
+                                }}
+                                className="px-2.5 py-1 rounded-full bg-surface-container text-secondary text-xs hover:bg-surface-container-high font-medium"
+                              >
+                                "Invariant hint"
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setAiMode('debug');
+                                  setAiPrompt('How should I check boundary edge cases on empty or single-element inputs?');
+                                }}
+                                className="px-2.5 py-1 rounded-full bg-surface-container text-secondary text-xs hover:bg-surface-container-high font-medium"
+                              >
+                                "Edge cases check"
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setAiMode('complexity');
+                                  setAiPrompt('Can you analyze the time and space complexity of my approach?');
+                                }}
+                                className="px-2.5 py-1 rounded-full bg-surface-container text-secondary text-xs hover:bg-surface-container-high font-medium"
+                              >
+                                "Complexity analysis"
+                              </button>
+                            </div>
+                          </div>
+                        ) : (
+                          aiHistory.map((item, idx) => (
+                            <div key={item.id || idx} className="flex flex-col gap-2 p-3 rounded-xl bg-surface-container-low border border-outline-variant/30 text-xs">
+                              <div className="flex items-center justify-between pb-1.5 border-b border-outline-variant/20">
+                                <div className="flex items-center gap-2">
+                                  <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-secondary text-white">
+                                    {item.mode || 'hint'}
+                                  </span>
+                                  <span className="font-semibold text-primary">Question: "{item.prompt}"</span>
+                                </div>
+                                <span className="font-mono text-[10px] text-on-surface-variant">
+                                  {new Date(item.createdAt).toLocaleTimeString()}
+                                </span>
+                              </div>
+                              <div className="text-on-surface whitespace-pre-wrap leading-relaxed pt-1">
+                                {item.response}
+                              </div>
+                              <div className="pt-1.5 border-t border-outline-variant/20 flex items-center justify-between text-[10px] text-on-surface-variant font-mono">
+                                <span className="flex items-center gap-1 text-secondary">
+                                  <span className="material-symbols-outlined text-[13px]">verified</span>
+                                  <span>Attributed in Step 2 AI Declaration</span>
+                                </span>
+                                <span>Audit ID: {item.id?.slice(0, 8)}</span>
+                              </div>
+                            </div>
+                          ))
+                        )}
+                      </div>
+
+                      {/* Prompt Input & Send Console */}
+                      <div className="flex flex-col gap-2 pt-2 border-t border-outline-variant/30">
+                        <div className="flex gap-2">
+                          <input
+                            type="text"
+                            value={aiPrompt}
+                            onChange={(e) => setAiPrompt(e.target.value)}
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter' && !e.shiftKey && !aiLoading && aiPrompt.trim()) {
+                                e.preventDefault();
+                                handleAskAssistant();
+                              }
+                            }}
+                            placeholder={
+                              aiMode === 'hint'
+                                ? 'Ask a Socratic question (e.g., What invariant governs two pointers here?)...'
+                                : aiMode === 'debug'
+                                ? 'Ask about a bug or test failure (e.g., Why might my fast pointer segfault?)...'
+                                : 'Ask about asymptotic bounds (e.g., Is my space complexity strictly O(1)?)...'
+                            }
+                            className="flex-1 h-10 px-3.5 rounded-lg bg-surface-container text-xs text-on-surface placeholder:text-on-surface-variant/60 focus:ring-2 focus:ring-secondary outline-none"
+                            disabled={aiLoading || aiStatus.remainingQueries <= 0}
+                          />
+                          <button
+                            type="button"
+                            onClick={handleAskAssistant}
+                            disabled={aiLoading || !aiPrompt.trim() || aiStatus.remainingQueries <= 0}
+                            className="h-10 px-4 rounded-lg bg-secondary text-white text-xs font-bold hover:bg-secondary/90 disabled:opacity-50 transition-colors flex items-center gap-1.5 shrink-0 shadow-sm"
+                          >
+                            {aiLoading ? (
+                              <>
+                                <span className="material-symbols-outlined text-sm animate-spin">progress_activity</span>
+                                <span>Thinking…</span>
+                              </>
+                            ) : (
+                              <>
+                                <span className="material-symbols-outlined text-base">send</span>
+                                <span>Ask TA</span>
+                              </>
+                            )}
+                          </button>
+                        </div>
+                        <div className="flex items-center justify-between text-[11px] text-on-surface-variant">
+                          <span>Departmental Rule: All assistant inquiries are logged and attributed in Step 2.</span>
+                          <span className="font-mono">{aiStatus.remainingQueries} queries left</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -1129,6 +1430,36 @@ export default function CodeWorkspacePage() {
               {/* Conditional AI Assistance Details */}
               {aiDeclaration.aiUsed && (
                 <div className="flex flex-col gap-6 pt-2 border-t border-outline-variant/30">
+                  {/* In-Platform AI Inquiries Log Card (Iteration 8) */}
+                  {aiHistory.length > 0 && (
+                    <div className="p-4 rounded-xl bg-secondary-container/30 border border-secondary/20 flex flex-col gap-2">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2 text-primary font-bold text-xs">
+                          <span className="material-symbols-outlined text-secondary text-base">verified</span>
+                          <span>In-Platform AI Assistant Inquiries ({aiHistory.length} Recorded)</span>
+                        </div>
+                        <span className="px-2 py-0.5 rounded-full bg-secondary text-white font-mono text-[10px] font-bold">
+                          Auto-Attributed
+                        </span>
+                      </div>
+                      <p className="text-xs text-on-surface-variant">
+                        Your inquiries with the Socratic AI Assistant have been automatically logged to verify adherence to constructive disclosure policies.
+                      </p>
+                      <div className="mt-1 flex flex-col gap-1.5 max-h-40 overflow-y-auto">
+                        {aiHistory.map((h, i) => (
+                          <div key={h.id || i} className="p-2 rounded bg-white text-xs border border-outline-variant/20 flex items-center justify-between">
+                            <span className="truncate max-w-[70%] font-mono text-[11px] text-primary">
+                              <strong>[{h.mode?.toUpperCase()}]</strong> {h.prompt}
+                            </span>
+                            <span className="text-[10px] text-on-surface-variant font-mono">
+                              {new Date(h.createdAt).toLocaleTimeString()}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {/* Tool Selection */}
                   <div className="flex flex-col gap-2">
                     <label className="text-xs font-bold text-on-surface flex items-center gap-1">

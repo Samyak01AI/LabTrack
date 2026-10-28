@@ -16,6 +16,8 @@ import { createGradeRepository } from './grading/repository.js';
 import { createTeacherGradingRouter, createStudentGradingRouter } from './grading/routes.js';
 import { createReportingRepository } from './reporting/repository.js';
 import { createStudentReportingRouter, createTeacherReportingRouter } from './reporting/routes.js';
+import { createAiRepository } from './ai/repository.js';
+import { createStudentAiRouter, createTeacherAiRouter } from './ai/routes.js';
 
 export function createApp({
   pool,
@@ -60,6 +62,7 @@ export function createApp({
   const similarity = createSimilarityRepository(pool);
   const grades = createGradeRepository(pool);
   const reporting = createReportingRepository(pool);
+  const aiRepo = createAiRepository(pool);
   const judge0 = createJudge0Adapter(config);
 
   app.use('/api/student/assignments', createStudentAssignmentsRouter({ users, config, assignments }));
@@ -67,6 +70,7 @@ export function createApp({
   app.use('/api/student', createStudentSubmissionsRouter({ users, config, assignments, submissions, judge0 }));
   app.use('/api/student', createStudentGradingRouter({ users, config, assignments, submissions, grades }));
   app.use('/api/student', createStudentReportingRouter({ users, config, reporting }));
+  app.use('/api/student', createStudentAiRouter({ users, config, assignments, aiRepo }));
 
   app.use('/api/teacher/assignments', createTeacherAssignmentsRouter({ users, config, assignments }));
   app.use('/api/teacher/assignments', createTeacherSubmissionsRouter({ users, config, assignments, submissions }));
@@ -74,6 +78,7 @@ export function createApp({
   app.use('/api/teacher', createTeacherSimilarityRouter({ users, config, assignments, submissions, similarity }));
   app.use('/api/teacher', createTeacherGradingRouter({ users, config, assignments, submissions, grades }));
   app.use('/api/teacher', createTeacherReportingRouter({ users, config, assignments, reporting }));
+  app.use('/api/teacher', createTeacherAiRouter({ users, config, assignments, aiRepo }));
 
   app.use('/api', createProfileRouter({ users, config }));
   app.use('/api', (_req, res) => res.status(404).json({ error: 'Route not found.' }));
