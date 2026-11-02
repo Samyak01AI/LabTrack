@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="LabTrack Playwright GUI Test Suite" verbose="1">
+    <listeners>
+        <listener class-name="com.labtrack.gui.TestFailureListener" />
+    </listeners>
+    <test name="GUI Tests">
+        <classes>
+            <class name="com.labtrack.gui.LoginUITest" />
+            <class name="com.labtrack.gui.RegistrationUITest" />
+            <class name="com.labtrack.gui.StudentDashboardTest" />
+            <class name="com.labtrack.gui.TeacherDashboardTest" />
+            <class name="com.labtrack.gui.AssignmentUITest" />
+            <class name="com.labtrack.gui.SubmissionUITest" />
+            <class name="com.labtrack.gui.GradingUITest" />
+        </classes>
+    </test>
+</suite>
+
