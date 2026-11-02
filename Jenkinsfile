@@ -48,6 +48,7 @@ pipeline {
 
         stage('Unit Tests and Code Coverage') {
             steps {
+                bat 'if exist reports\\*.xml del /q reports\\*.xml'
                 bat 'if not exist reports mkdir reports'
                 bat 'npm run test:coverage'
             }
