@@ -19,10 +19,14 @@
     "api:start": "npm --workspace @labtrack/api run start",
     "web:dev": "npm --workspace @labtrack/web run dev",
     "web:build": "npm --workspace @labtrack/web run build",
-    "serve:prototype": "python3 -m http.server 4173 --bind 0.0.0.0 --directory legacy-prototype/LabTrack"
+    "serve:prototype": "python3 -m http.server 4173 --bind 0.0.0.0 --directory legacy-prototype/LabTrack",
+    "test:coverage": "c8 --reporter=html --reporter=text-summary --reports-dir=coverage npm test"
   },
   "packageManager": "npm@10.9.2",
   "engines": {
     "node": ">=22.13.0"
+  },
+  "devDependencies": {
+    "c8": "^12.0.0"
   }
 }

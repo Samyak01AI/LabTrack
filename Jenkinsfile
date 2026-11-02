@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
 
@@ -8,20 +9,28 @@ pipeline {
     }
 
     tools {
-        // Configure this exact name in Manage Jenkins > Tools > NodeJS.
         nodejs 'NodeJS-22'
     }
 
     parameters {
-        booleanParam(name: 'RUN_API_TESTS', defaultValue: false,
-            description: 'Run MySQL integration tests using the isolated test database.')
-        booleanParam(name: 'RUN_BROWSER_TESTS', defaultValue: false,
-            description: 'Run Playwright tests after Python, Chromium and browser test servers are configured.')
+        booleanParam(
+            name: 'RUN_API_TESTS',
+            defaultValue: false,
+            description: 'Run MySQL integration tests using the isolated test database.'
+        )
+
+        booleanParam(
+            name: 'RUN_BROWSER_TESTS',
+            defaultValue: false,
+            description: 'Run Playwright tests after browser configuration.'
+        )
     }
 
     stages {
         stage('Checkout') {
-            steps { checkout scm }
+            steps {
+                checkout scm
+            }
         }
 
         stage('Check Node and npm') {
@@ -32,35 +41,60 @@ pipeline {
         }
 
         stage('Install dependencies') {
-            steps { bat 'npm ci' }
+            steps {
+                bat 'npm ci'
+            }
         }
 
-        stage('Unit tests') {
-            steps { bat 'npm test' }
+        stage('Unit Tests and Code Coverage') {
+            steps {
+                bat 'if not exist reports mkdir reports'
+                bat 'npm run test:coverage'
+            }
         }
 
         stage('Web production build') {
-            steps { bat 'npm run web:build' }
+            steps {
+                bat 'npm run web:build'
+            }
         }
 
         stage('API integration tests') {
-            when { expression { return params.RUN_API_TESTS } }
+            when {
+                expression { return params.RUN_API_TESTS }
+            }
+
             steps {
                 withCredentials([
-                    string(credentialsId: 'labtrack-test-database-url', variable: 'LABTRACK_TEST_DATABASE_URL'),
-                    string(credentialsId: 'labtrack-test-jwt-secret', variable: 'JWT_SECRET')
+                    string(
+                        credentialsId: 'labtrack-test-database-url',
+                        variable: 'LABTRACK_TEST_DATABASE_URL'
+                    ),
+                    string(
+                        credentialsId: 'labtrack-test-jwt-secret',
+                        variable: 'JWT_SECRET'
+                    )
                 ]) {
-                    bat 'npm run test:api'
+                    bat 'node --test --test-concurrency=1 --test-reporter=spec --test-reporter=junit --test-reporter-destination=stdout --test-reporter-destination=reports/api-tests.xml tests/api/*.test.mjs'
                 }
             }
         }
 
         stage('Browser tests') {
-            when { expression { return params.RUN_BROWSER_TESTS } }
+            when {
+                expression { return params.RUN_BROWSER_TESTS }
+            }
+
             steps {
                 withCredentials([
-                    string(credentialsId: 'labtrack-test-database-url', variable: 'LABTRACK_TEST_DATABASE_URL'),
-                    string(credentialsId: 'labtrack-test-jwt-secret', variable: 'JWT_SECRET')
+                    string(
+                        credentialsId: 'labtrack-test-database-url',
+                        variable: 'LABTRACK_TEST_DATABASE_URL'
+                    ),
+                    string(
+                        credentialsId: 'labtrack-test-jwt-secret',
+                        variable: 'JWT_SECRET'
+                    )
                 ]) {
                     bat 'python --version'
                     bat 'python -m playwright --version'
@@ -70,19 +104,36 @@ pipeline {
         }
 
         stage('Dependency security audit') {
-            steps { bat 'npm audit --audit-level=high' }
+            steps {
+                bat 'npm audit --audit-level=high'
+            }
         }
     }
 
     post {
         always {
+            // Publish JUnit test results
+            junit(
+                testResults: 'reports/*.xml',
+                allowEmptyResults: true
+            )
+
+            // Archive generated reports
             archiveArtifacts(
-                artifacts: 'coverage/**, reports/**, test-results/**',
+                artifacts: 'reports/**, coverage/**, test-results/**',
                 allowEmptyArchive: true,
                 fingerprint: true
             )
+
+            // Publish HTML coverage report
+            publishHTML(target: [
+                reportDir: 'coverage',
+                reportFiles: 'index.html',
+                reportName: 'LabTrack Code Coverage',
+                keepAll: true,
+                alwaysLinkToLastBuild: true,
+                allowMissing: true
+            ])
         }
-        success { echo 'LabTrack CI pipeline completed successfully.' }
-        failure { echo 'Pipeline failed. Review the stage logs; do not mark the tests as passed.' }
     }
 }
