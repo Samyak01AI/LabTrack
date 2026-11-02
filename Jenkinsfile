@@ -125,15 +125,20 @@ pipeline {
                 fingerprint: true
             )
 
-            // Publish HTML coverage report
-            publishHTML(target: [
-                reportDir: 'coverage',
-                reportFiles: 'index.html',
-                reportName: 'LabTrack Code Coverage',
-                keepAll: true,
-                alwaysLinkToLastBuild: true,
-                allowMissing: true
-            ])
+script {
+    env.LABTRACK_PIPELINE_RESULT = currentBuild.currentResult
+}
+
+bat 'node scripts/generate-test-report.mjs'
+
+publishHTML(target: [
+    reportDir: 'reports',
+    reportFiles: 'LabTrack-Test-Report.html',
+    reportName: 'LabTrack Consolidated Test Report',
+    keepAll: true,
+    alwaysLinkToLastBuild: true,
+    allowMissing: true
+])
         }
     }
 }
