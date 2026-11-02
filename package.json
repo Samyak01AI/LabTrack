@@ -19,8 +19,8 @@
     "api:start": "npm --workspace @labtrack/api run start",
     "web:dev": "npm --workspace @labtrack/web run dev",
     "web:build": "npm --workspace @labtrack/web run build",
-    "serve:prototype": "python3 -m http.server 4173 --bind 0.0.0.0 --directory legacy-prototype/LabTrack",
-    "test:coverage": "c8 --reporter=html --reporter=text-summary --reports-dir=coverage npm test"
+    "test:coverage": "c8 --reporter=html --reporter=text-summary --reports-dir=coverage node --test --test-reporter=spec --test-reporter-destination=stdout --test-reporter=junit --test-reporter-destination=reports/unit-tests.xml tests/*.test.mjs",
+    "serve:prototype": "python3 -m http.server 4173 --bind 0.0.0.0 --directory legacy-prototype/LabTrack"
   },
   "packageManager": "npm@10.9.2",
   "engines": {
