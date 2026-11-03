@@ -64,3 +64,4 @@ public class RegistrationUITest extends BasePlaywrightTest {
                 "Registered student should be routed to student dashboard");
     }
 }
+

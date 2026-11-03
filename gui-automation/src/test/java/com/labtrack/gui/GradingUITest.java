@@ -36,3 +36,4 @@ public class GradingUITest extends BasePlaywrightTest {
                 "Similarity review interface should be reachable");
     }
 }
+

@@ -32,3 +32,4 @@ public class TeacherDashboardTest extends BasePlaywrightTest {
                 "Teacher assignment controls should be visible");
     }
 }
+

@@ -29,3 +29,4 @@ public class SubmissionUITest extends BasePlaywrightTest {
                 "Student submission history or navigation should be accessible");
     }
 }
+

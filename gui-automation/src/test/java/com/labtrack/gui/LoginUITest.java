@@ -56,3 +56,4 @@ public class LoginUITest extends BasePlaywrightTest {
         Assert.assertTrue(page.url().contains("/teacher/"), "User should be redirected to teacher dashboard/assignments");
     }
 }
+

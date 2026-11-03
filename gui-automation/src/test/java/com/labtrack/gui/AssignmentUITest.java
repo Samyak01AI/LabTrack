@@ -32,3 +32,4 @@ public class AssignmentUITest extends BasePlaywrightTest {
         }
     }
 }
+

@@ -39,3 +39,4 @@ public class StudentDashboardTest extends BasePlaywrightTest {
         }
     }
 }
+
