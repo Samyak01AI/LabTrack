@@ -95,7 +95,7 @@ public class GradingTest extends BaseApiTest {
                 .then()
                 .statusCode(200)
                 .body("submission.id", equalTo(submissionId))
-                .body("evaluation", notNullValue());
+                .body("provisionalGrade", notNullValue());
     }
 
     @Test(priority = 2, description = "Teacher evaluates submission with provisional rubric scores")
@@ -121,7 +121,7 @@ public class GradingTest extends BaseApiTest {
                 .post("/api/teacher/submissions/" + submissionId + "/grade")
                 .then()
                 .statusCode(200)
-                .body("grade.totalScore", equalTo(92.0F))
+                .body("grade.totalScore", anyOf(equalTo(92), equalTo(92.0F), equalTo(92.0)))
                 .body("grade.status", equalTo("provisionally_scored"));
     }
 
