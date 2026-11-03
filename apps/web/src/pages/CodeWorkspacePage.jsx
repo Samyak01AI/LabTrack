@@ -193,7 +193,7 @@ export default function CodeWorkspacePage() {
         }
 
         // Initialize sample case results placeholder
-        if (res.assignment.sampleCases) {
+        if (res.assignment.sampleCases && res.assignment.sampleCases.length > 0) {
           setTestResults(res.assignment.sampleCases.map((sc, idx) => ({
             testIndex: idx,
             input: sc.input || '',
@@ -203,6 +203,10 @@ export default function CodeWorkspacePage() {
             timeMs: 0,
             memoryKb: 0,
           })));
+        } else {
+          // Zero-sample assignment (open lab): activate custom input by default
+          setUseCustomInput(true);
+          setActiveTab('custom-input');
         }
         // Fetch AI Assistance Status & Prior Logs (Iteration 8)
         try {
@@ -398,9 +402,9 @@ export default function CodeWorkspacePage() {
           .map((r, i) => {
             let item = '';
             if (res.results.length > 1) item += `--- Test Case ${i + 1} (${(r.status || 'DONE').toUpperCase()}) ---\n`;
-            if (r.input && !useCustomInput) item += `Input: ${r.input}\n`;
-            item += `[Program Output (stdout)]:\n${r.actualOutput ? r.actualOutput : '(no output generated)'}\n`;
-            if (r.stderr) item += `[Standard Error (stderr)]:\n${r.stderr}\n`;
+            if (r.input && !useCustomInput) item += `Input:\n${r.input}\n\n`;
+            item += `[Program Output (stdout)]:\n${r.actualOutput && r.actualOutput.trim().length > 0 ? r.actualOutput : '(no output generated - process finished with exit code 0)'}\n`;
+            if (r.stderr) item += `\n[Standard Error (stderr)]:\n${r.stderr}\n`;
             return item.trim();
           })
           .join('\n\n');
@@ -909,6 +913,24 @@ export default function CodeWorkspacePage() {
 
                   <button
                     type="button"
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors shadow-sm ${
+                      useCustomInput
+                        ? 'bg-[#7cd4df] text-[#0d121f] font-bold shadow-md'
+                        : 'bg-[#1b2336] text-slate-300 hover:bg-white/10 border border-white/10'
+                    }`}
+                    onClick={() => {
+                      const next = !useCustomInput;
+                      setUseCustomInput(next);
+                      if (next) setActiveTab('custom-input');
+                    }}
+                    title="Toggle Standard Input (stdin)"
+                  >
+                    <span className="material-symbols-outlined text-sm">input</span>
+                    <span>Custom Input {useCustomInput ? '✓' : ''}</span>
+                  </button>
+
+                  <button
+                    type="button"
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1b2336] hover:bg-white/10 text-white text-xs font-medium transition-colors shadow-sm disabled:opacity-50"
                     onClick={handleSaveDraft}
                     disabled={isSaving}
@@ -1043,6 +1065,24 @@ export default function CodeWorkspacePage() {
 
                   <button
                     type="button"
+                    className={`flex items-center gap-2 px-3 py-2 rounded-t-lg text-xs font-bold transition-colors ${
+                      activeTab === 'custom-input'
+                        ? 'bg-surface-container-lowest text-primary shadow-sm border-t-2 border-secondary'
+                        : 'text-on-surface-variant hover:bg-surface-container'
+                    }`}
+                    onClick={() => setActiveTab('custom-input')}
+                  >
+                    <span className="material-symbols-outlined text-base text-secondary">input</span>
+                    <span>Custom Input (stdin)</span>
+                    {useCustomInput && (
+                      <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-[#7cd4df]/30 text-teal-900">
+                        Active
+                      </span>
+                    )}
+                  </button>
+
+                  <button
+                    type="button"
                     className={`flex items-center gap-2 px-3 py-2 rounded-t-lg text-xs font-medium transition-colors ${
                       activeTab === 'console'
                         ? 'bg-[#1b2336] text-white shadow-sm'
@@ -1094,9 +1134,25 @@ export default function CodeWorkspacePage() {
               {activeTab === 'tests' && (
                 <div className="p-4 flex flex-col gap-2">
                   {testResults.length === 0 ? (
-                    <div className="p-6 text-center text-xs text-on-surface-variant flex flex-col items-center gap-2">
-                      <span className="material-symbols-outlined text-2xl text-secondary">terminal</span>
-                      <span>No predefined sample cases for this assignment. Enable <strong>Custom Test Input (stdin)</strong> above or click <strong>Run Code</strong> to execute and view output in the Console tab.</span>
+                    <div className="p-6 text-center text-xs text-on-surface-variant flex flex-col items-center gap-3">
+                      <span className="material-symbols-outlined text-3xl text-secondary">input</span>
+                      <div className="max-w-md">
+                        <p className="font-semibold text-primary text-sm">No Predefined Test Cases</p>
+                        <p className="mt-1 text-on-surface-variant">
+                          This assignment accepts interactive user input. Switch to the <strong>Custom Input (stdin)</strong> tab to supply input for <code>cin</code> or <code>System.in</code>, or click <strong>Run Code</strong>.
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setUseCustomInput(true);
+                          setActiveTab('custom-input');
+                        }}
+                        className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-secondary text-white hover:bg-secondary/90 text-xs font-semibold transition-colors shadow-sm"
+                      >
+                        <span className="material-symbols-outlined text-sm">edit_note</span>
+                        <span>Open Custom Input (stdin) Tab</span>
+                      </button>
                     </div>
                   ) : (
                     testResults.map((tc, idx) => {
@@ -1130,7 +1186,7 @@ export default function CodeWorkspacePage() {
 
                             <div className="flex flex-col min-w-0">
                               <div className="flex items-center gap-2">
-                                <span className="text-sm font-semibold text-on-surface">Case {idx + 1}</span>
+                                <span className="text-sm font-semibold text-on-surface">{useCustomInput ? 'Custom Execution' : `Case ${idx + 1}`}</span>
                                 <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase ${
                                   isPass
                                     ? 'bg-green-100 text-green-700'
@@ -1145,7 +1201,7 @@ export default function CodeWorkspacePage() {
                               </div>
                               <div className="font-mono text-xs text-on-surface-variant pt-1 truncate">
                                 <span className="text-primary font-medium">Input: </span>
-                                {tc.input ? tc.input.replace(/\n/g, ' ') : '(empty)'}
+                                {tc.input ? tc.input.replace(/\n/g, ' ') : '(empty / EOF)'}
                               </div>
                             </div>
                           </div>
@@ -1153,7 +1209,13 @@ export default function CodeWorkspacePage() {
                           <div className="flex items-center gap-4 font-mono text-xs text-on-surface-variant self-end md:self-auto shrink-0">
                             <div className="text-right max-w-sm">
                               <div className="text-on-surface font-semibold font-mono text-xs">
-                                Output: <span className="text-primary font-bold">{tc.actualOutput ? tc.actualOutput.trim() : '—'}</span>
+                                Output: <span className="text-primary font-bold">
+                                  {tc.actualOutput && tc.actualOutput.trim().length > 0
+                                    ? tc.actualOutput.trim()
+                                    : (tc.status === 'accepted' || tc.status === 'PASS'
+                                      ? '(empty - process exited 0)'
+                                      : '—')}
+                                </span>
                               </div>
                               {tc.expectedOutput ? (
                                 <div className="text-[11px] text-outline font-mono">
@@ -1170,6 +1232,90 @@ export default function CodeWorkspacePage() {
                       );
                     })
                   )}
+                </div>
+              )}
+
+              {activeTab === 'custom-input' && (
+                <div className="p-4 flex flex-col gap-3 bg-surface-container-lowest">
+                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-outline-variant/30 pb-2">
+                    <div className="flex items-center gap-2">
+                      <span className="material-symbols-outlined text-secondary text-base">input</span>
+                      <span className="text-xs font-bold text-primary">Standard Input Console (stdin)</span>
+                      <span className="text-[11px] text-on-surface-variant">
+                        Supplied directly to <code>cin</code> (C++) or <code>Scanner(System.in) / BufferedReader</code> (Java).
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setCustomInput('5\n10 20 30 40 50');
+                          setUseCustomInput(true);
+                        }}
+                        className="px-2.5 py-1 rounded bg-surface-container text-primary hover:bg-surface-container-high text-[11px] font-mono transition-colors"
+                      >
+                        Sample Numbers
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setCustomInput('Hello World\nSecond input line\nLabTrack 2026');
+                          setUseCustomInput(true);
+                        }}
+                        className="px-2.5 py-1 rounded bg-surface-container text-primary hover:bg-surface-container-high text-[11px] font-mono transition-colors"
+                      >
+                        Sample Text
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setCustomInput('')}
+                        className="px-2 py-1 rounded bg-surface-container text-on-surface-variant hover:text-primary text-[11px] font-mono transition-colors"
+                      >
+                        Clear
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-1.5">
+                    <div className="flex items-center justify-between text-[11px] font-medium text-on-surface-variant">
+                      <span>Standard Input Data:</span>
+                      <span className="font-mono text-[10px] text-outline">
+                        {customInput.length} characters • {customInput ? customInput.split('\n').length : 0} line(s)
+                      </span>
+                    </div>
+                    <textarea
+                      rows={5}
+                      value={customInput}
+                      onChange={(e) => {
+                        setCustomInput(e.target.value);
+                        setUseCustomInput(true);
+                      }}
+                      placeholder="Type your program's stdin input here (e.g. 5, or line-separated inputs)..."
+                      className="w-full p-3 rounded-lg bg-[#0b121e] text-slate-100 font-mono text-xs border border-white/10 focus:border-secondary focus:ring-1 focus:ring-secondary outline-none resize-y leading-5"
+                    />
+                  </div>
+
+                  <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
+                    <label className="flex items-center gap-2 cursor-pointer select-none text-xs text-on-surface-variant">
+                      <input
+                        type="checkbox"
+                        checked={useCustomInput}
+                        onChange={(e) => setUseCustomInput(e.target.checked)}
+                        className="rounded border-outline text-secondary focus:ring-secondary w-3.5 h-3.5"
+                      />
+                      <span>Feed this stdin input when clicking <strong>Run Code</strong></span>
+                    </label>
+
+                    <button
+                      type="button"
+                      onClick={handleRunCode}
+                      disabled={isRunning}
+                      className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-[#1f3864] text-white hover:bg-[#2e4673] text-xs font-semibold transition-colors disabled:opacity-50 shadow-sm"
+                    >
+                      <span className="material-symbols-outlined text-sm text-[#7cd4df]">play_arrow</span>
+                      <span>{isRunning ? 'Running…' : 'Run Code with this Input'}</span>
+                    </button>
+                  </div>
                 </div>
               )}
 
