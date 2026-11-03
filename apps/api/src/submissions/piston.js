@@ -100,6 +100,101 @@ export function createPistonAdapter(config = {}) {
     } : {}),
   };
 
+  async function executeViaOpenSandbox(sourceCode, language, testCase, testIndex, timeLimitSeconds = 5) {
+    const startMs = Date.now();
+    let payload;
+
+    if (language === 'C++20') {
+      payload = {
+        compiler: 'gcc-13.2.0',
+        code: sourceCode,
+        'compiler-option-raw': '-std=c++20\n-O2',
+        stdin: testCase.input ?? '',
+      };
+    } else if (language === 'Java 21') {
+      const javaCode = sourceCode.replace(/\bpublic\s+class\b/, 'class');
+      payload = {
+        compiler: 'openjdk-jdk-21+35',
+        code: javaCode,
+        stdin: testCase.input ?? '',
+      };
+    } else {
+      throw new Error(`Unsupported language: ${language}`);
+    }
+
+    const response = await fetch('https://wandbox.org/api/compile.json', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      signal: AbortSignal.timeout(Math.max(15000, (timeLimitSeconds + 5) * 1000)),
+    });
+
+    const elapsedMs = Date.now() - startMs;
+    if (!response.ok) {
+      const errText = await response.text();
+      throw new Error(`Open sandbox execution failed (HTTP ${response.status}): ${errText}`);
+    }
+
+    const data = await response.json();
+    const exitCode = parseInt(data.status ?? '0', 10);
+    const compilerErr = (data.compiler_error || data.compiler_message || '').trim();
+    const programErr = (data.program_error || data.program_message || '').trim();
+    const programOut = data.program_output ?? '';
+
+    // 1. Compilation Error
+    if (exitCode !== 0 && compilerErr) {
+      return {
+        testIndex,
+        input: testCase.input ?? '',
+        expectedOutput: testCase.expectedOutput ?? '',
+        actualOutput: '',
+        status: 'compilation_error',
+        timeMs: elapsedMs,
+        memoryKb: 0,
+        stderr: compilerErr,
+        exitCode,
+        compilerOutput: compilerErr,
+      };
+    }
+
+    // 2. Runtime Error / Timeout
+    if (data.signal || (exitCode !== 0 && !compilerErr)) {
+      const isTimeout = /timed?\s*out|SIGKILL|SIGXCPU/i.test(data.signal || programErr);
+      return {
+        testIndex,
+        input: testCase.input ?? '',
+        expectedOutput: testCase.expectedOutput ?? '',
+        actualOutput: programOut,
+        status: isTimeout ? 'time_limit_exceeded' : 'runtime_error',
+        timeMs: elapsedMs,
+        memoryKb: 1024,
+        stderr: programErr || data.signal || 'Runtime error',
+        exitCode: exitCode || 1,
+        compilerOutput: compilerErr || null,
+      };
+    }
+
+    // 3. Normal Output Evaluation
+    const actualOutput = programOut;
+    const expectedOutput = testCase.expectedOutput ?? '';
+    const isAccepted = !expectedOutput
+      ? true
+      : normalizeOutput(actualOutput) === normalizeOutput(expectedOutput);
+
+    return {
+      testIndex,
+      input: testCase.input ?? '',
+      expectedOutput,
+      actualOutput,
+      status: isAccepted ? 'accepted' : 'wrong_answer',
+      timeMs: elapsedMs,
+      memoryKb: 1024,
+      stderr: programErr || null,
+      exitCode: 0,
+      compilerOutput: compilerErr || null,
+    };
+  }
+
   async function executeSingleTestCase(sourceCode, language, testCase, testIndex, timeLimitSeconds = 5) {
     const langConfig = getPistonLanguageConfig(language, sourceCode);
     const startMs = Date.now();
@@ -131,20 +226,25 @@ export function createPistonAdapter(config = {}) {
     const elapsedMs = Date.now() - startMs;
 
     if (!response.ok) {
+      if (response.status === 401) {
+        try {
+          return await executeViaOpenSandbox(sourceCode, language, testCase, testIndex, timeLimitSeconds);
+        } catch (fallbackErr) {
+          throw new Error(
+            `Piston API returned HTTP 401 Unauthorized (Whitelist token required). ` +
+            `Fallback runner error: ${fallbackErr.message}. ` +
+            `To run code with Piston locally, start a Docker container (docker run -d -p 2000:2000 ghcr.io/engineer-man/piston) ` +
+            `and set PISTON_API_URL=http://127.0.0.1:2000.`
+          );
+        }
+      }
+
       let errText = '';
       try {
         const errJson = await response.json();
         errText = errJson.message || JSON.stringify(errJson);
       } catch {
         errText = await response.text();
-      }
-
-      if (response.status === 401) {
-        throw new Error(
-          `Piston API returned HTTP 401 Unauthorized: ${errText || 'Whitelist token required'}. ` +
-          `To run code with Piston, start a local Docker container (docker run -d -p 2000:2000 ghcr.io/engineer-man/piston) ` +
-          `and set PISTON_API_URL=http://127.0.0.1:2000 in your .env or server environment.`
-        );
       }
 
       throw new Error(`Piston API execution failed (HTTP ${response.status}): ${errText}`);
