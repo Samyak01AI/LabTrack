@@ -16,6 +16,9 @@
  * Host process execution is strictly prohibited.
  */
 
+export const PUBLIC_PISTON_EXECUTE_URL = 'https://emkc.org/api/v2/piston/execute';
+export const PUBLIC_PISTON_RUNTIMES_URL = 'https://emkc.org/api/v2/piston/runtimes';
+
 function normalizeOutput(str) {
   if (typeof str !== 'string') return '';
   return str.replace(/\r\n/g, '\n').trim();
@@ -25,6 +28,13 @@ export function normalizePistonUrl(rawUrl) {
   if (!rawUrl || typeof rawUrl !== 'string') return '';
   let url = rawUrl.trim().replace(/\/+$/, '');
   if (!url) return '';
+  if (url.includes('emkc.org')) {
+    if (url.endsWith('/execute')) return url;
+    if (url.endsWith('/runtimes')) return url.replace(/\/runtimes$/, '/execute');
+    if (url.endsWith('/piston')) return `${url}/execute`;
+    if (url.endsWith('/api/v2')) return `${url}/piston/execute`;
+    return `${url}/api/v2/piston/execute`;
+  }
   if (url.endsWith('/execute')) return url;
   if (url.endsWith('/api/v2')) return `${url}/execute`;
   if (url.includes('/api/v2/')) return `${url}/execute`;
@@ -76,6 +86,7 @@ export function createPistonAdapter(config = {}) {
       provider: 'piston',
       available: false,
       executeUrl: '',
+      runtimesUrl: '',
       async getRuntimes() { return []; },
       async executeSubmission() { return null; },
     };
@@ -201,16 +212,18 @@ export function createPistonAdapter(config = {}) {
     };
   }
 
+  const runtimesUrl = executeUrl ? executeUrl.replace(/\/execute$/, '/runtimes') : '';
+
   return {
     provider: 'piston',
     available: true,
     executeUrl,
+    runtimesUrl,
 
     /**
      * Query available runtimes from GET /api/v2/runtimes
      */
     async getRuntimes() {
-      const runtimesUrl = executeUrl.replace(/\/execute$/, '/runtimes');
       try {
         const response = await fetch(runtimesUrl, {
           method: 'GET',

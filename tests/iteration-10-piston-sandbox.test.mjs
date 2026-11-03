@@ -17,10 +17,11 @@ test('Piston adapter reports unavailable when no API URL is configured', () => {
 });
 
 test('Piston adapter reports available when API URL is configured', () => {
-  const adapter = createPistonAdapter({ pistonApiUrl: 'http://localhost:2000', pistonApiKey: '' });
+  const adapter = createPistonAdapter({ pistonApiUrl: 'https://emkc.org/api/v2/piston/execute', pistonApiKey: '' });
   assert.equal(adapter.available, true);
   assert.equal(adapter.provider, 'piston');
-  assert.equal(adapter.executeUrl, 'http://localhost:2000/api/v2/execute');
+  assert.equal(adapter.executeUrl, 'https://emkc.org/api/v2/piston/execute');
+  assert.equal(adapter.runtimesUrl, 'https://emkc.org/api/v2/piston/runtimes');
 });
 
 test('Piston URL normalization handles root, subpath, and trailing slash variants', () => {
@@ -29,6 +30,9 @@ test('Piston URL normalization handles root, subpath, and trailing slash variant
   assert.equal(normalizePistonUrl('http://localhost:2000/api/v2'), 'http://localhost:2000/api/v2/execute');
   assert.equal(normalizePistonUrl('http://localhost:2000/api/v2/execute'), 'http://localhost:2000/api/v2/execute');
   assert.equal(normalizePistonUrl('https://emkc.org/api/v2/piston/execute'), 'https://emkc.org/api/v2/piston/execute');
+  assert.equal(normalizePistonUrl('https://emkc.org/api/v2/piston'), 'https://emkc.org/api/v2/piston/execute');
+  assert.equal(normalizePistonUrl('https://emkc.org'), 'https://emkc.org/api/v2/piston/execute');
+  assert.equal(normalizePistonUrl('https://emkc.org/api/v2/piston/runtimes'), 'https://emkc.org/api/v2/piston/execute');
   assert.equal(normalizePistonUrl(''), '');
 });
 
