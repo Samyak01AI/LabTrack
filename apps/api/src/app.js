@@ -68,9 +68,9 @@ export function createApp({
 
   app.use('/api/student/assignments', createStudentAssignmentsRouter({ users, config, assignments }));
   app.use('/api/student/assignments', createStudentSubmissionsRouter({ users, config, assignments, submissions, judge0 }));
+  app.use('/api/student', createStudentReportingRouter({ users, config, reporting }));
   app.use('/api/student', createStudentSubmissionsRouter({ users, config, assignments, submissions, judge0 }));
   app.use('/api/student', createStudentGradingRouter({ users, config, assignments, submissions, grades }));
-  app.use('/api/student', createStudentReportingRouter({ users, config, reporting }));
   app.use('/api/student', createStudentAiRouter({ users, config, assignments, aiRepo }));
 
   app.use('/api/teacher/assignments', createTeacherAssignmentsRouter({ users, config, assignments }));

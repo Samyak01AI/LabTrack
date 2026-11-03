@@ -54,7 +54,7 @@ export function createStudentReportingRouter({ users, config, reporting }) {
         item.passedTests,
         item.totalTests,
         item.aiDeclared ? 'YES' : 'NO',
-        item.aiTools.join('; '),
+        Array.isArray(item.aiTools) ? item.aiTools.join('; ') : '',
         item.grade?.totalScore ?? 'N/A',
         item.maxScore,
         item.grade?.status ?? 'Pending',

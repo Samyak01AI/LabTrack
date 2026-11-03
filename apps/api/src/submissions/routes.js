@@ -310,9 +310,9 @@ export function createStudentSubmissionsRouter({ users, config, assignments, sub
   });
 
   // Get a specific submission detail
-  router.get('/submissions/:id', async (req, res) => {
+  router.get('/submissions/:id', async (req, res, next) => {
     if (!idSchema.safeParse(req.params.id).success) {
-      return res.status(404).json({ error: 'Submission not found.' });
+      return next ? next() : res.status(404).json({ error: 'Submission not found.' });
     }
 
     const submission = await submissions.getByIdForStudent(req.params.id, req.user.id);
@@ -347,9 +347,9 @@ export function createTeacherSubmissionsRouter({ users, config, assignments, sub
   });
 
   // Get a specific submission
-  router.get('/submissions/:id', async (req, res) => {
+  router.get('/submissions/:id', async (req, res, next) => {
     if (!idSchema.safeParse(req.params.id).success) {
-      return res.status(404).json({ error: 'Submission not found.' });
+      return next ? next() : res.status(404).json({ error: 'Submission not found.' });
     }
 
     const submission = await submissions.getById(req.params.id);

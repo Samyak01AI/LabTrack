@@ -1,7 +1,25 @@
 export function createReportingRepository(pool) {
   function parseJson(val) {
     if (val == null) return null;
-    return typeof val === 'string' ? JSON.parse(val) : val;
+    if (typeof val !== 'string') return val;
+    try {
+      return JSON.parse(val);
+    } catch {
+      return null;
+    }
+  }
+
+  function toIso(val) {
+    if (!val) return null;
+    if (val instanceof Date) return val.toISOString();
+    try {
+      const str = String(val);
+      const normalized = str.includes('T') ? str : `${str.replace(' ', 'T')}Z`;
+      const d = new Date(normalized);
+      return Number.isNaN(d.getTime()) ? new Date().toISOString() : d.toISOString();
+    } catch {
+      return new Date().toISOString();
+    }
   }
 
   return {
@@ -55,7 +73,7 @@ export function createReportingRepository(pool) {
       const [rows] = await pool.query(query, params);
       return rows.map((r) => {
         const results = parseJson(r.results) || [];
-        const passedTests = results.filter((t) => t.status === 'PASS').length;
+        const passedTests = results.filter((t) => t.status === 'PASS' || t.status === 'accepted').length;
         const totalTests = results.length;
         const aiDecl = parseJson(r.ai_declaration);
         const annots = parseJson(r.annotations) || [];
@@ -77,11 +95,11 @@ export function createReportingRepository(pool) {
           passedTests,
           totalTests,
           isFinal: Boolean(r.is_final),
-          submittedAt: r.submitted_at ? new Date(r.submitted_at).toISOString() : null,
-          createdAt: new Date(r.created_at).toISOString(),
+          submittedAt: toIso(r.submitted_at),
+          createdAt: toIso(r.created_at) || new Date().toISOString(),
           aiDeclaration: aiDecl,
           aiDeclared: Boolean(aiDecl?.aiUsed),
-          aiTools: aiDecl?.tools || [],
+          aiTools: Array.isArray(aiDecl?.tools) ? aiDecl.tools : [],
           annotationStatus: r.annotation_status,
           annotationsCount: annots.length,
           logicExplanation: parseJson(r.logic_explanation),
@@ -95,7 +113,7 @@ export function createReportingRepository(pool) {
                 totalScore: Number(r.total_score),
                 status: r.grade_status,
                 feedback: r.feedback,
-                finalisedAt: r.finalised_at ? new Date(r.finalised_at).toISOString() : null,
+                finalisedAt: toIso(r.finalised_at),
               }
             : null,
         };

@@ -207,3 +207,25 @@ test('Hard Rule Safeguards: No AI code detection claims and similarity is review
   assert.ok(teacherReportsCode.includes('AI Disclosed'), 'Must label as AI Disclosed or declared');
   assert.ok(!teacherReportsCode.includes('AI Generated Code'), 'Must not claim AI generated code detection');
 });
+
+test('Student submission history routing: /submissions/:id does not shadow /submissions/history', () => {
+  const submissionsRouterCode = fs.readFileSync(
+    path.join(rootDir, 'apps', 'api', 'src', 'submissions', 'routes.js'),
+    'utf8',
+  );
+  // Ensure router.get('/submissions/:id') calls next() when :id is non-UUID (e.g. 'history')
+  assert.ok(
+    submissionsRouterCode.includes('next ? next() :'),
+    'Submission detail route must delegate to next middleware on non-UUID parameter to avoid shadowing history route',
+  );
+
+  const appCode = fs.readFileSync(
+    path.join(rootDir, 'apps', 'api', 'src', 'app.js'),
+    'utf8',
+  );
+  const reportingIndex = appCode.indexOf("app.use('/api/student', createStudentReportingRouter");
+  const submissionsIndex = appCode.indexOf("app.use('/api/student', createStudentSubmissionsRouter");
+  assert.ok(reportingIndex !== -1, 'createStudentReportingRouter mounted at /api/student');
+  assert.ok(submissionsIndex !== -1, 'createStudentSubmissionsRouter mounted at /api/student');
+  assert.ok(reportingIndex < submissionsIndex, 'Reporting router must be mounted before submissions router so /submissions/history is evaluated first');
+});

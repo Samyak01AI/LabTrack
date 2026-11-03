@@ -2,6 +2,16 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '../lib/api.js';
 
+function formatDateTime(val) {
+  if (!val) return '—';
+  try {
+    const d = new Date(val);
+    return Number.isNaN(d.getTime()) ? '—' : d.toLocaleString(undefined, { dateStyle: 'short', timeStyle: 'short' });
+  } catch {
+    return '—';
+  }
+}
+
 export default function StudentSubmissionHistoryPage() {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -49,7 +59,7 @@ export default function StudentSubmissionHistoryPage() {
   const evaluatedCount = history.filter((h) => h.grade?.status === 'finalised').length;
   const gradedItems = history.filter((h) => h.grade?.totalScore != null);
   const avgScore = gradedItems.length > 0
-    ? Math.round(gradedItems.reduce((acc, h) => acc + h.grade.totalScore, 0) / gradedItems.length)
+    ? Math.round(gradedItems.reduce((acc, h) => acc + (Number(h.grade.totalScore) || 0), 0) / gradedItems.length)
     : 0;
 
   return (
@@ -264,7 +274,7 @@ export default function StudentSubmissionHistoryPage() {
                       {item.aiDeclared ? (
                         <span className="inline-flex items-center gap-1 text-[11px] font-medium text-secondary">
                           <span className="material-symbols-outlined text-[13px]">smart_toy</span>
-                          <span>{item.aiTools?.join(', ') || 'Declared'}</span>
+                          <span>{Array.isArray(item.aiTools) ? item.aiTools.join(', ') : (item.aiTools || 'Declared')}</span>
                         </span>
                       ) : (
                         <span className="text-on-surface-variant text-[11px]">Independent</span>
@@ -285,7 +295,7 @@ export default function StudentSubmissionHistoryPage() {
                       )}
                     </td>
                     <td className="py-3 px-4 font-mono text-[11px] text-on-surface-variant">
-                      {new Date(item.submittedAt || item.createdAt).toLocaleString(undefined, { dateStyle: 'short', timeStyle: 'short' })}
+                      {formatDateTime(item.submittedAt || item.createdAt)}
                     </td>
                     <td className="py-3 px-4 text-right">
                       <button
@@ -313,7 +323,7 @@ export default function StudentSubmissionHistoryPage() {
                 <span className="font-mono text-[10px] text-secondary font-bold uppercase">{selectedSnapshot.assignmentCode} • {selectedSnapshot.language}</span>
                 <h3 className="text-base font-bold text-primary">{selectedSnapshot.assignmentTitle}</h3>
                 <p className="text-xs text-on-surface-variant mt-0.5">
-                  Attempt snapshot: {new Date(selectedSnapshot.submittedAt || selectedSnapshot.createdAt).toLocaleString()}
+                  Attempt snapshot: {formatDateTime(selectedSnapshot.submittedAt || selectedSnapshot.createdAt)}
                 </p>
               </div>
               <button type="button" className="icon-button" onClick={() => setSelectedSnapshot(null)}>
