@@ -732,7 +732,7 @@ export default function TeacherMarkingPage() {
                   className="w-full accent-secondary h-1.5 bg-surface-container-highest rounded-lg cursor-pointer"
                 />
                 <span className="text-[10px] text-on-surface-variant">
-                  Calculated from Judge0 CE test passes with teacher override capability.
+                  Calculated from sandboxed test passes (Piston / Judge0) with teacher override capability.
                 </span>
               </div>
 

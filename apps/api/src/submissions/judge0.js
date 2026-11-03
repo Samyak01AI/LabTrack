@@ -1,36 +1,42 @@
 /**
- * Judge0 sandbox adapter.
+ * Sandboxed Execution Engine Adapter (Unified Sandbox Adapter).
  *
- * Judge0 is optional — when JUDGE0_API_URL is not set, submissions stay in
- * 'pending' status. When configured, source code is sent to the Judge0 CE API
- * and results are polled back.
+ * Supports both Piston and Judge0 isolated execution engines.
+ * Default provider is Piston with seamless fallback to Judge0 when configured.
  *
- * Language IDs (Judge0 CE):
- *   C++20 → 76  (GCC 11.1.0 with C++20)
- *   Java 21 → 91 (OpenJDK 21) — fallback 62 (OpenJDK 13)
+ * Language mappings:
+ *   C++20 (GCC / Piston cpp)
+ *   Java 21 (OpenJDK 21 / Piston java)
+ *
+ * Hard rule constraint: Student code is NEVER executed on the host server process.
+ * Host process execution is strictly prohibited.
  */
+
+import { createPistonAdapter } from './piston.js';
+
+export { createPistonAdapter };
 
 const LANGUAGE_IDS = {
   'C++20': 76,
   'Java 21': 91,
 };
 
-// Judge0 status IDs → LabTrack submission statuses
+// Judge0 status IDs -> LabTrack submission statuses
 const STATUS_MAP = {
-  1: 'queued',      // In Queue
-  2: 'running',     // Processing
-  3: 'accepted',    // Accepted
-  4: 'wrong_answer', // Wrong Answer
+  1: 'queued',
+  2: 'running',
+  3: 'accepted',
+  4: 'wrong_answer',
   5: 'time_limit_exceeded',
   6: 'compilation_error',
-  7: 'runtime_error',    // Runtime Error (SIGSEGV)
-  8: 'runtime_error',    // Runtime Error (SIGXFSZ)
-  9: 'runtime_error',    // Runtime Error (SIGFPE)
-  10: 'runtime_error',   // Runtime Error (SIGABRT)
-  11: 'runtime_error',   // Runtime Error (NZEC)
-  12: 'runtime_error',   // Runtime Error (Other)
-  13: 'internal_error',  // Internal Error
-  14: 'internal_error',  // Exec Format Error
+  7: 'runtime_error',
+  8: 'runtime_error',
+  9: 'runtime_error',
+  10: 'runtime_error',
+  11: 'runtime_error',
+  12: 'runtime_error',
+  13: 'internal_error',
+  14: 'internal_error',
   15: 'memory_limit_exceeded',
 };
 
@@ -38,17 +44,22 @@ function mapJudge0Status(statusId) {
   return STATUS_MAP[statusId] ?? 'internal_error';
 }
 
-export function createJudge0Adapter(config) {
+function buildUnavailableAdapter(provider = 'sandbox') {
+  return {
+    provider,
+    available: false,
+    async submit() { return null; },
+    async poll() { return null; },
+    async executeSubmission() { return null; },
+  };
+}
+
+function createJudge0DedicatedAdapter(config) {
   const apiUrl = config.judge0ApiUrl;
   const apiKey = config.judge0ApiKey;
 
   if (!apiUrl) {
-    return {
-      available: false,
-      async submit() { return null; },
-      async poll() { return null; },
-      async executeSubmission() { return null; },
-    };
+    return buildUnavailableAdapter('judge0');
   }
 
   const headers = {
@@ -108,16 +119,13 @@ export function createJudge0Adapter(config) {
       if (allDone) return results;
       await new Promise((resolve) => setTimeout(resolve, intervalMs));
     }
-    return getBatchResults(tokens); // return whatever we have
+    return getBatchResults(tokens);
   }
 
   return {
+    provider: 'judge0',
     available: true,
 
-    /**
-     * Execute a submission against an assignment's sample cases.
-     * Returns { status, results, executionTimeMs, memoryKb, compilerOutput }.
-     */
     async executeSubmission(sourceCode, language, sampleCases) {
       if (!sampleCases || sampleCases.length === 0) {
         return {
@@ -149,7 +157,6 @@ export function createJudge0Adapter(config) {
           compilerOutput = r.compile_output;
         }
 
-        // Determine overall worst status
         if (testStatus !== 'accepted' && worstStatus === 'accepted') {
           worstStatus = testStatus;
         }
@@ -176,4 +183,27 @@ export function createJudge0Adapter(config) {
       };
     },
   };
+}
+
+export function createJudge0Adapter(config = {}) {
+  const provider = config.sandboxProvider || 'piston';
+
+  if (provider === 'judge0') {
+    if (config.judge0ApiUrl) {
+      return createJudge0DedicatedAdapter(config);
+    }
+    if (config.pistonApiUrl) {
+      return createPistonAdapter(config);
+    }
+    return buildUnavailableAdapter('judge0');
+  }
+
+  // Provider is 'piston' (default)
+  if (config.pistonApiUrl) {
+    return createPistonAdapter(config);
+  }
+  if (config.judge0ApiUrl) {
+    return createJudge0DedicatedAdapter(config);
+  }
+  return buildUnavailableAdapter('piston');
 }

@@ -13,4 +13,5 @@ reports/jmeter-dashboard/
 tools/
 target/
 **/target/
-
+__pycache__/
+*.pyc

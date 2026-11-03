@@ -98,7 +98,7 @@ export function createStudentSubmissionsRouter({ users, config, assignments, sub
         testIndex: index,
         input: sample.input || '',
         expectedOutput: sample.expectedOutput || '',
-        actualOutput: 'Runner unavailable: Judge0 sandbox not configured.',
+        actualOutput: 'Runner unavailable: Sandboxed execution engine (Piston/Judge0) not configured.',
         status: 'pending',
         timeMs: 0,
         memoryKb: 0,
@@ -109,7 +109,7 @@ export function createStudentSubmissionsRouter({ users, config, assignments, sub
         results: pendingResults,
         executionTimeMs: 0,
         memoryKb: 0,
-        compilerOutput: 'Notice: Sandboxed execution engine (Judge0) is not configured in this environment.',
+        compilerOutput: 'Notice: Sandboxed execution engine (Piston/Judge0) is not configured in this environment.',
       });
     }
 
