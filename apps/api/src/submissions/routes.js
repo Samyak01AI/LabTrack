@@ -41,6 +41,8 @@ const submitSchema = z.object({
 const runSchema = z.object({
   language: z.enum(['C++20', 'Java 21']),
   sourceCode: z.string().trim().min(1, 'Source code is required.').max(100_000, 'Source code is too large.'),
+  customInput: z.string().max(50_000).optional(),
+  stdin: z.string().max(50_000).optional(),
 }).strict();
 
 function badInput(res, parsed) {
@@ -93,8 +95,15 @@ export function createStudentSubmissionsRouter({ users, config, assignments, sub
       });
     }
 
+    const customStdin = parsed.data.customInput ?? parsed.data.stdin;
+    const casesToRun = (customStdin !== undefined && customStdin !== null)
+      ? [{ input: customStdin, expectedOutput: '' }]
+      : (assignment.sampleCases && assignment.sampleCases.length > 0
+        ? assignment.sampleCases
+        : [{ input: '', expectedOutput: '' }]);
+
     if (!judge0 || !judge0.available) {
-      const pendingResults = (assignment.sampleCases || []).map((sample, index) => ({
+      const pendingResults = casesToRun.map((sample, index) => ({
         testIndex: index,
         input: sample.input || '',
         expectedOutput: sample.expectedOutput || '',
@@ -117,7 +126,7 @@ export function createStudentSubmissionsRouter({ users, config, assignments, sub
       const result = await judge0.executeSubmission(
         parsed.data.sourceCode,
         parsed.data.language,
-        assignment.sampleCases,
+        casesToRun,
       );
       return res.status(200).json(result);
     } catch (execError) {

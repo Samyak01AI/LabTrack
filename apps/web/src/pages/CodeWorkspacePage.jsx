@@ -85,6 +85,8 @@ export default function CodeWorkspacePage() {
   const [testResults, setTestResults] = useState([]);
   const [overallStatus, setOverallStatus] = useState(null);
   const [compilerOutput, setCompilerOutput] = useState('');
+  const [useCustomInput, setUseCustomInput] = useState(false);
+  const [customInput, setCustomInput] = useState('');
 
   // Step 2: AI Declaration state
   const [aiDeclaration, setAiDeclaration] = useState({
@@ -374,6 +376,7 @@ export default function CodeWorkspacePage() {
         body: {
           language: selectedLanguage,
           sourceCode: currentCode,
+          customInput: useCustomInput ? customInput : undefined,
         },
       });
 
@@ -383,22 +386,34 @@ export default function CodeWorkspacePage() {
       }
 
       let terminalLog = '';
-      if (res.compilerOutput) {
-        terminalLog += `${res.compilerOutput}\n\n`;
-      } else {
-        terminalLog += `$ ${selectedLanguage === 'C++20' ? 'g++ -std=c++20 -O2' : 'javac -version'} solution\nCompilation finished with 0 errors.\nExecution completed in ${res.executionTimeMs ?? 1} ms.\n\n`;
+      terminalLog += `$ ${selectedLanguage === 'C++20' ? 'g++ -std=c++20 -O2' : 'javac'} solution\n`;
+      terminalLog += `Execution completed in ${res.executionTimeMs ?? 1} ms (Status: ${(res.status || 'DONE').toUpperCase()})\n\n`;
+
+      if (useCustomInput && customInput) {
+        terminalLog += `[Standard Input (stdin)]:\n${customInput}\n\n`;
       }
 
       if (res.results && res.results.length > 0) {
         terminalLog += res.results
-          .map((r, i) => `[Test Case ${i + 1} - ${(r.status || 'DONE').toUpperCase()}]\nOutput:\n${r.actualOutput || '(no output)'}${r.stderr ? `\nStderr:\n${r.stderr}` : ''}`)
+          .map((r, i) => {
+            let item = '';
+            if (res.results.length > 1) item += `--- Test Case ${i + 1} (${(r.status || 'DONE').toUpperCase()}) ---\n`;
+            if (r.input && !useCustomInput) item += `Input: ${r.input}\n`;
+            item += `[Program Output (stdout)]:\n${r.actualOutput ? r.actualOutput : '(no output generated)'}\n`;
+            if (r.stderr) item += `[Standard Error (stderr)]:\n${r.stderr}\n`;
+            return item.trim();
+          })
           .join('\n\n');
+      }
+
+      if (res.compilerOutput) {
+        terminalLog += `\n\n[Compiler / Diagnostic Output]:\n${res.compilerOutput}`;
       }
 
       setCompilerOutput(terminalLog.trim());
 
-      // If no sample cases were defined or if execution reported an error, switch to terminal view
-      if (!assignment?.sampleCases?.length || res.status === 'compilation_error' || res.status === 'internal_error') {
+      // If custom input was used, or if no predefined sample cases exist, or if compilation/execution failed, switch to console tab
+      if (useCustomInput || !assignment?.sampleCases?.length || res.status === 'compilation_error' || res.status === 'internal_error') {
         setActiveTab('console');
       }
 
@@ -408,6 +423,7 @@ export default function CodeWorkspacePage() {
       setOverallStatus('internal_error');
       setCompilerOutput(`Execution failed: ${err.message}`);
       setBannerNotice(`Execution error: ${err.message}`);
+      setActiveTab('console');
       setActiveTab('console');
     } finally {
       setIsRunning(false);
@@ -962,6 +978,45 @@ export default function CodeWorkspacePage() {
 
             {/* Test Harness & Results Panel */}
             <div className="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+              {/* Custom Input (stdin) Panel */}
+              <div className="bg-surface-container-high/40 px-4 py-2 border-b border-outline-variant/30 flex flex-col gap-2">
+                <div className="flex items-center justify-between">
+                  <label className="flex items-center gap-2 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      checked={useCustomInput}
+                      onChange={(e) => setUseCustomInput(e.target.checked)}
+                      className="rounded border-outline text-secondary focus:ring-secondary w-3.5 h-3.5"
+                    />
+                    <span className="text-xs font-semibold text-primary flex items-center gap-1.5">
+                      <span className="material-symbols-outlined text-sm text-secondary">input</span>
+                      Custom Test Input (stdin)
+                    </span>
+                    <span className="text-[11px] text-on-surface-variant hidden sm:inline">
+                      Provide input for cin, Scanner(System.in), etc.
+                    </span>
+                  </label>
+                  {useCustomInput && (
+                    <button
+                      type="button"
+                      onClick={() => setCustomInput('')}
+                      className="text-[11px] text-on-surface-variant hover:text-primary font-mono"
+                    >
+                      Clear Input
+                    </button>
+                  )}
+                </div>
+                {useCustomInput && (
+                  <textarea
+                    rows={2}
+                    value={customInput}
+                    onChange={(e) => setCustomInput(e.target.value)}
+                    placeholder="Enter standard input values (e.g. 5, or line-separated inputs) to feed into cin / System.in..."
+                    className="w-full p-2.5 rounded-lg bg-[#0b121e] text-slate-200 font-mono text-xs border border-white/10 focus:border-secondary focus:ring-1 focus:ring-secondary outline-none resize-y"
+                  />
+                )}
+              </div>
+
               <div className="bg-surface-container-low px-4 pt-2 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <button
@@ -1039,8 +1094,9 @@ export default function CodeWorkspacePage() {
               {activeTab === 'tests' && (
                 <div className="p-4 flex flex-col gap-2">
                   {testResults.length === 0 ? (
-                    <div className="p-6 text-center text-xs text-on-surface-variant">
-                      No sample test cases available for this assignment. Click "Run Code" to verify against runner.
+                    <div className="p-6 text-center text-xs text-on-surface-variant flex flex-col items-center gap-2">
+                      <span className="material-symbols-outlined text-2xl text-secondary">terminal</span>
+                      <span>No predefined sample cases for this assignment. Enable <strong>Custom Test Input (stdin)</strong> above or click <strong>Run Code</strong> to execute and view output in the Console tab.</span>
                     </div>
                   ) : (
                     testResults.map((tc, idx) => {
@@ -1089,19 +1145,21 @@ export default function CodeWorkspacePage() {
                               </div>
                               <div className="font-mono text-xs text-on-surface-variant pt-1 truncate">
                                 <span className="text-primary font-medium">Input: </span>
-                                {tc.input ? tc.input.replace(/\n/g, ' ') : '—'}
+                                {tc.input ? tc.input.replace(/\n/g, ' ') : '(empty)'}
                               </div>
                             </div>
                           </div>
 
                           <div className="flex items-center gap-4 font-mono text-xs text-on-surface-variant self-end md:self-auto shrink-0">
-                            <div className="text-right">
-                              <div className="text-on-surface font-semibold truncate max-w-[200px]">
-                                Output: {tc.actualOutput || '—'}
+                            <div className="text-right max-w-sm">
+                              <div className="text-on-surface font-semibold font-mono text-xs">
+                                Output: <span className="text-primary font-bold">{tc.actualOutput ? tc.actualOutput.trim() : '—'}</span>
                               </div>
-                              <div className="text-[11px] text-outline truncate max-w-[200px]">
-                                Expected: {tc.expectedOutput || '—'}
-                              </div>
+                              {tc.expectedOutput ? (
+                                <div className="text-[11px] text-outline font-mono">
+                                  Expected: {tc.expectedOutput.trim()}
+                                </div>
+                              ) : null}
                             </div>
                             <div className="bg-surface-container-lowest px-2 py-1 rounded shadow-sm flex flex-col items-end">
                               <span className="text-secondary font-bold">{tc.timeMs ? `${tc.timeMs} ms` : '—'}</span>
