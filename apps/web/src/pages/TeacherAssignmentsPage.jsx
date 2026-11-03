@@ -116,11 +116,39 @@ export default function TeacherAssignmentsPage() {
     } catch (changeError) { setError(changeError.message); }
   }
 
+  async function deleteAssignment(item) {
+    if (!window.confirm(`Permanently delete assignment "${item.title}"? This action cannot be undone.`)) return;
+    setError(''); setNotice('');
+    try {
+      await api(`/api/teacher/assignments/${item.id}`, { method: 'DELETE' });
+      setNotice(`Assignment "${item.title}" deleted.`);
+      await refresh();
+    } catch (delError) { setError(delError.message); }
+  }
+
+  async function handleCleanMockData() {
+    if (!window.confirm('Permanently purge all mock/test assignments and test student records?')) return;
+    setError(''); setNotice('');
+    try {
+      const res = await api('/api/teacher/assignments/clean-mock-data', { method: 'POST' });
+      setNotice(`Cleaned ${res.deletedAssignments} mock assignments and ${res.deletedTestStudents} test accounts.`);
+      await refresh();
+    } catch (cleanError) { setError(cleanError.message); }
+  }
+
   return (
     <div className="page-wrap">
       <section className="page-hero flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
         <div><div className="flex items-center gap-2"><span className="tag tag-code">COURSE ADMINISTRATION</span><span className="tag tag-topic">TEACHER</span></div><h1 className="page-title mt-2">Assignment management</h1><p className="mt-1 max-w-3xl text-sm text-on-surface-variant">Create and maintain the DSA assignments students can access. Drafts are private to you until published.</p></div>
-        <button type="button" className="primary-button shrink-0" onClick={openCreate}><span className="material-symbols-outlined">add_circle</span>Create assignment</button>
+        <div className="flex items-center gap-3">
+          {assignments.length > 0 && (
+            <button type="button" className="secondary-button shrink-0 text-red-600 hover:text-red-700" onClick={handleCleanMockData} title="Delete all mock/test assignments">
+              <span className="material-symbols-outlined text-sm">cleaning_services</span>
+              Clean all test/mock data
+            </button>
+          )}
+          <button type="button" className="primary-button shrink-0" onClick={openCreate}><span className="material-symbols-outlined">add_circle</span>Create assignment</button>
+        </div>
       </section>
 
       {notice && <div className="notice-banner" role="status" aria-live="polite">{notice}</div>}
@@ -169,6 +197,7 @@ export default function TeacherAssignmentsPage() {
               {item.status === 'published' && <button className="table-action" type="button" onClick={() => changeStatus(item, 'draft')}>Unpublish</button>}
               {item.status !== 'archived' && <button className="table-action" type="button" onClick={() => changeStatus(item, 'archived')}>Archive</button>}
               {item.status === 'archived' && <button className="table-action" type="button" onClick={() => changeStatus(item, 'draft')}>Restore draft</button>}
+              <button className="table-action text-red-600 hover:text-red-700 font-semibold" type="button" onClick={() => deleteAssignment(item)} title="Permanently delete this assignment">Delete</button>
             </div></td></tr>)}
           </tbody></table></div>
         )}

@@ -253,6 +253,15 @@ export default function TeacherReportsPage() {
         </div>
       )}
 
+      {!loading && assignments.length === 0 && (
+        <div className="mt-8 p-12 text-center rounded-xl bg-white border border-outline-variant/30 max-w-xl mx-auto shadow-sm">
+          <span className="material-symbols-outlined text-4xl text-secondary">analytics</span>
+          <h3 className="mt-2 text-lg font-bold text-on-surface">No Course Assignments Yet</h3>
+          <p className="mt-1 text-sm text-on-surface-variant">Create and publish an assignment to track cohort analytics, histograms, and grades.</p>
+          <Link to="/teacher/assignments" className="primary-button mt-4 inline-flex">Go to Assignment Management</Link>
+        </div>
+      )}
+
       {/* Analytics & KPI Distribution Overview Bento */}
       <div className="mt-6 grid grid-cols-1 xl:grid-cols-12 gap-6">
         {/* Histogram Chart Visual Container (7 cols) */}

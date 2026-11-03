@@ -127,13 +127,39 @@ export function createAssignmentRepository(pool) {
       );
     },
 
-    async deleteDraftByTeacher(id, teacherId) {
+    async deleteByTeacher(id, teacherId) {
+      await pool.execute('DELETE FROM submissions WHERE assignment_id = ?', [id]);
       const [result] = await pool.execute(
-        `DELETE FROM assignments
-         WHERE id = ? AND created_by = ? AND status = 'draft'`,
+        'DELETE FROM assignments WHERE id = ? AND created_by = ?',
         [id, teacherId],
       );
       return result.affectedRows > 0;
+    },
+
+    async deleteDraftByTeacher(id, teacherId) {
+      return this.deleteByTeacher(id, teacherId);
+    },
+
+    async cleanMockTestData(teacherId) {
+      const [rows] = await pool.execute(
+        'SELECT id, assignment_code FROM assignments WHERE created_by = ?',
+        [teacherId],
+      );
+      let deleted = 0;
+      for (const row of rows) {
+        await pool.execute('DELETE FROM submissions WHERE assignment_id = ?', [row.id]);
+        await pool.execute('DELETE FROM assignments WHERE id = ?', [row.id]);
+        deleted++;
+      }
+      const [userRes] = await pool.execute(
+        `DELETE FROM users WHERE role = 'student' AND (
+          email LIKE 'student_%@%' OR
+          email LIKE 'verify_%@%' OR
+          email LIKE 'sub_student_%@%' OR
+          email = 'student@university.edu'
+        )`,
+      );
+      return { deletedAssignments: deleted, deletedTestStudents: userRes.affectedRows };
     },
   };
 }

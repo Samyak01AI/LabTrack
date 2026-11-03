@@ -122,10 +122,15 @@ export function createTeacherAssignmentsRouter({ users, config, assignments }) {
       throw error;
     }
   });
+  router.post('/clean-mock-data', async (req, res) => {
+    const result = await assignments.cleanMockTestData(req.user.id);
+    return res.status(200).json({ success: true, ...result });
+  });
+
   router.delete('/:id', async (req, res) => {
     if (!idSchema.safeParse(req.params.id).success) return res.status(404).json({ error: 'Assignment not found.' });
-    const deleted = await assignments.deleteDraftByTeacher(req.params.id, req.user.id);
-    if (!deleted) return res.status(404).json({ error: 'Draft assignment not found.' });
+    const deleted = await assignments.deleteByTeacher(req.params.id, req.user.id);
+    if (!deleted) return res.status(404).json({ error: 'Assignment not found.' });
     return res.status(204).end();
   });
   return router;
