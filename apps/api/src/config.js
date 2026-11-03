@@ -14,7 +14,7 @@ const envSchema = z.object({
   LOGIN_RATE_LIMIT_WINDOW_MS: z.coerce.number().int().min(1000).default(900000),
   LOGIN_RATE_LIMIT_MAX: z.coerce.number().int().min(1).default(10),
   SANDBOX_PROVIDER: z.enum(['piston', 'judge0']).default('piston'),
-  PISTON_API_URL: z.string().default(''),
+  PISTON_API_URL: z.string().default('https://emkc.org/api/v2/piston/execute'),
   PISTON_API_KEY: z.string().default(''),
   JUDGE0_API_URL: z.string().default(''),
   JUDGE0_API_KEY: z.string().default(''),

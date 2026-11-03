@@ -131,7 +131,22 @@ export function createPistonAdapter(config = {}) {
     const elapsedMs = Date.now() - startMs;
 
     if (!response.ok) {
-      const errText = await response.text();
+      let errText = '';
+      try {
+        const errJson = await response.json();
+        errText = errJson.message || JSON.stringify(errJson);
+      } catch {
+        errText = await response.text();
+      }
+
+      if (response.status === 401) {
+        throw new Error(
+          `Piston API returned HTTP 401 Unauthorized: ${errText || 'Whitelist token required'}. ` +
+          `To run code with Piston, start a local Docker container (docker run -d -p 2000:2000 ghcr.io/engineer-man/piston) ` +
+          `and set PISTON_API_URL=http://127.0.0.1:2000 in your .env or server environment.`
+        );
+      }
+
       throw new Error(`Piston API execution failed (HTTP ${response.status}): ${errText}`);
     }
 
@@ -242,19 +257,13 @@ export function createPistonAdapter(config = {}) {
      * Returns { status, results, executionTimeMs, memoryKb, compilerOutput }.
      */
     async executeSubmission(sourceCode, language, sampleCases, timeLimitSeconds = 5) {
-      if (!sampleCases || sampleCases.length === 0) {
-        return {
-          status: 'accepted',
-          results: [],
-          executionTimeMs: 0,
-          memoryKb: 0,
-          compilerOutput: null,
-        };
-      }
+      const casesToRun = (sampleCases && sampleCases.length > 0)
+        ? sampleCases
+        : [{ input: '', expectedOutput: '' }];
 
       // Execute sample cases concurrently in Piston sandbox
       const perTestResults = await Promise.all(
-        sampleCases.map((tc, index) =>
+        casesToRun.map((tc, index) =>
           executeSingleTestCase(sourceCode, language, tc, index, timeLimitSeconds),
         ),
       );

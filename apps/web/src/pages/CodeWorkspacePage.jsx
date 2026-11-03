@@ -381,17 +381,34 @@ export default function CodeWorkspacePage() {
       if (res.results && res.results.length > 0) {
         setTestResults(res.results);
       }
+
+      let terminalLog = '';
       if (res.compilerOutput) {
-        setCompilerOutput(res.compilerOutput);
+        terminalLog += `${res.compilerOutput}\n\n`;
       } else {
-        setCompilerOutput(`$ ${selectedLanguage === 'C++20' ? 'g++ -std=c++20 -O2' : 'javac -version'} solution\nCompilation finished with 0 errors.\nExecution completed in ${res.executionTimeMs ?? 1} ms.`);
+        terminalLog += `$ ${selectedLanguage === 'C++20' ? 'g++ -std=c++20 -O2' : 'javac -version'} solution\nCompilation finished with 0 errors.\nExecution completed in ${res.executionTimeMs ?? 1} ms.\n\n`;
       }
+
+      if (res.results && res.results.length > 0) {
+        terminalLog += res.results
+          .map((r, i) => `[Test Case ${i + 1} - ${(r.status || 'DONE').toUpperCase()}]\nOutput:\n${r.actualOutput || '(no output)'}${r.stderr ? `\nStderr:\n${r.stderr}` : ''}`)
+          .join('\n\n');
+      }
+
+      setCompilerOutput(terminalLog.trim());
+
+      // If no sample cases were defined or if execution reported an error, switch to terminal view
+      if (!assignment?.sampleCases?.length || res.status === 'compilation_error' || res.status === 'internal_error') {
+        setActiveTab('console');
+      }
+
       persistLocal();
       setBannerNotice('Test run completed.');
     } catch (err) {
       setOverallStatus('internal_error');
       setCompilerOutput(`Execution failed: ${err.message}`);
       setBannerNotice(`Execution error: ${err.message}`);
+      setActiveTab('console');
     } finally {
       setIsRunning(false);
       setTimeout(() => setBannerNotice(''), 4000);
