@@ -34,6 +34,7 @@ export function createAuthRouter({ pool, users, config }) {
     limit: config.loginRateLimitMax,
     standardHeaders: true,
     legacyHeaders: false,
+    validate: { xForwardedForHeader: false },
     skip: () => config.environment === 'test',
     message: { error: 'Too many login attempts. Try again later.' },
   });

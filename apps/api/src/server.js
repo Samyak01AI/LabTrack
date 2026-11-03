@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { loadConfig } from './config.js';
@@ -12,7 +13,10 @@ let frontendMiddleware = null;
 let staticDirectory = null;
 
 if (config.environment === 'production') {
-  staticDirectory = path.join(projectRoot, 'apps', 'web', 'dist');
+  const candidate = path.join(projectRoot, 'apps', 'web', 'dist');
+  if (fs.existsSync(candidate)) {
+    staticDirectory = candidate;
+  }
 } else {
   const { createServer } = await import('vite');
   const webRoot = path.join(projectRoot, 'apps', 'web');
