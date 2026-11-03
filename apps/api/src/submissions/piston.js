@@ -1,8 +1,16 @@
 /**
  * Piston Sandbox Adapter.
  *
- * Executes student C++20 and Java 21 submissions inside isolated Piston sandbox
- * containers via Piston API v2 (POST /api/v2/execute).
+ * Implements isolated code execution conforming to the official Piston API v2 specification:
+ * https://piston.readthedocs.io/en/latest/api-v2/
+ *
+ * Supported endpoints:
+ *   POST /api/v2/execute - Execute code in an isolated container
+ *   GET  /api/v2/runtimes - List installed language runtimes and versions
+ *
+ * Supported DSA languages:
+ *   C++20 (GCC / Piston cpp)
+ *   Java 21 (OpenJDK / Piston java)
  *
  * Hard rule constraint: Student code is NEVER executed on the host server process.
  * Host process execution is strictly prohibited.
@@ -68,6 +76,7 @@ export function createPistonAdapter(config = {}) {
       provider: 'piston',
       available: false,
       executeUrl: '',
+      async getRuntimes() { return []; },
       async executeSubmission() { return null; },
     };
   }
@@ -93,7 +102,7 @@ export function createPistonAdapter(config = {}) {
       compile_timeout: 10000,
       run_timeout: Math.max(1000, timeLimitSeconds * 1000),
       compile_memory_limit: -1,
-      run_memory_limit: -1,
+      run_memory_limit: 268435456, // 256 MB in bytes
     };
 
     let response;
@@ -120,7 +129,7 @@ export function createPistonAdapter(config = {}) {
     const run = data.run || null;
 
     // 1. Compilation Error
-    if (compile && compile.code !== 0 && compile.code !== null) {
+    if (compile && ((compile.code !== 0 && compile.code !== null) || compile.signal)) {
       const compilerOutput = compile.output || compile.stderr || compile.stdout || 'Compilation error';
       return {
         testIndex,
@@ -131,14 +140,14 @@ export function createPistonAdapter(config = {}) {
         timeMs: elapsedMs,
         memoryKb: 0,
         stderr: compile.stderr || null,
-        exitCode: compile.code,
+        exitCode: compile.code ?? 1,
         compilerOutput,
       };
     }
 
     // 2. Time Limit Exceeded
     const isTimeout =
-      (run?.signal === 'SIGKILL' || run?.signal === 'SIGTERM') ||
+      (run?.signal === 'SIGKILL' || run?.signal === 'SIGTERM' || run?.signal === 'SIGXCPU') ||
       (typeof run?.output === 'string' && /timed?\s*out/i.test(run.output)) ||
       (typeof run?.stderr === 'string' && /timed?\s*out/i.test(run.stderr));
 
@@ -157,8 +166,8 @@ export function createPistonAdapter(config = {}) {
       };
     }
 
-    // 3. Runtime Error
-    if (run && run.code !== 0 && run.code !== null) {
+    // 3. Runtime Error (Crash signal or non-zero exit code)
+    if ((run && run.code !== 0 && run.code !== null) || run?.signal) {
       return {
         testIndex,
         input: testCase.input ?? '',
@@ -167,8 +176,8 @@ export function createPistonAdapter(config = {}) {
         status: 'runtime_error',
         timeMs: elapsedMs,
         memoryKb: 1024,
-        stderr: run?.stderr || run?.output || 'Runtime error',
-        exitCode: run?.code,
+        stderr: run?.stderr || run?.output || `Runtime error (${run?.signal || run?.code})`,
+        exitCode: run?.code ?? (run?.signal ? 139 : 1),
         compilerOutput: compile?.output || null,
       };
     }
@@ -196,6 +205,24 @@ export function createPistonAdapter(config = {}) {
     provider: 'piston',
     available: true,
     executeUrl,
+
+    /**
+     * Query available runtimes from GET /api/v2/runtimes
+     */
+    async getRuntimes() {
+      const runtimesUrl = executeUrl.replace(/\/execute$/, '/runtimes');
+      try {
+        const response = await fetch(runtimesUrl, {
+          method: 'GET',
+          headers,
+          signal: AbortSignal.timeout(10000),
+        });
+        if (!response.ok) return [];
+        return await response.json();
+      } catch {
+        return [];
+      }
+    },
 
     /**
      * Execute a submission against an assignment's sample cases using Piston.

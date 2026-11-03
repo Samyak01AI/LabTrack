@@ -182,6 +182,30 @@ test('Piston adapter correctly evaluates time limit exceeded', async () => {
   }
 });
 
+test('Piston adapter supports GET /api/v2/runtimes inquiry', async () => {
+  const originalFetch = globalThis.fetch;
+  try {
+    globalThis.fetch = async (url) => {
+      assert.match(url, /\/api\/v2\/runtimes$/);
+      return {
+        ok: true,
+        status: 200,
+        json: async () => [
+          { language: 'cpp', version: '10.2.0', aliases: ['c++', 'g++'] },
+          { language: 'java', version: '15.0.2', aliases: [] },
+        ],
+      };
+    };
+
+    const adapter = createPistonAdapter({ pistonApiUrl: 'http://localhost:2000' });
+    const runtimes = await adapter.getRuntimes();
+    assert.equal(runtimes.length, 2);
+    assert.equal(runtimes[0].language, 'cpp');
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
 test('Unified sandbox factory delegates to Piston when configured as default', () => {
   const adapter = createJudge0Adapter({
     sandboxProvider: 'piston',
@@ -199,3 +223,4 @@ test('Hard rule audit: Piston adapter never imports or invokes process execution
   assert.ok(!pistonCode.includes('exec('), 'Piston adapter must never invoke exec');
   assert.ok(!pistonCode.includes('spawn('), 'Piston adapter must never invoke spawn');
 });
+
