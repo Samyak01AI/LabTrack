@@ -43,7 +43,7 @@ public class GradingTest extends BaseApiTest {
                 .jsonPath()
                 .getString("assignment.id");
 
-        String studentCookie = createStudentAndGetCookie();
+        String studentCookie = getStudentCookie();
         Map<String, Object> sPayload = new HashMap<>();
         sPayload.put("language", "C++20");
         sPayload.put("sourceCode", "#include <iostream>\nint main(){ return 0; }");
@@ -172,7 +172,7 @@ public class GradingTest extends BaseApiTest {
                 .post("/api/teacher/submissions/" + submissionId + "/grade");
 
         // 2. Student cannot finalize grade (403)
-        String studentCookie = createStudentAndGetCookie();
+        String studentCookie = getStudentCookie();
         given()
                 .relaxedHTTPSValidation()
                 .cookie(TestConfig.getCookieName(), studentCookie)

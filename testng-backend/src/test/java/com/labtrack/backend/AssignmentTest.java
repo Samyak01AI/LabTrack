@@ -98,7 +98,7 @@ public class AssignmentTest extends BaseApiTest {
     @Test(priority = 3, description = "Student cannot create assignments (returns 403 Forbidden)")
     public void testStudentCannotCreateAssignment() {
         requireApi();
-        String studentCookie = createStudentAndGetCookie();
+        String studentCookie = getStudentCookie();
         String code = "ILLEGAL_" + UUID.randomUUID().toString().substring(0, 6);
         Map<String, Object> payload = createSampleAssignmentPayload(code, "published");
 
@@ -130,7 +130,7 @@ public class AssignmentTest extends BaseApiTest {
                 .then()
                 .statusCode(201);
 
-        String studentCookie = createStudentAndGetCookie();
+        String studentCookie = getStudentCookie();
         given()
                 .relaxedHTTPSValidation()
                 .cookie(TestConfig.getCookieName(), studentCookie)
@@ -161,7 +161,7 @@ public class AssignmentTest extends BaseApiTest {
                 .jsonPath()
                 .getString("assignment.id");
 
-        String studentCookie = createStudentAndGetCookie();
+        String studentCookie = getStudentCookie();
         given()
                 .relaxedHTTPSValidation()
                 .cookie(TestConfig.getCookieName(), studentCookie)

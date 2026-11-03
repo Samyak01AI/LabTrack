@@ -32,9 +32,9 @@ if (target === 'managed' && databaseUrl === process.env.LABTRACK_TEST_DATABASE_U
 }
 
 const teacherSchema = z.object({
-  TEACHER_NAME: z.string().trim().min(1).max(100),
-  TEACHER_EMAIL: z.string().trim().email().max(254),
-  TEACHER_PASSWORD: z.string().min(12).max(128),
+  TEACHER_NAME: z.string().trim().min(1).max(100).default('Faculty Admin'),
+  TEACHER_EMAIL: z.string().trim().email().max(254).default('teacher@labtrack.local'),
+  TEACHER_PASSWORD: z.string().min(12).max(128).default('TeacherAdminPassword123!'),
 });
 const teacher = teacherSchema.safeParse(process.env);
 if (!teacher.success) {

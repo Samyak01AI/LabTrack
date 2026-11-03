@@ -14,6 +14,9 @@ import static io.restassured.RestAssured.given;
 
 public abstract class BaseApiTest {
     protected static boolean apiHealthy = false;
+    private static String cachedTeacherCookie = null;
+    private static String cachedStudentCookie = null;
+    private static boolean teacherAuthFailed = false;
 
     @BeforeSuite(alwaysRun = true)
     public void setupSuite() {
@@ -62,18 +65,40 @@ public abstract class BaseApiTest {
                 .when()
                 .post("/api/auth/login");
 
+        if (response.getStatusCode() == 429) {
+            System.err.println("[WARN] Hit login rate limit (HTTP 429). Retry after rate limit window.");
+            return null;
+        }
+
         if (response.getStatusCode() != 200) {
+            System.err.println("[WARN] Login failed for " + email + " with status: " + response.getStatusCode() + ": " + response.getBody().asString());
             return null;
         }
         return response.getCookie(TestConfig.getCookieName());
     }
 
-    protected String getTeacherCookie() {
+    protected synchronized String getTeacherCookie() {
+        if (cachedTeacherCookie != null) {
+            return cachedTeacherCookie;
+        }
+        if (teacherAuthFailed) {
+            throw new SkipException("Teacher credentials (" + TestConfig.getTeacherEmail() + ") previously failed authentication - skipping.");
+        }
         String cookie = login(TestConfig.getTeacherEmail(), TestConfig.getTeacherPassword());
         if (cookie == null) {
-            throw new SkipException("Teacher credentials (" + TestConfig.getTeacherEmail() + ") could not authenticate.");
+            teacherAuthFailed = true;
+            throw new SkipException("Teacher credentials (" + TestConfig.getTeacherEmail() + ") could not authenticate (check credentials or rate limit 429).");
         }
-        return cookie;
+        cachedTeacherCookie = cookie;
+        return cachedTeacherCookie;
+    }
+
+    protected synchronized String getStudentCookie() {
+        if (cachedStudentCookie != null) {
+            return cachedStudentCookie;
+        }
+        cachedStudentCookie = createStudentAndGetCookie();
+        return cachedStudentCookie;
     }
 
     protected String createStudentAndGetCookie() {
@@ -101,7 +126,7 @@ public abstract class BaseApiTest {
 
         String cookie = login(email, password);
         if (cookie == null) {
-            throw new SkipException("Could not login newly registered student.");
+            throw new SkipException("Could not login newly registered student (HTTP 429 rate limit or auth error).");
         }
         return cookie;
     }

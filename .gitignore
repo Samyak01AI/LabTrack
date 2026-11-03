@@ -8,3 +8,9 @@ coverage/
 .DS_Store
 .vite/
 reports/*.xml
+reports/*.jtl
+reports/jmeter-dashboard/
+tools/
+target/
+**/target/
+

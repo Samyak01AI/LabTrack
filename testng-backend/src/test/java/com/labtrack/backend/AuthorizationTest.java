@@ -15,7 +15,7 @@ public class AuthorizationTest extends BaseApiTest {
     @Test(priority = 1, description = "Student role cannot access teacher assignment endpoints (403 Forbidden)")
     public void testStudentCannotAccessTeacherEndpoints() {
         requireApi();
-        String studentCookie = createStudentAndGetCookie();
+        String studentCookie = getStudentCookie();
 
         given()
                 .relaxedHTTPSValidation()
@@ -82,7 +82,7 @@ public class AuthorizationTest extends BaseApiTest {
     @Test(priority = 5, description = "Session endpoint /api/auth/me returns authenticated identity")
     public void testSessionEndpointIdentity() {
         requireApi();
-        String studentCookie = createStudentAndGetCookie();
+        String studentCookie = getStudentCookie();
 
         given()
                 .relaxedHTTPSValidation()

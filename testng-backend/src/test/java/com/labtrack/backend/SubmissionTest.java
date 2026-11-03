@@ -79,7 +79,7 @@ public class SubmissionTest extends BaseApiTest {
     public void testStudentSubmitsCode() {
         requireApi();
         String assignmentId = createPublishedAssignment();
-        String studentCookie = createStudentAndGetCookie();
+        String studentCookie = getStudentCookie();
 
         Map<String, Object> payload = createSubmissionPayload(false, "C++20");
 
@@ -100,7 +100,7 @@ public class SubmissionTest extends BaseApiTest {
     public void testSubmissionIsRecorded() {
         requireApi();
         String assignmentId = createPublishedAssignment();
-        String studentCookie = createStudentAndGetCookie();
+        String studentCookie = getStudentCookie();
 
         Map<String, Object> payload = createSubmissionPayload(false, "Java 21");
         payload.put("sourceCode", "public class Solution { public static void main(String[] args){ System.out.println(3); } }");
@@ -130,7 +130,7 @@ public class SubmissionTest extends BaseApiTest {
     public void testInvalidLanguageRejected() {
         requireApi();
         String assignmentId = createPublishedAssignment();
-        String studentCookie = createStudentAndGetCookie();
+        String studentCookie = getStudentCookie();
 
         Map<String, Object> payload = createSubmissionPayload(false, "Python");
 
@@ -149,7 +149,7 @@ public class SubmissionTest extends BaseApiTest {
     public void testDraftSavingRulesEnforced() {
         requireApi();
         String assignmentId = createPublishedAssignment();
-        String studentCookie = createStudentAndGetCookie();
+        String studentCookie = getStudentCookie();
 
         Map<String, Object> draftPayload = new HashMap<>();
         draftPayload.put("language", "C++20");
@@ -172,7 +172,7 @@ public class SubmissionTest extends BaseApiTest {
     public void testFinalSubmissionValidationEnforced() {
         requireApi();
         String assignmentId = createPublishedAssignment();
-        String studentCookie = createStudentAndGetCookie();
+        String studentCookie = getStudentCookie();
 
         // Final submission without required AI declaration or explanation
         Map<String, Object> incompletePayload = new HashMap<>();
