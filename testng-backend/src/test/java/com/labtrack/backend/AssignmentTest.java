@@ -201,7 +201,7 @@ public class AssignmentTest extends BaseApiTest {
                 .contentType(ContentType.JSON)
                 .body(updatePayload)
                 .when()
-                .put("/api/teacher/assignments/" + assignmentId)
+                .patch("/api/teacher/assignments/" + assignmentId)
                 .then()
                 .statusCode(200)
                 .body("assignment.title", equalTo("Updated Title for Assignment"));

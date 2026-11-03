@@ -275,7 +275,7 @@ export function createStudentSubmissionsRouter({ users, config, assignments, sub
   });
 
   // Get latest draft or submission for student on assignment
-  router.get('/:assignmentId/submissions/latest', async (req, res) => {
+  router.get(['/:assignmentId/submissions/latest', '/:assignmentId/submission'], async (req, res) => {
     const assignmentId = req.params.assignmentId;
     if (!idSchema.safeParse(assignmentId).success) {
       return res.status(404).json({ error: 'Assignment not found.' });

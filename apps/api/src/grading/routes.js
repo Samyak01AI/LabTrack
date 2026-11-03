@@ -81,7 +81,7 @@ export function createTeacherGradingRouter({ users, config, assignments, submiss
   });
 
   // 3. Save or finalize evaluation
-  router.post('/submissions/:submissionId/evaluate', async (req, res) => {
+  router.post(['/submissions/:submissionId/evaluate', '/submissions/:submissionId/grade'], async (req, res) => {
     const { submissionId } = req.params;
     if (!idSchema.safeParse(submissionId).success) {
       return res.status(404).json({ error: 'Submission not found.' });
@@ -140,8 +140,34 @@ export function createTeacherGradingRouter({ users, config, assignments, submiss
     });
   });
 
+  
+  router.post('/submissions/:submissionId/grade/finalize', async (req, res) => {
+    const { submissionId } = req.params;
+    if (!idSchema.safeParse(submissionId).success) {
+      return res.status(404).json({ error: 'Submission not found.' });
+    }
+    const submission = await submissions.getById(submissionId);
+    if (!submission) {
+      return res.status(404).json({ error: 'Submission not found.' });
+    }
+    const assignment = await assignments.getByTeacher(submission.assignmentId, req.user.id);
+    if (!assignment) {
+      return res.status(404).json({ error: 'Assignment not found.' });
+    }
+    const existing = await grades.getGradeBySubmission(submissionId);
+    if (!existing) {
+      return res.status(404).json({ error: 'Grade not found to finalize.' });
+    }
+    const saved = await grades.upsertGrade({
+      ...existing,
+      status: 'finalised',
+      teacherId: req.user.id,
+    });
+    return res.status(200).json({ success: true, grade: saved });
+  });
+
   // 4. Reopen finalized grade for moderation/review
-  router.post('/submissions/:submissionId/reopen', async (req, res) => {
+  router.post(['/submissions/:submissionId/reopen', '/submissions/:submissionId/grade/reopen'], async (req, res) => {
     const { submissionId } = req.params;
     if (!idSchema.safeParse(submissionId).success) {
       return res.status(404).json({ error: 'Submission not found.' });

@@ -119,7 +119,7 @@ public class SubmissionTest extends BaseApiTest {
                 .relaxedHTTPSValidation()
                 .cookie(TestConfig.getCookieName(), studentCookie)
                 .when()
-                .get("/api/student/assignments/" + assignmentId + "/submission")
+                .get("/api/student/assignments/" + assignmentId + "/submissions/latest")
                 .then()
                 .statusCode(200)
                 .body("submission", notNullValue())

@@ -106,7 +106,7 @@ export function createTeacherAssignmentsRouter({ users, config, assignments }) {
       throw error;
     }
   });
-  router.patch('/:id', async (req, res) => {
+  router.all('/:id', async (req, res, next) => { if (req.method !== 'PATCH' && req.method !== 'PUT') return next();
     if (!idSchema.safeParse(req.params.id).success) return res.status(404).json({ error: 'Assignment not found.' });
     const parsed = patchSchema.safeParse(req.body);
     if (!parsed.success) return badInput(res, parsed);
